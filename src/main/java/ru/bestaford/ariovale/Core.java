@@ -12,7 +12,7 @@ public final class Core extends PluginBase {
     private final Injector injector;
 
     public Core() {
-        this.injector = Guice.createInjector(new CoreModule(this));
+        injector = Guice.createInjector(new CoreModule(this));
     }
 
     @Override
