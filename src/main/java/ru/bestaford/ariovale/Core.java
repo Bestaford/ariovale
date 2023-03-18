@@ -9,8 +9,14 @@ import ru.bestaford.ariovale.module.CoreModule;
 @EntryPoint
 public final class Core extends PluginBase {
 
+    private final Injector injector;
+
+    public Core() {
+        this.injector = Guice.createInjector(new CoreModule(this));
+    }
+
     @Override
     public void onEnable() {
-        Injector injector = Guice.createInjector(new CoreModule(this));
+        getLogger().info(injector.toString());
     }
 }
