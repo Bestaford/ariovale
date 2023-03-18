@@ -1,5 +1,5 @@
-name: Ariovale
+name: Core
 version: 1.0
 api: 1.0.14
 author: Bestaford
-main: ru.bestaford.ariovale.Ariovale
+main: ru.bestaford.ariovale.Core
