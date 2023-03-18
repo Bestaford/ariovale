@@ -13,11 +13,11 @@
             <id>home</id>
             <activation>
                 <file>
-                    <exists>C:\Nukkit</exists>
+                    <exists>C:\Users\Bestaford\Documents\Nukkit</exists>
                 </file>
             </activation>
             <properties>
-                <server.directory>C:\Nukkit</server.directory>
+                <server.directory>C:\Users\Bestaford\Documents\Nukkit</server.directory>
             </properties>
         </profile>
     </profiles>
@@ -44,12 +44,6 @@
             <groupId>cn.nukkit</groupId>
             <artifactId>nukkit</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
