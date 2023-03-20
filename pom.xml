@@ -20,6 +20,17 @@
                 <server.directory>C:\Users\Bestaford\Documents\Nukkit</server.directory>
             </properties>
         </profile>
+        <profile>
+            <id>work</id>
+            <activation>
+                <file>
+                    <exists>/home/bestaford/Документы/Nukkit</exists>
+                </file>
+            </activation>
+            <properties>
+                <server.directory>/home/bestaford/Документы/Nukkit</server.directory>
+            </properties>
+        </profile>
     </profiles>
 
     <properties>
