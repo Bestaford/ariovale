@@ -3,6 +3,10 @@ package ru.bestaford.ariovale.module;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import ru.bestaford.ariovale.Core;
+import ru.bestaford.ariovale.impl.AuthorizationServiceImpl;
+import ru.bestaford.ariovale.impl.FormServiceImpl;
+import ru.bestaford.ariovale.service.AuthorizationService;
+import ru.bestaford.ariovale.service.FormService;
 
 public final class CoreModule extends AbstractModule {
 
@@ -10,6 +14,12 @@ public final class CoreModule extends AbstractModule {
 
     public CoreModule(Core core) {
         this.core = core;
+    }
+
+    @Override
+    protected void configure() {
+        bind(AuthorizationService.class).to(AuthorizationServiceImpl.class);
+        bind(FormService.class).to(FormServiceImpl.class);
     }
 
     @Provides
