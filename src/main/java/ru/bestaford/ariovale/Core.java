@@ -14,15 +14,17 @@ import java.util.ArrayList;
 @EntryPoint
 public final class Core extends PluginBase {
 
-    private final Injector injector;
-
-    public Core() {
-        injector = Guice.createInjector(new CoreModule(this));
-    }
+    private Injector injector;
 
     @Override
     public void onEnable() {
+        initialize();
         registerListeners();
+    }
+
+    private void initialize() {
+        saveDefaultConfig();
+        injector = Guice.createInjector(new CoreModule(this));
     }
 
     private void registerListeners() {
