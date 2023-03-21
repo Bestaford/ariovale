@@ -1,5 +1,6 @@
 package ru.bestaford.ariovale.impl;
 
+import cn.nukkit.Player;
 import com.google.inject.Injector;
 import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.service.FormService;
@@ -20,5 +21,10 @@ public final class FormServiceImpl implements FormService {
     @Override
     public <T extends Form> T createForm(Class<T> formClass) {
         return injector.getInstance(formClass);
+    }
+
+    @Override
+    public <T extends Form> void sendForm(T form, Player player) {
+
     }
 }
