@@ -2,6 +2,7 @@ package ru.bestaford.ariovale.form.base;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseSimple;
+import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowSimple;
 
 public class SimpleForm implements Form {
@@ -15,5 +16,10 @@ public class SimpleForm implements Form {
 
     public void handle(Player player, boolean wasClosed, FormResponseSimple response) {
 
+    }
+
+    @Override
+    public FormWindow getWindow() {
+        return window;
     }
 }
