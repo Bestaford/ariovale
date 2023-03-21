@@ -4,6 +4,7 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.plugin.PluginBase;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Stage;
 import ru.bestaford.ariovale.annotation.EntryPoint;
 import ru.bestaford.ariovale.listener.AuthorizationListener;
 import ru.bestaford.ariovale.listener.FormListener;
@@ -24,7 +25,7 @@ public final class Core extends PluginBase {
 
     private void initialize() {
         saveDefaultConfig();
-        injector = Guice.createInjector(new CoreModule(this));
+        injector = Guice.createInjector(Stage.DEVELOPMENT, new CoreModule(this));
     }
 
     private void registerListeners() {
