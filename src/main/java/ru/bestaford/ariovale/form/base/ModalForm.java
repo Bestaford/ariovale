@@ -6,7 +6,8 @@ public class ModalForm implements Form {
 
     protected FormWindowModal window;
 
-    public void build(String title, String content, String trueButtonText, String falseButtonText) {
+    public ModalForm build(String title, String content, String trueButtonText, String falseButtonText) {
         window = new FormWindowModal(title, content, trueButtonText, falseButtonText);
+        return this;
     }
 }

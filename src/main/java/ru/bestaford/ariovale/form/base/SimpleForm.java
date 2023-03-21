@@ -6,7 +6,8 @@ public class SimpleForm implements Form {
 
     protected FormWindowSimple window;
 
-    public void build(String title, String content) {
+    public SimpleForm build(String title, String content) {
         window = new FormWindowSimple(title, content);
+        return this;
     }
 }
