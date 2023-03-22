@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import ru.bestaford.ariovale.dao.AccountDao;
 
 @DatabaseTable(tableName = "accounts", daoClass = AccountDao.class)
-public class Account {
+public final class Account {
 
     @DatabaseField(id = true)
     private String id;
