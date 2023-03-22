@@ -4,8 +4,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
-
-import javax.inject.Singleton;
+import com.google.inject.Singleton;
 
 @Singleton
 public final class AuthorizationListener implements Listener {

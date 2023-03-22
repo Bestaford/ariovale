@@ -1,8 +1,7 @@
 package ru.bestaford.ariovale.impl;
 
+import com.google.inject.Singleton;
 import ru.bestaford.ariovale.service.AuthorizationService;
-
-import javax.inject.Singleton;
 
 @Singleton
 public final class AuthorizationServiceImpl implements AuthorizationService {

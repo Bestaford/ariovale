@@ -4,10 +4,9 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import ru.bestaford.ariovale.service.FormService;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public final class FormListener implements Listener {
