@@ -2,6 +2,7 @@ package ru.bestaford.ariovale;
 
 import cn.nukkit.event.Listener;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.plugin.PluginManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Stage;
@@ -29,13 +30,13 @@ public final class Core extends PluginBase {
     }
 
     private void registerListeners() {
-        var pluginManager = getServer().getPluginManager();
-        var listeners = new ArrayList<Class<? extends Listener>>();
+        ArrayList<Class<? extends Listener>> listeners = new ArrayList<>();
 
         listeners.add(AuthorizationListener.class);
         listeners.add(FormListener.class);
 
-        for (var listener : listeners) {
+        PluginManager pluginManager = getServer().getPluginManager();
+        for (Class<? extends Listener> listener : listeners) {
             pluginManager.registerEvents(injector.getInstance(listener), this);
         }
     }
