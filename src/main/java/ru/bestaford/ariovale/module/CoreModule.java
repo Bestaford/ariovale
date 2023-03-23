@@ -36,6 +36,7 @@ public final class CoreModule extends AbstractModule {
     @Provides
     @Singleton
     public Config provideConfig(Core core) {
+        core.saveDefaultConfig();
         return core.getConfig();
     }
 }

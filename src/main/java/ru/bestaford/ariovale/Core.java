@@ -26,7 +26,6 @@ public final class Core extends PluginBase {
     }
 
     private void initialize() {
-        saveDefaultConfig();
         injector = Guice.createInjector(
                 Stage.DEVELOPMENT,
                 new CoreModule(this),
