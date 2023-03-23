@@ -4,6 +4,6 @@ import cn.nukkit.form.window.FormWindow;
 
 public interface Form {
 
-    FormWindow getWindow();
+    FormWindow build();
 
 }

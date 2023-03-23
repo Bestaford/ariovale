@@ -5,20 +5,13 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowCustom;
 
-public class CustomForm implements Form {
+public abstract class CustomForm extends FormWindowCustom implements Form {
 
-    protected FormWindowCustom window;
-
-    protected void build(String title) {
-        window = new FormWindowCustom(title);
+    public CustomForm() {
+        super("");
     }
 
-    public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
+    public abstract FormWindow build();
 
-    }
-
-    @Override
-    public FormWindow getWindow() {
-        return window;
-    }
+    public abstract void handle(Player player, boolean wasClosed, FormResponseCustom response);
 }

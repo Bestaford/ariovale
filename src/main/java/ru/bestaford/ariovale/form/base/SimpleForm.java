@@ -5,20 +5,13 @@ import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowSimple;
 
-public class SimpleForm implements Form {
+public abstract class SimpleForm extends FormWindowSimple implements Form {
 
-    protected FormWindowSimple window;
-
-    protected void build(String title, String content) {
-        window = new FormWindowSimple(title, content);
+    public SimpleForm() {
+        super("", "");
     }
 
-    public void handle(Player player, boolean wasClosed, FormResponseSimple response) {
+    public abstract FormWindow build();
 
-    }
-
-    @Override
-    public FormWindow getWindow() {
-        return window;
-    }
+    public abstract void handle(Player player, boolean wasClosed, FormResponseSimple response);
 }

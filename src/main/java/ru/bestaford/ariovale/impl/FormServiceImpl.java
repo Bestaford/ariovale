@@ -36,7 +36,7 @@ public final class FormServiceImpl implements FormService {
 
     @Override
     public <T extends Form> void sendForm(T form, Player player) {
-        formCache.put(player.showFormWindow(form.getWindow()), form);
+        formCache.put(player.showFormWindow(form.build()), form);
     }
 
     @Override

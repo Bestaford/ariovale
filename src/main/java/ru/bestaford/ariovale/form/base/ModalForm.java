@@ -5,20 +5,13 @@ import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowModal;
 
-public class ModalForm implements Form {
+public abstract class ModalForm extends FormWindowModal implements Form {
 
-    protected FormWindowModal window;
-
-    protected void build(String title, String content, String trueButtonText, String falseButtonText) {
-        window = new FormWindowModal(title, content, trueButtonText, falseButtonText);
+    public ModalForm() {
+        super("", "", "", "");
     }
 
-    public void handle(Player player, boolean wasClosed, FormResponseModal response) {
+    public abstract FormWindow build();
 
-    }
-
-    @Override
-    public FormWindow getWindow() {
-        return window;
-    }
+    public abstract void handle(Player player, boolean wasClosed, FormResponseModal response);
 }
