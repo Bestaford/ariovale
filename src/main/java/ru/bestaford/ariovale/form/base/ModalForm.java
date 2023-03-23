@@ -9,9 +9,8 @@ public class ModalForm implements Form {
 
     protected FormWindowModal window;
 
-    public ModalForm build(String title, String content, String trueButtonText, String falseButtonText) {
+    protected void build(String title, String content, String trueButtonText, String falseButtonText) {
         window = new FormWindowModal(title, content, trueButtonText, falseButtonText);
-        return this;
     }
 
     public void handle(Player player, boolean wasClosed, FormResponseModal response) {

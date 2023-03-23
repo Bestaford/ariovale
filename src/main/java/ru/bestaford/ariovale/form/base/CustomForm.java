@@ -9,9 +9,8 @@ public class CustomForm implements Form {
 
     protected FormWindowCustom window;
 
-    public CustomForm build(String title) {
+    protected void build(String title) {
         window = new FormWindowCustom(title);
-        return this;
     }
 
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {

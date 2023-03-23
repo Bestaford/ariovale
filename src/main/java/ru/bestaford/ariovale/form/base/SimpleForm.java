@@ -9,9 +9,8 @@ public class SimpleForm implements Form {
 
     protected FormWindowSimple window;
 
-    public SimpleForm build(String title, String content) {
+    protected void build(String title, String content) {
         window = new FormWindowSimple(title, content);
-        return this;
     }
 
     public void handle(Player player, boolean wasClosed, FormResponseSimple response) {
