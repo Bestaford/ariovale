@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale.impl;
 
 import cn.nukkit.Player;
+import cn.nukkit.math.Vector3;
 import com.google.inject.Singleton;
 import ru.bestaford.ariovale.service.AuthorizationService;
 
@@ -14,7 +15,15 @@ public final class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public void initialize(Player player) {
-        player.sendMessage("initialize"); //TODO: implement
+        player.setGamemode(Player.SURVIVAL);
+        player.setAllowModifyWorld(false);
+        player.setAllowInteract(false);
+        player.setCheckMovement(false);
+        player.setOp(false);
+        int x = player.getFloorX();
+        int z = player.getFloorZ();
+        int y = player.getLevel().getHighestBlockAt(x, z);
+        player.teleport(new Vector3(x, y, z));
     }
 
     @Override
