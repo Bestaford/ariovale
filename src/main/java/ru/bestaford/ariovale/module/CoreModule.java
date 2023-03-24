@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale.module;
 
 import cn.nukkit.utils.Config;
+import cn.nukkit.utils.Logger;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -38,5 +39,11 @@ public final class CoreModule extends AbstractModule {
     public Config provideConfig(Core core) {
         core.saveDefaultConfig();
         return core.getConfig();
+    }
+
+    @Provides
+    @Singleton
+    public Logger provideLogger(Core core) {
+        return core.getLogger();
     }
 }
