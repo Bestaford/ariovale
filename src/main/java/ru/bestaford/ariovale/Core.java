@@ -10,7 +10,6 @@ import ru.bestaford.ariovale.annotation.EntryPoint;
 import ru.bestaford.ariovale.listener.AuthorizationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.module.CoreModule;
-import ru.bestaford.ariovale.module.DatabaseModule;
 
 import java.util.ArrayList;
 
@@ -28,8 +27,7 @@ public final class Core extends PluginBase {
     private void initialize() {
         injector = Guice.createInjector(
                 Stage.DEVELOPMENT,
-                new CoreModule(this),
-                new DatabaseModule()
+                new CoreModule()
         );
     }
 
