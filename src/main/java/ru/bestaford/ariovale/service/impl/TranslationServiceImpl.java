@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.impl;
+package ru.bestaford.ariovale.service.impl;
 
 import cn.nukkit.Player;
 import com.google.inject.Singleton;
