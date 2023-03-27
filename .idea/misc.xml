@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="cn.nukkit.event.EventHandler" />
-      <item index="1" class="java.lang.String" itemvalue="com.google.inject.Provides" />
-      <item index="2" class="java.lang.String" itemvalue="ru.bestaford.ariovale.annotation.EntryPoint" />
-    </list>
-    <pattern value="ru.bestaford.ariovale.listener.*" hierarchically="true" method="on*" />
+    <pattern value="ru.bestaford.ariovale.Core" method="*" />
+    <pattern value="ru.bestaford.ariovale.module.*" method="*" />
+    <pattern value="ru.bestaford.ariovale.listener.*" method="*" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">

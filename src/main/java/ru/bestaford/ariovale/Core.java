@@ -6,14 +6,12 @@ import cn.nukkit.plugin.PluginManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Stage;
-import ru.bestaford.ariovale.annotation.EntryPoint;
 import ru.bestaford.ariovale.listener.AuthorizationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.module.CoreModule;
 
 import java.util.ArrayList;
 
-@EntryPoint
 public final class Core extends PluginBase {
 
     private Injector injector;
