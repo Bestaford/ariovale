@@ -1,9 +1,9 @@
 package ru.bestaford.ariovale.service.impl;
 
 import cn.nukkit.Player;
-import com.google.inject.Singleton;
 import ru.bestaford.ariovale.service.TranslationService;
 
+import javax.inject.Singleton;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

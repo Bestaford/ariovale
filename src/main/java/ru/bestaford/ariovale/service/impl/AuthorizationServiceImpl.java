@@ -2,8 +2,9 @@ package ru.bestaford.ariovale.service.impl;
 
 import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
-import com.google.inject.Singleton;
 import ru.bestaford.ariovale.service.AuthorizationService;
+
+import javax.inject.Singleton;
 
 @Singleton
 public final class AuthorizationServiceImpl implements AuthorizationService {

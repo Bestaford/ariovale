@@ -5,15 +5,15 @@ import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.form.base.ModalForm;
 import ru.bestaford.ariovale.form.base.SimpleForm;
 import ru.bestaford.ariovale.service.FormService;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

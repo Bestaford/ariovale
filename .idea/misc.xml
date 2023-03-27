@@ -6,6 +6,7 @@
       <item index="1" class="java.lang.String" itemvalue="com.google.inject.Provides" />
       <item index="2" class="java.lang.String" itemvalue="ru.bestaford.ariovale.annotation.EntryPoint" />
     </list>
+    <pattern value="ru.bestaford.ariovale.listener.*" hierarchically="true" method="on*" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
