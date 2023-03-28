@@ -1,6 +1,5 @@
 package ru.bestaford.ariovale;
 
-import cn.nukkit.event.Listener;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import com.google.inject.Guice;
@@ -10,31 +9,14 @@ import ru.bestaford.ariovale.listener.AuthorizationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.module.CoreModule;
 
-import java.util.ArrayList;
-
 public final class Core extends PluginBase {
-
-    private Injector injector;
 
     @Override
     public void onEnable() {
-        initialize();
-        registerListeners();
-    }
-
-    private void initialize() {
-        injector = Guice.createInjector(Stage.DEVELOPMENT, new CoreModule(this));
-    }
-
-    private void registerListeners() {
-        ArrayList<Class<? extends Listener>> listeners = new ArrayList<>();
-
-        listeners.add(AuthorizationListener.class);
-        listeners.add(FormListener.class);
+        Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new CoreModule(this));
 
         PluginManager pluginManager = getServer().getPluginManager();
-        for (Class<? extends Listener> listener : listeners) {
-            pluginManager.registerEvents(injector.getInstance(listener), this);
-        }
+        pluginManager.registerEvents(injector.getInstance(AuthorizationListener.class), this);
+        pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
     }
 }
