@@ -8,9 +8,7 @@ import com.google.inject.Injector;
 import com.google.inject.Stage;
 import ru.bestaford.ariovale.listener.AuthorizationListener;
 import ru.bestaford.ariovale.listener.FormListener;
-import ru.bestaford.ariovale.module.HibernateModule;
-import ru.bestaford.ariovale.module.ListenerModule;
-import ru.bestaford.ariovale.module.ServiceModule;
+import ru.bestaford.ariovale.module.CoreModule;
 
 import java.util.ArrayList;
 
@@ -25,12 +23,7 @@ public final class Core extends PluginBase {
     }
 
     private void initialize() {
-        injector = Guice.createInjector(
-                Stage.DEVELOPMENT,
-                new ServiceModule(),
-                new ListenerModule(),
-                new HibernateModule()
-        );
+        injector = Guice.createInjector(Stage.DEVELOPMENT, new CoreModule(this));
     }
 
     private void registerListeners() {
