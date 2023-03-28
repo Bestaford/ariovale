@@ -5,9 +5,11 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
-        <property name="hibernate.connection.url">jdbc:sqlite:ariovale.db</property>
-        <property name="hibernate.dialect">org.hibernate.community.dialect.SQLiteDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/ariovale</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">ariovale</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
