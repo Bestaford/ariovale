@@ -8,7 +8,7 @@ import ru.bestaford.ariovale.service.impl.AuthorizationServiceImpl;
 import ru.bestaford.ariovale.service.impl.FormServiceImpl;
 import ru.bestaford.ariovale.service.impl.TranslationServiceImpl;
 
-public class ServiceModule extends AbstractModule {
+public final class ServiceModule extends AbstractModule {
 
     @Override
     protected void configure() {

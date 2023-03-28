@@ -5,7 +5,7 @@ import org.hibernate.cfg.Configuration;
 
 import javax.inject.Provider;
 
-public class SessionFactoryProvider implements Provider<SessionFactory> {
+public final class SessionFactoryProvider implements Provider<SessionFactory> {
 
     @Override
     public SessionFactory get() {
