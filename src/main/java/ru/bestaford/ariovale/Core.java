@@ -1,7 +1,9 @@
 package ru.bestaford.ariovale;
 
+import cn.nukkit.Server;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
+import cn.nukkit.scheduler.ServerScheduler;
 import cn.nukkit.utils.Logger;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -15,9 +17,11 @@ import ru.bestaford.ariovale.listener.impl.AuthorizationListenerImpl;
 import ru.bestaford.ariovale.listener.impl.FormListenerImpl;
 import ru.bestaford.ariovale.service.AuthorizationService;
 import ru.bestaford.ariovale.service.FormService;
+import ru.bestaford.ariovale.service.TaskService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.service.impl.AuthorizationServiceImpl;
 import ru.bestaford.ariovale.service.impl.FormServiceImpl;
+import ru.bestaford.ariovale.service.impl.TaskServiceImpl;
 import ru.bestaford.ariovale.service.impl.TranslationServiceImpl;
 
 public final class Core extends PluginBase {
@@ -44,6 +48,8 @@ public final class Core extends PluginBase {
             //Core
             bind(Core.class).toInstance(core);
             bind(Logger.class).toInstance(core.getLogger());
+            bind(Server.class).toInstance(core.getServer());
+            bind(ServerScheduler.class).toInstance(core.getServer().getScheduler());
 
             //Hibernate
             bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
@@ -51,6 +57,7 @@ public final class Core extends PluginBase {
             //Services
             bind(AuthorizationService.class).to(AuthorizationServiceImpl.class).asEagerSingleton();
             bind(FormService.class).to(FormServiceImpl.class).asEagerSingleton();
+            bind(TaskService.class).to(TaskServiceImpl.class).asEagerSingleton();
             bind(TranslationService.class).to(TranslationServiceImpl.class).asEagerSingleton();
 
             //Listeners
