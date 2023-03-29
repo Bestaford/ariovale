@@ -5,6 +5,7 @@ import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
+import cn.nukkit.form.window.FormWindow;
 import com.google.inject.Injector;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Form;
@@ -30,18 +31,10 @@ public final class FormServiceImpl implements FormService {
     }
 
     @Override
-    public <T extends Form> T createForm(Class<T> formClass) {
-        return injector.getInstance(formClass);
-    }
-
-    @Override
-    public <T extends Form> void sendForm(Class<T> formClass, Player player) {
-        sendForm(createForm(formClass), player);
-    }
-
-    @Override
     public <T extends Form> void sendForm(T form, Player player) {
-        formCache.put(player.showFormWindow(form.build()), form);
+        injector.injectMembers(form);
+        form.build();
+        formCache.put(player.showFormWindow((FormWindow) form), form);
     }
 
     @Override
