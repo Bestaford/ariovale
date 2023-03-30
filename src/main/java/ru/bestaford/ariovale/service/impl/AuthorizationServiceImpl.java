@@ -2,16 +2,26 @@ package ru.bestaford.ariovale.service.impl;
 
 import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
+import ru.bestaford.ariovale.form.RegistrationForm;
 import ru.bestaford.ariovale.service.AuthorizationService;
+import ru.bestaford.ariovale.service.FormService;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public final class AuthorizationServiceImpl implements AuthorizationService {
 
+    private final FormService formService;
+
+    @Inject
+    public AuthorizationServiceImpl(FormService formService) {
+        this.formService = formService;
+    }
+
     @Override
     public boolean isValidSession(Player player) {
-        return false; //TODO: implement
+        return true; //TODO: implement
     }
 
     @Override
@@ -29,6 +39,6 @@ public final class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public void process(Player player) {
-        player.sendMessage("process"); //TODO: implement
+        formService.sendForm(new RegistrationForm(player), player);
     }
 }
