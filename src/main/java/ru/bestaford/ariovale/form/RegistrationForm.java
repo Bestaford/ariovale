@@ -11,13 +11,11 @@ import javax.inject.Inject;
 
 public final class RegistrationForm extends CustomForm {
 
-    private final transient Player player;
-
     @Inject
     private TranslationService translationService;
 
     public RegistrationForm(Player player) {
-        this.player = player;
+        super(player);
     }
 
     @Override
