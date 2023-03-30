@@ -7,10 +7,10 @@ import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
 import com.google.inject.Injector;
-import ru.bestaford.ariovale.form.base.CustomForm;
-import ru.bestaford.ariovale.form.base.Form;
-import ru.bestaford.ariovale.form.base.ModalForm;
-import ru.bestaford.ariovale.form.base.SimpleForm;
+import ru.bestaford.ariovale.form.CustomForm;
+import ru.bestaford.ariovale.form.Form;
+import ru.bestaford.ariovale.form.ModalForm;
+import ru.bestaford.ariovale.form.SimpleForm;
 import ru.bestaford.ariovale.service.FormService;
 
 import javax.inject.Inject;

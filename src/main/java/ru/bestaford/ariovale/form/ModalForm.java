@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.form.base;
+package ru.bestaford.ariovale.form;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseModal;

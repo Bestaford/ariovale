@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.form.base;
+package ru.bestaford.ariovale.form;
 
 public interface Form {
 
