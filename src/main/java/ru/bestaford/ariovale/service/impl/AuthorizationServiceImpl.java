@@ -2,9 +2,9 @@ package ru.bestaford.ariovale.service.impl;
 
 import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
-import ru.bestaford.ariovale.form.RegistrationForm;
 import ru.bestaford.ariovale.service.AuthorizationService;
-import ru.bestaford.ariovale.service.FormService;
+import ru.bestaford.ariovale.service.TaskService;
+import ru.bestaford.ariovale.task.AuthorizationTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -12,11 +12,11 @@ import javax.inject.Singleton;
 @Singleton
 public final class AuthorizationServiceImpl implements AuthorizationService {
 
-    private final FormService formService;
+    private final TaskService taskService;
 
     @Inject
-    public AuthorizationServiceImpl(FormService formService) {
-        this.formService = formService;
+    public AuthorizationServiceImpl(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @Override
@@ -39,6 +39,6 @@ public final class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public void process(Player player) {
-        formService.sendForm(new RegistrationForm(player), player);
+        taskService.scheduleAsyncTask(new AuthorizationTask(player));
     }
 }
