@@ -15,6 +15,7 @@ public final class TranslationServiceImpl implements TranslationService {
     @Override
     public String getString(String key, Player player) {
         String[] languageCodeParts = player.getLoginChainData().getLanguageCode().split("_");
-        return ResourceBundle.getBundle(BUNDLE_BASE_NAME, new Locale(languageCodeParts[0], languageCodeParts[1])).getString(key);
+        Locale locale = new Locale(languageCodeParts[0], languageCodeParts[1]);
+        return ResourceBundle.getBundle(BUNDLE_BASE_NAME, locale).getString(key).trim();
     }
 }
