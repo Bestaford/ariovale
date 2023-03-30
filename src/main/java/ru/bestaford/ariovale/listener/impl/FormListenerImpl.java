@@ -22,6 +22,6 @@ public final class FormListenerImpl implements FormListener {
     @Override
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerFormResponded(PlayerFormRespondedEvent event) {
-        formService.handleResponse(event.getFormID(), event.getPlayer(), event.wasClosed(), event.getResponse());
+        formService.handleResponse(event.getWindow(), event.getPlayer(), event.wasClosed(), event.getResponse());
     }
 }

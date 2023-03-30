@@ -15,40 +15,32 @@ import ru.bestaford.ariovale.service.FormService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public final class FormServiceImpl implements FormService {
 
     private final Injector injector;
-    private final Map<Integer, Form> formCache;
 
     @Inject
     public FormServiceImpl(Injector injector) {
         this.injector = injector;
-        formCache = new ConcurrentHashMap<>();
     }
 
     @Override
     public <T extends Form> void sendForm(T form, Player player) {
         injector.injectMembers(form);
         form.build();
-        formCache.put(player.showFormWindow((FormWindow) form), form);
+        player.showFormWindow((FormWindow) form);
     }
 
     @Override
-    public void handleResponse(int formID, Player player, boolean wasClosed, FormResponse response) {
-        if (formCache.containsKey(formID)) {
-            Form form = formCache.get(formID);
-            if (form instanceof SimpleForm) {
-                ((SimpleForm) form).handle(player, wasClosed, (FormResponseSimple) response);
-            } else if (form instanceof ModalForm) {
-                ((ModalForm) form).handle(player, wasClosed, (FormResponseModal) response);
-            } else if (form instanceof CustomForm) {
-                ((CustomForm) form).handle(player, wasClosed, (FormResponseCustom) response);
-            }
-            formCache.remove(formID);
+    public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
+        if (window instanceof SimpleForm) {
+            ((SimpleForm) window).handle(player, wasClosed, (FormResponseSimple) response);
+        } else if (window instanceof ModalForm) {
+            ((ModalForm) window).handle(player, wasClosed, (FormResponseModal) response);
+        } else if (window instanceof CustomForm) {
+            ((CustomForm) window).handle(player, wasClosed, (FormResponseCustom) response);
         }
     }
 }
