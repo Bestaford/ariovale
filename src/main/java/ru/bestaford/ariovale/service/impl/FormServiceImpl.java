@@ -32,13 +32,7 @@ public final class FormServiceImpl implements FormService {
     }
 
     @Override
-    public <T extends Form> void sendForm(Class<T> formClass, Player player) {
-        sendForm(createForm(formClass), player);
-    }
-
-    @Override
     public <T extends Form> void sendForm(T form, Player player) {
-        form.build(player);
         player.showFormWindow((FormWindow) form);
     }
 

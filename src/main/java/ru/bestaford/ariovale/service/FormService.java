@@ -9,8 +9,6 @@ public interface FormService {
 
     <T extends Form> T createForm(Class<T> formClass);
 
-    <T extends Form> void sendForm(Class<T> formClass, Player player);
-
     <T extends Form> void sendForm(T form, Player player);
 
     void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response);

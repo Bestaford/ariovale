@@ -4,15 +4,19 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
+import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 
 public final class AuthorizationForm extends CustomForm {
 
+    private final transient FormService formService;
+
     @Inject
-    public AuthorizationForm(TranslationService translationService) {
+    public AuthorizationForm(TranslationService translationService, FormService formService) {
         super(translationService);
+        this.formService = formService;
     }
 
     @Override
@@ -27,6 +31,6 @@ public final class AuthorizationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        player.sendMessage("AuthorizationForm response handler");
+        formService.sendForm(this, player);
     }
 }
