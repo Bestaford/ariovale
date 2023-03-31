@@ -10,7 +10,7 @@ public abstract class CustomForm extends FormWindowCustom implements Form {
         super("");
     }
 
-    public abstract void build(Player targetPlayer);
+    public abstract void build(Player player);
 
-    public abstract void handle(Player targetPlayer, boolean wasClosed, FormResponseCustom response);
+    public abstract void handle(Player player, boolean wasClosed, FormResponseCustom response);
 }

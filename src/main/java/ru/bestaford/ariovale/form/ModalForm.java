@@ -10,7 +10,7 @@ public abstract class ModalForm extends FormWindowModal implements Form {
         super("", "", "", "");
     }
 
-    public abstract void build(Player targetPlayer);
+    public abstract void build(Player player);
 
-    public abstract void handle(Player targetPlayer, boolean wasClosed, FormResponseModal response);
+    public abstract void handle(Player player, boolean wasClosed, FormResponseModal response);
 }

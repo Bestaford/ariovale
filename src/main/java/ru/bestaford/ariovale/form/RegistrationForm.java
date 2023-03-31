@@ -18,17 +18,17 @@ public final class RegistrationForm extends CustomForm {
     }
 
     @Override
-    public void build(Player targetPlayer) {
-        setTitle(translationService.getString("authorization.registration.form.title", targetPlayer) + " [1/2]");
-        addElement(new ElementLabel(translationService.getString("authorization.registration.form.label", targetPlayer)));
+    public void build(Player player) {
+        setTitle(translationService.getString("authorization.registration.form.title", player) + " [1/2]");
+        addElement(new ElementLabel(translationService.getString("authorization.registration.form.label", player)));
         addElement(new ElementInput(
-                translationService.getString("authorization.password.text", targetPlayer),
-                translationService.getString("authorization.password.placeholder", targetPlayer)
+                translationService.getString("authorization.password.text", player),
+                translationService.getString("authorization.password.placeholder", player)
         ));
     }
 
     @Override
-    public void handle(Player targetPlayer, boolean wasClosed, FormResponseCustom response) {
-        targetPlayer.sendMessage("Registration");
+    public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
+        player.sendMessage("Registration");
     }
 }

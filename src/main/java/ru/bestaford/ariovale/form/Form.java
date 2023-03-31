@@ -4,6 +4,6 @@ import cn.nukkit.Player;
 
 public interface Form {
 
-    void build(Player targetPlayer);
+    void build(Player player);
 
 }
