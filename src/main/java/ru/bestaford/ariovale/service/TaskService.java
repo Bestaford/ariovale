@@ -1,9 +1,11 @@
 package ru.bestaford.ariovale.service;
 
-import cn.nukkit.scheduler.AsyncTask;
+import ru.bestaford.ariovale.task.Task;
 
 public interface TaskService {
 
-    void scheduleAsyncTask(AsyncTask task);
+    <T extends Task> T createTask(Class<T> taskClass);
+
+    <T extends Task> void scheduleAsyncTask(T task);
 
 }

@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.service.AuthorizationService;
 import ru.bestaford.ariovale.service.TaskService;
-import ru.bestaford.ariovale.task.AuthorizationTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -39,6 +38,6 @@ public final class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public void process(Player player) {
-        taskService.scheduleAsyncTask(new AuthorizationTask(player));
+
     }
 }
