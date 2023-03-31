@@ -10,11 +10,9 @@ import javax.inject.Inject;
 
 public final class AuthorizationForm extends CustomForm {
 
-    private final transient TranslationService translationService;
-
     @Inject
     public AuthorizationForm(TranslationService translationService) {
-        this.translationService = translationService;
+        super(translationService);
     }
 
     @Override
