@@ -6,14 +6,11 @@ import cn.nukkit.form.window.FormWindowSimple;
 
 public abstract class SimpleForm extends FormWindowSimple implements Form {
 
-    protected final transient Player player;
-
-    public SimpleForm(Player player) {
+    public SimpleForm() {
         super("", "");
-        this.player = player;
     }
 
-    public abstract void build();
+    public abstract void build(Player targetPlayer);
 
-    public abstract void handle(Player player, boolean wasClosed, FormResponseSimple response);
+    public abstract void handle(Player targetPlayer, boolean wasClosed, FormResponseSimple response);
 }

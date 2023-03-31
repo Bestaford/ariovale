@@ -6,14 +6,11 @@ import cn.nukkit.form.window.FormWindowModal;
 
 public abstract class ModalForm extends FormWindowModal implements Form {
 
-    protected final transient Player player;
-
-    public ModalForm(Player player) {
+    public ModalForm() {
         super("", "", "", "");
-        this.player = player;
     }
 
-    public abstract void build();
+    public abstract void build(Player targetPlayer);
 
-    public abstract void handle(Player player, boolean wasClosed, FormResponseModal response);
+    public abstract void handle(Player targetPlayer, boolean wasClosed, FormResponseModal response);
 }

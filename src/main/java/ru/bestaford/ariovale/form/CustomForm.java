@@ -6,14 +6,11 @@ import cn.nukkit.form.window.FormWindowCustom;
 
 public abstract class CustomForm extends FormWindowCustom implements Form {
 
-    protected final transient Player player;
-
-    public CustomForm(Player player) {
+    public CustomForm() {
         super("");
-        this.player = player;
     }
 
-    public abstract void build();
+    public abstract void build(Player targetPlayer);
 
-    public abstract void handle(Player player, boolean wasClosed, FormResponseCustom response);
+    public abstract void handle(Player targetPlayer, boolean wasClosed, FormResponseCustom response);
 }

@@ -38,7 +38,7 @@ public final class AuthorizationTask extends AsyncTask {
         if (isRegistered) {
             //TODO: implement
         } else {
-            formService.sendForm(new RegistrationForm(player), player);
+            formService.createForm(RegistrationForm.class).send(player);
         }
     }
 }
