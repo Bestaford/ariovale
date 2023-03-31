@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 public final class AuthorizationForm extends CustomForm {
 
-    private final TranslationService translationService;
+    private final transient TranslationService translationService;
 
     @Inject
     public AuthorizationForm(TranslationService translationService) {
@@ -22,8 +22,8 @@ public final class AuthorizationForm extends CustomForm {
         setTitle(translationService.getString("authorization.form.title", player));
         addElement(new ElementLabel(translationService.getString("authorization.form.label", player)));
         addElement(new ElementInput(
-                translationService.getString("authorization.name.text", player),
-                translationService.getString("authorization.name.placeholder", player)
+                translationService.getString("authorization.form.input.text", player),
+                translationService.getString("authorization.form.input.placeholder", player)
         ));
     }
 
