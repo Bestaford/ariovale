@@ -39,8 +39,6 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void process(Player player) {
-        AuthenticationForm form = formService.createForm(AuthenticationForm.class);
-        form.build(player);
-        formService.sendForm(form, player);
+        formService.sendForm(AuthenticationForm.class, player);
     }
 }
