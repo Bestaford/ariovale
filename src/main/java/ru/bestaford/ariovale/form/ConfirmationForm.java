@@ -12,8 +12,8 @@ public abstract class ConfirmationForm extends ModalForm {
 
     @Override
     public void build(Player player) {
-        setButton1(translationService.getString("confirmation.form.yes", player));
-        setButton2(translationService.getString("confirmation.form.no", player));
+        setButton1(translationService.getString("confirmation.yes", player));
+        setButton2(translationService.getString("confirmation.no", player));
     }
 
     @Override
