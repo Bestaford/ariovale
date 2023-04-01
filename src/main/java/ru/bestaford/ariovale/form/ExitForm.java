@@ -7,9 +7,19 @@ import javax.inject.Inject;
 
 public final class ExitForm extends ConfirmationForm {
 
+    private transient Runnable callback;
+
     @Inject
     public ExitForm(TranslationService translationService) {
         super(translationService);
+    }
+
+    public Runnable getCallback() {
+        return callback;
+    }
+
+    public void setCallback(Runnable callback) {
+        this.callback = callback;
     }
 
     @Override
@@ -21,6 +31,11 @@ public final class ExitForm extends ConfirmationForm {
 
     @Override
     public void handle(Player player, boolean confirmed) {
+        if (confirmed) {
+            String message = translationService.getString("exit.text", player);
+            player.close(message, message);
+        } else {
 
+        }
     }
 }
