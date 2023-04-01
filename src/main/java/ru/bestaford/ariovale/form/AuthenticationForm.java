@@ -23,15 +23,11 @@ public final class AuthenticationForm extends CustomForm {
     public void build(Player player) {
         setTitle(translationService.getString("authentication.form.title", player));
         addElement(new ElementLabel(translationService.getString("authentication.form.label", player)));
-        addElement(new ElementInput(
-                translationService.getString("authentication.form.input.text", player),
-                translationService.getString("authentication.form.input.placeholder", player)
-        ));
+        addElement(new ElementInput(translationService.getString("authentication.form.input.text", player), translationService.getString("authentication.form.input.placeholder", player)));
     }
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        ExitForm form = formService.createForm(ExitForm.class);
-        formService.sendForm(form, player);
+        formService.sendForm(ExitForm.class, player);
     }
 }
