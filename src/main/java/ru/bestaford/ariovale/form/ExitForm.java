@@ -35,7 +35,9 @@ public final class ExitForm extends ConfirmationForm {
             String message = translationService.getString("exit.text", player);
             player.close(message, message);
         } else {
-
+            if (callback != null) {
+                callback.run();
+            }
         }
     }
 }
