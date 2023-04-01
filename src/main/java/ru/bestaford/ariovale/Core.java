@@ -11,15 +11,15 @@ import com.google.inject.Injector;
 import com.google.inject.Stage;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.bestaford.ariovale.listener.AuthorizationListener;
+import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
-import ru.bestaford.ariovale.listener.impl.AuthorizationListenerImpl;
+import ru.bestaford.ariovale.listener.impl.AuthenticationListenerImpl;
 import ru.bestaford.ariovale.listener.impl.FormListenerImpl;
-import ru.bestaford.ariovale.service.AuthorizationService;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TaskService;
 import ru.bestaford.ariovale.service.TranslationService;
-import ru.bestaford.ariovale.service.impl.AuthorizationServiceImpl;
+import ru.bestaford.ariovale.service.impl.AuthenticationServiceImpl;
 import ru.bestaford.ariovale.service.impl.FormServiceImpl;
 import ru.bestaford.ariovale.service.impl.TaskServiceImpl;
 import ru.bestaford.ariovale.service.impl.TranslationServiceImpl;
@@ -31,7 +31,7 @@ public final class Core extends PluginBase {
         Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
 
         PluginManager pluginManager = getServer().getPluginManager();
-        pluginManager.registerEvents(injector.getInstance(AuthorizationListener.class), this);
+        pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
         pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
     }
 
@@ -55,13 +55,13 @@ public final class Core extends PluginBase {
             bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
 
             //Services
-            bind(AuthorizationService.class).to(AuthorizationServiceImpl.class).asEagerSingleton();
+            bind(AuthenticationService.class).to(AuthenticationServiceImpl.class).asEagerSingleton();
             bind(FormService.class).to(FormServiceImpl.class).asEagerSingleton();
             bind(TaskService.class).to(TaskServiceImpl.class).asEagerSingleton();
             bind(TranslationService.class).to(TranslationServiceImpl.class).asEagerSingleton();
 
             //Listeners
-            bind(AuthorizationListener.class).to(AuthorizationListenerImpl.class).asEagerSingleton();
+            bind(AuthenticationListener.class).to(AuthenticationListenerImpl.class).asEagerSingleton();
             bind(FormListener.class).to(FormListenerImpl.class).asEagerSingleton();
         }
     }

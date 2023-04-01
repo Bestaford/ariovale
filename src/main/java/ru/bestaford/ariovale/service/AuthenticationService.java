@@ -2,7 +2,7 @@ package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
 
-public interface AuthorizationService {
+public interface AuthenticationService {
 
     boolean isValidSession(Player player);
 

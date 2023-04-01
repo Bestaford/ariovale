@@ -9,23 +9,23 @@ import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 
-public final class AuthorizationForm extends CustomForm {
+public final class AuthenticationForm extends CustomForm {
 
     private final transient FormService formService;
 
     @Inject
-    public AuthorizationForm(TranslationService translationService, FormService formService) {
+    public AuthenticationForm(TranslationService translationService, FormService formService) {
         super(translationService);
         this.formService = formService;
     }
 
     @Override
     public void build(Player player) {
-        setTitle(translationService.getString("authorization.form.title", player));
-        addElement(new ElementLabel(translationService.getString("authorization.form.label", player)));
+        setTitle(translationService.getString("authentication.form.title", player));
+        addElement(new ElementLabel(translationService.getString("authentication.form.label", player)));
         addElement(new ElementInput(
-                translationService.getString("authorization.form.input.text", player),
-                translationService.getString("authorization.form.input.placeholder", player)
+                translationService.getString("authentication.form.input.text", player),
+                translationService.getString("authentication.form.input.placeholder", player)
         ));
     }
 

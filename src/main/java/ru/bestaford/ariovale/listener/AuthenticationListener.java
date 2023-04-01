@@ -5,7 +5,7 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerLocallyInitializedEvent;
 import cn.nukkit.event.player.PlayerPreLoginEvent;
 
-public interface AuthorizationListener extends Listener {
+public interface AuthenticationListener extends Listener {
 
     void onPlayerPreLogin(PlayerPreLoginEvent event);
 

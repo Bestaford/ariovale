@@ -5,26 +5,26 @@ import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerLocallyInitializedEvent;
 import cn.nukkit.event.player.PlayerPreLoginEvent;
-import ru.bestaford.ariovale.listener.AuthorizationListener;
-import ru.bestaford.ariovale.service.AuthorizationService;
+import ru.bestaford.ariovale.listener.AuthenticationListener;
+import ru.bestaford.ariovale.service.AuthenticationService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public final class AuthorizationListenerImpl implements AuthorizationListener {
+public final class AuthenticationListenerImpl implements AuthenticationListener {
 
-    private final AuthorizationService authorizationService;
+    private final AuthenticationService authenticationService;
 
     @Inject
-    public AuthorizationListenerImpl(AuthorizationService authorizationService) {
-        this.authorizationService = authorizationService;
+    public AuthenticationListenerImpl(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
     @Override
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerPreLogin(PlayerPreLoginEvent event) {
-        if (!authorizationService.isValidSession(event.getPlayer())) {
+        if (!authenticationService.isValidSession(event.getPlayer())) {
             event.setKickMessage("not valid"); //TODO: change message
             event.setCancelled();
         }
@@ -33,12 +33,12 @@ public final class AuthorizationListenerImpl implements AuthorizationListener {
     @Override
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        authorizationService.initialize(event.getPlayer());
+        authenticationService.initialize(event.getPlayer());
     }
 
     @Override
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event) {
-        authorizationService.process(event.getPlayer());
+        authenticationService.process(event.getPlayer());
     }
 }
