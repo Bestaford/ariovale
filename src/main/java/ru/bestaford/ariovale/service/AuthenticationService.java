@@ -10,4 +10,6 @@ public interface AuthenticationService {
 
     void process(Player player);
 
+    void authenticate(Player player, String name);
+
 }

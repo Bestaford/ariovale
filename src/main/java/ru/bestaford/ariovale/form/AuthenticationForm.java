@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
@@ -13,12 +14,14 @@ import java.util.Objects;
 public final class AuthenticationForm extends CustomForm {
 
     private final transient FormService formService;
+    private final transient AuthenticationService authenticationService;
     private transient String error;
 
     @Inject
-    public AuthenticationForm(TranslationService translationService, FormService formService) {
+    public AuthenticationForm(TranslationService translationService, FormService formService, AuthenticationService authenticationService) {
         super(translationService);
         this.formService = formService;
+        this.authenticationService = authenticationService;
     }
 
     public String getError() {
@@ -60,5 +63,6 @@ public final class AuthenticationForm extends CustomForm {
             formService.sendForm(authenticationForm, player);
             return;
         }
+        authenticationService.authenticate(player, name);
     }
 }
