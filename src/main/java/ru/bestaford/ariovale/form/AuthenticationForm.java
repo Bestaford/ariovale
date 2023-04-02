@@ -8,6 +8,7 @@ import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
+import java.util.Objects;
 
 public final class AuthenticationForm extends CustomForm {
 
@@ -31,11 +32,7 @@ public final class AuthenticationForm extends CustomForm {
     @Override
     public void build(Player player) {
         setTitle(translationService.getString("authentication.form.title", player));
-        if (error == null) {
-            addElement(new ElementLabel(translationService.getString("authentication.form.label", player)));
-        } else {
-            addElement(new ElementLabel(translationService.getString(error, player)));
-        }
+        addElement(new ElementLabel(translationService.getString(Objects.requireNonNullElse(error, "authentication.form.label"), player)));
         addElement(new ElementInput(
                 translationService.getString("authentication.form.input.text", player),
                 translationService.getString("authentication.form.input.placeholder", player)
