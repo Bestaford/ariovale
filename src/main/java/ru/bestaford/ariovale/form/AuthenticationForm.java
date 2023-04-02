@@ -43,7 +43,7 @@ public final class AuthenticationForm extends CustomForm {
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
         if (wasClosed) {
             ExitForm exitForm = formService.createForm(ExitForm.class);
-            exitForm.setCallback(() -> formService.sendForm(getClass(), player));
+            exitForm.setCallback(() -> formService.sendForm(AuthenticationForm.class, player));
             formService.sendForm(exitForm, player);
             return;
         }
@@ -51,6 +51,12 @@ public final class AuthenticationForm extends CustomForm {
         if (name.isBlank()) {
             AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);
             authenticationForm.setError("authentication.form.input.error.empty");
+            formService.sendForm(authenticationForm, player);
+            return;
+        }
+        if (!name.matches("^[a-zA-Z]{1,20} [a-zA-Z]{1,20}$")) {
+            AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);
+            authenticationForm.setError("authentication.form.input.error.invalid");
             formService.sendForm(authenticationForm, player);
             return;
         }
