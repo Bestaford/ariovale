@@ -5,6 +5,8 @@ import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
+import ru.bestaford.ariovale.service.TaskService;
+import ru.bestaford.ariovale.task.AuthenticationTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,10 +15,12 @@ import javax.inject.Singleton;
 public final class AuthenticationServiceImpl implements AuthenticationService {
 
     private final FormService formService;
+    private final TaskService taskService;
 
     @Inject
-    public AuthenticationServiceImpl(FormService formService) {
+    public AuthenticationServiceImpl(FormService formService, TaskService taskService) {
         this.formService = formService;
+        this.taskService = taskService;
     }
 
     @Override
@@ -44,6 +48,9 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void authenticate(Player player, String name) {
-        player.sendMessage(name);
+        AuthenticationTask authenticationTask = taskService.createTask(AuthenticationTask.class);
+        authenticationTask.setPlayer(player);
+        authenticationTask.setName(name);
+        taskService.scheduleAsyncTask(authenticationTask);
     }
 }
