@@ -11,7 +11,7 @@ import ru.bestaford.ariovale.service.TranslationService;
 import javax.inject.Inject;
 import java.util.Objects;
 
-public final class AuthenticationForm extends CustomForm {
+public final class AuthenticationForm extends CustomForm implements Required {
 
     private final transient FormService formService;
     private final transient AuthenticationService authenticationService;
@@ -44,12 +44,6 @@ public final class AuthenticationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        if (wasClosed) {
-            ExitForm exitForm = formService.createForm(ExitForm.class);
-            exitForm.setCallback(() -> formService.sendForm(AuthenticationForm.class, player));
-            formService.sendForm(exitForm, player);
-            return;
-        }
         String name = response.getInputResponse(1);
         if (name.isBlank()) {
             AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);

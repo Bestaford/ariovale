@@ -8,7 +8,7 @@ import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 
-public final class RegistrationForm extends CustomForm {
+public final class RegistrationForm extends CustomForm implements Required {
 
     private transient String name;
 
