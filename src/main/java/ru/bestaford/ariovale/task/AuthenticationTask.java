@@ -6,19 +6,23 @@ import cn.nukkit.scheduler.AsyncTask;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.form.RegistrationForm;
+import ru.bestaford.ariovale.service.FormService;
 
 import javax.inject.Inject;
 
 public final class AuthenticationTask extends AsyncTask implements Task {
 
     private final SessionFactory sessionFactory;
+    private final FormService formService;
     private Player player;
     private String name;
     private boolean isRegistered;
 
     @Inject
-    public AuthenticationTask(SessionFactory sessionFactory) {
+    public AuthenticationTask(SessionFactory sessionFactory, FormService formService) {
         this.sessionFactory = sessionFactory;
+        this.formService = formService;
     }
 
     public Player getPlayer() {
@@ -46,6 +50,12 @@ public final class AuthenticationTask extends AsyncTask implements Task {
 
     @Override
     public void onCompletion(Server server) {
-        player.sendMessage(String.valueOf(isRegistered));
+        if (isRegistered) {
+
+        } else {
+            RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
+            registrationForm.setName(name);
+            formService.sendForm(registrationForm, player);
+        }
     }
 }
