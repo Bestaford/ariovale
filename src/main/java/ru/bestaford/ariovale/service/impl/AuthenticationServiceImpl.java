@@ -39,6 +39,7 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
         int z = player.getFloorZ();
         int y = player.getLevel().getHighestBlockAt(x, z);
         player.teleport(new Vector3(x, y, z));
+        player.pitch = 0;
     }
 
     @Override
