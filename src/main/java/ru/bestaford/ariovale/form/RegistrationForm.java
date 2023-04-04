@@ -58,5 +58,12 @@ public final class RegistrationForm extends CustomForm implements Required {
             formService.sendForm(registrationForm, player);
             return;
         }
+        if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!\\\"#$%&'()*+,\\-./:;<=>?@\\[\\\\\\]^_`{|}~])\\S{8,}$")) {
+            RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
+            registrationForm.setName(name);
+            registrationForm.setError("registration.form.input.error.invalid");
+            formService.sendForm(registrationForm, player);
+            return;
+        }
     }
 }
