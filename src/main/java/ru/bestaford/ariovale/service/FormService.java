@@ -3,7 +3,7 @@ package ru.bestaford.ariovale.service;
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.form.window.FormWindow;
-import ru.bestaford.ariovale.form.Form;
+import ru.bestaford.ariovale.form.base.Form;
 
 public interface FormService {
 
