@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
+import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
 public final class RegistrationForm extends CustomForm implements Required {
 
     private final transient FormService formService;
-    private transient String name;
+    private transient Account account;
     private transient String error;
 
     @Inject
@@ -22,12 +23,12 @@ public final class RegistrationForm extends CustomForm implements Required {
         this.formService = formService;
     }
 
-    public String getName() {
-        return name;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String getError() {
@@ -40,7 +41,7 @@ public final class RegistrationForm extends CustomForm implements Required {
 
     @Override
     public void build(Player player) {
-        setTitle(translationService.getString("registration.form.title", player));
+        setTitle(translationService.getString("registration.form.title", player) + " [1/2]");
         addElement(new ElementLabel(translationService.getString(Objects.requireNonNullElse(error, "registration.form.label"), player)));
         addElement(new ElementInput(
                 translationService.getString("registration.form.input.text", player),
@@ -53,14 +54,14 @@ public final class RegistrationForm extends CustomForm implements Required {
         String password = response.getInputResponse(1);
         if (password.isBlank()) {
             RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
-            registrationForm.setName(name);
+            registrationForm.setAccount(account);
             registrationForm.setError("registration.form.input.error.empty");
             formService.sendForm(registrationForm, player);
             return;
         }
         if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!\\\"#$%&'()*+,\\-./:;<=>?@\\[\\\\\\]^_`{|}~])\\S{8,}$")) {
             RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
-            registrationForm.setName(name);
+            registrationForm.setAccount(account);
             registrationForm.setError("registration.form.input.error.invalid");
             formService.sendForm(registrationForm, player);
             return;

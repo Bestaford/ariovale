@@ -53,8 +53,10 @@ public final class AuthenticationTask extends AsyncTask implements Task {
         if (isRegistered) {
 
         } else {
+            Account account = new Account();
+            account.setName(name);
             RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
-            registrationForm.setName(name);
+            registrationForm.setAccount(account);
             formService.sendForm(registrationForm, player);
         }
     }
