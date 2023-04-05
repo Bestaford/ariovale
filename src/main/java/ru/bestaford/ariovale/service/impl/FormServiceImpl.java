@@ -7,8 +7,10 @@ import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
 import com.google.inject.Injector;
-import ru.bestaford.ariovale.form.ExitForm;
-import ru.bestaford.ariovale.form.base.*;
+import ru.bestaford.ariovale.form.base.CustomForm;
+import ru.bestaford.ariovale.form.base.Form;
+import ru.bestaford.ariovale.form.base.ModalForm;
+import ru.bestaford.ariovale.form.base.SimpleForm;
 import ru.bestaford.ariovale.service.FormService;
 
 import javax.inject.Inject;
@@ -43,18 +45,12 @@ public final class FormServiceImpl implements FormService {
     @Override
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
         if (window instanceof Form) {
-            if (wasClosed && window instanceof Required) {
-                ExitForm exitForm = createForm(ExitForm.class);
-                exitForm.setCallback(() -> sendForm(((Form) window).getClass(), player));
-                sendForm(exitForm, player);
-            } else {
-                if (window instanceof SimpleForm) {
-                    ((SimpleForm) window).handle(player, wasClosed, (FormResponseSimple) response);
-                } else if (window instanceof ModalForm) {
-                    ((ModalForm) window).handle(player, wasClosed, (FormResponseModal) response);
-                } else if (window instanceof CustomForm) {
-                    ((CustomForm) window).handle(player, wasClosed, (FormResponseCustom) response);
-                }
+            if (window instanceof SimpleForm) {
+                ((SimpleForm) window).handle(player, wasClosed, (FormResponseSimple) response);
+            } else if (window instanceof ModalForm) {
+                ((ModalForm) window).handle(player, wasClosed, (FormResponseModal) response);
+            } else if (window instanceof CustomForm) {
+                ((CustomForm) window).handle(player, wasClosed, (FormResponseCustom) response);
             }
         }
     }

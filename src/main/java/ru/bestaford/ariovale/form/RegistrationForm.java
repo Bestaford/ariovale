@@ -6,14 +6,13 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
-import ru.bestaford.ariovale.form.base.Required;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 import java.util.Objects;
 
-public final class RegistrationForm extends CustomForm implements Required {
+public final class RegistrationForm extends CustomForm {
 
     private final transient FormService formService;
     private transient Account account;
@@ -47,13 +46,25 @@ public final class RegistrationForm extends CustomForm implements Required {
         addElement(new ElementLabel(translationService.getString(Objects.requireNonNullElse(error, "registration.form.label"), player)));
         addElement(new ElementInput(
                 translationService.getString("registration.form.input.text", player),
-                translationService.getString("registration.form.input.placeholder", player)
+                translationService.getString("registration.form.input.placeholder", player),
+                Objects.requireNonNullElse(account.getPassword(), "")
         ));
     }
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
+        if (wasClosed) {
+            ExitForm exitForm = formService.createForm(ExitForm.class);
+            exitForm.setCallback(() -> {
+                RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
+                registrationForm.setAccount(account);
+                formService.sendForm(registrationForm, player);
+            });
+            formService.sendForm(exitForm, player);
+            return;
+        }
         String password = response.getInputResponse(1);
+        account.setPassword(password);
         if (password.isBlank()) {
             RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
             registrationForm.setAccount(account);
