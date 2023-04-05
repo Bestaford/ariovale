@@ -58,6 +58,7 @@ public final class RegistrationForm extends CustomForm {
             exitForm.setCallback(() -> {
                 RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
                 registrationForm.setAccount(account);
+                registrationForm.setError(error);
                 formService.sendForm(registrationForm, player);
             });
             formService.sendForm(exitForm, player);
@@ -79,5 +80,7 @@ public final class RegistrationForm extends CustomForm {
             formService.sendForm(registrationForm, player);
             return;
         }
+        ProfileCreationForm profileCreationForm = formService.createForm(ProfileCreationForm.class);
+        formService.sendForm(profileCreationForm, player);
     }
 }

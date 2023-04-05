@@ -60,6 +60,7 @@ public final class AuthenticationForm extends CustomForm {
             exitForm.setCallback(() -> {
                 AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);
                 authenticationForm.setName(name);
+                authenticationForm.setError(error);
                 formService.sendForm(authenticationForm, player);
             });
             formService.sendForm(exitForm, player);
