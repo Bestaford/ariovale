@@ -74,7 +74,7 @@ public final class AuthenticationForm extends CustomForm {
             formService.sendForm(authenticationForm, player);
             return;
         }
-        if (!name.matches("^[a-zA-Z]{1,20} [a-zA-Z]{1,20}$")) {
+        if (!name.matches("^\\p{L}{1,30} \\p{L}{1,30}$")) {
             AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);
             authenticationForm.setName(name);
             authenticationForm.setError("authentication.form.input.error.invalid");
