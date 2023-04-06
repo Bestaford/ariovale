@@ -3,6 +3,7 @@ package ru.bestaford.ariovale.form;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
+import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
@@ -41,6 +42,12 @@ public final class ProfileCreationForm extends CustomForm {
                 Arrays.stream(Sex.values()).map(
                         sex -> translationService.getString("sex." + sex.toString().toLowerCase(), player)
                 ).collect(Collectors.toList())
+        ));
+        addElement(new ElementSlider(
+                translationService.getString("age", player),
+                (float) Account.MIN_AGE,
+                (float) Account.MAX_AGE,
+                1
         ));
     }
 

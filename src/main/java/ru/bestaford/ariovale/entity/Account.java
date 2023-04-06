@@ -9,6 +9,9 @@ import jakarta.persistence.Table;
 @Table(name = "accounts")
 public class Account {
 
+    public static int MIN_AGE = 18;
+    public static int MAX_AGE = 80;
+
     @Id
     @Column(nullable = false)
     private String name;
