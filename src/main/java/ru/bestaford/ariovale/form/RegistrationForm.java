@@ -81,6 +81,7 @@ public final class RegistrationForm extends CustomForm {
             return;
         }
         ProfileCreationForm profileCreationForm = formService.createForm(ProfileCreationForm.class);
+        profileCreationForm.setAccount(account);
         formService.sendForm(profileCreationForm, player);
     }
 }
