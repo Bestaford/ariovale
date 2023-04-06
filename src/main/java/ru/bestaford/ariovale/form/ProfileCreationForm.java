@@ -37,9 +37,9 @@ public final class ProfileCreationForm extends CustomForm {
                 translationService.getString("profile.creation.form.label", player) + ": " + account.getName()
         ));
         addElement(new ElementDropdown(
-                translationService.getString("variables.sex.title", player),
+                translationService.getString("sex.title", player),
                 Arrays.stream(Sex.values()).map(
-                        sex -> translationService.getString("variables.sex." + sex.toString().toLowerCase(), player)
+                        sex -> translationService.getString("sex." + sex.toString().toLowerCase(), player)
                 ).collect(Collectors.toList())
         ));
     }
