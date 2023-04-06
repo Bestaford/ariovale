@@ -7,6 +7,7 @@ import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
+import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.util.Sex;
 
@@ -16,11 +17,13 @@ import java.util.stream.Collectors;
 
 public final class ProfileCreationForm extends CustomForm {
 
+    private final transient FormService formService;
     private transient Account account;
 
     @Inject
-    public ProfileCreationForm(TranslationService translationService) {
+    public ProfileCreationForm(TranslationService translationService, FormService formService) {
         super(translationService);
+        this.formService = formService;
     }
 
     public Account getAccount() {
@@ -53,6 +56,15 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-
+        if (wasClosed) {
+            ExitForm exitForm = formService.createForm(ExitForm.class);
+            exitForm.setCallback(() -> {
+                ProfileCreationForm profileCreationForm = formService.createForm(ProfileCreationForm.class);
+                profileCreationForm.setAccount(account);
+                formService.sendForm(profileCreationForm, player);
+            });
+            formService.sendForm(exitForm, player);
+            return;
+        }
     }
 }

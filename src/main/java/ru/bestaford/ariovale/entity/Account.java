@@ -4,13 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import ru.bestaford.ariovale.util.Sex;
 
 @Entity
 @Table(name = "accounts")
 public class Account {
 
-    public static int MIN_AGE = 18;
-    public static int MAX_AGE = 80;
+    public final static int MIN_AGE = 18;
+    public final static int MAX_AGE = 80;
 
     @Id
     @Column(nullable = false)
@@ -18,6 +19,12 @@ public class Account {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private Sex sex;
+
+    @Column(nullable = false)
+    private int age;
 
     public Account() {
 
@@ -37,5 +44,21 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
