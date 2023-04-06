@@ -1,9 +1,6 @@
 package ru.bestaford.ariovale.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import ru.bestaford.ariovale.util.Sex;
 
 @Entity
@@ -21,6 +18,7 @@ public class Account {
     private String password;
 
     @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private Sex sex;
 
     @Column(nullable = false)
