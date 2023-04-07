@@ -41,13 +41,15 @@ public final class ProfileCreationForm extends CustomForm {
                 translationService.getString("sex.title", player),
                 Arrays.stream(Sex.values()).map(
                         sex -> translationService.getString("sex." + sex.toString().toLowerCase(), player)
-                ).collect(Collectors.toList())
+                ).collect(Collectors.toList()),
+                account.getSex() == null ? 0 : account.getSex().ordinal()
         ));
         addElement(new ElementSlider(
                 translationService.getString("age", player),
                 (float) Account.MIN_AGE,
                 (float) Account.MAX_AGE,
-                1
+                1,
+                Math.max(account.getAge(), Account.MIN_AGE)
         ));
     }
 
