@@ -46,8 +46,8 @@ public final class ProfileCreationForm extends CustomForm {
         ));
         addElement(new ElementSlider(
                 translationService.getString("age", player),
-                (float) Account.MIN_AGE,
-                (float) Account.MAX_AGE,
+                Account.MIN_AGE,
+                Account.MAX_AGE,
                 1,
                 Math.max(account.getAge(), Account.MIN_AGE)
         ));
