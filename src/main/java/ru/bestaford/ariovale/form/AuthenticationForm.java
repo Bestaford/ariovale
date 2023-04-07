@@ -75,6 +75,7 @@ public final class AuthenticationForm extends CustomForm {
                 .append(nameParts[1].substring(0, 1).toUpperCase())
                 .append(nameParts[1].substring(1).toLowerCase());
         name = finalName.toString();
+        error = null;
         authenticationService.authenticate(player, name);
     }
 }
