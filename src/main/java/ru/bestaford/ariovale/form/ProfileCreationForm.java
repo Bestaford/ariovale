@@ -27,10 +27,6 @@ public final class ProfileCreationForm extends CustomForm {
         this.formService = formService;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
     public void setAccount(Account account) {
         this.account = account;
     }
@@ -57,6 +53,9 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     public Form copy(Form other) {
+        if (other instanceof ProfileCreationForm form) {
+            account = form.account;
+        }
         return this;
     }
 
@@ -64,11 +63,7 @@ public final class ProfileCreationForm extends CustomForm {
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
         if (wasClosed) {
             ExitForm exitForm = formService.createForm(ExitForm.class);
-            exitForm.setCallback(() -> {
-                ProfileCreationForm profileCreationForm = formService.createForm(ProfileCreationForm.class);
-                profileCreationForm.setAccount(account);
-                formService.sendForm(profileCreationForm, player);
-            });
+            exitForm.setCallback(() -> formService.sendCopy(this, player));
             formService.sendForm(exitForm, player);
             return;
         }

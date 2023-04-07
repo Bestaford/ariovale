@@ -25,20 +25,8 @@ public final class RegistrationForm extends CustomForm {
         this.formService = formService;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
     }
 
     @Override
@@ -54,6 +42,10 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     public Form copy(Form other) {
+        if (other instanceof RegistrationForm form) {
+            account = form.account;
+            error = form.error;
+        }
         return this;
     }
 
@@ -61,31 +53,23 @@ public final class RegistrationForm extends CustomForm {
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
         if (wasClosed) {
             ExitForm exitForm = formService.createForm(ExitForm.class);
-            exitForm.setCallback(() -> {
-                RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
-                registrationForm.setAccount(account);
-                registrationForm.setError(error);
-                formService.sendForm(registrationForm, player);
-            });
+            exitForm.setCallback(() -> formService.sendCopy(this, player));
             formService.sendForm(exitForm, player);
             return;
         }
         String password = response.getInputResponse(1);
         account.setPassword(password);
         if (password.isBlank()) {
-            RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
-            registrationForm.setAccount(account);
-            registrationForm.setError("registration.form.input.error.empty");
-            formService.sendForm(registrationForm, player);
+            error = "registration.form.input.error.empty";
+            formService.sendCopy(this, player);
             return;
         }
         if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!\\\"#$%&'()*+,\\-./:;<=>?@\\[\\\\\\]^_`{|}~])\\S{8,}$")) {
-            RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
-            registrationForm.setAccount(account);
-            registrationForm.setError("registration.form.input.error.invalid");
-            formService.sendForm(registrationForm, player);
+            error = "registration.form.input.error.invalid";
+            formService.sendCopy(this, player);
             return;
         }
+        error = null;
         ProfileCreationForm profileCreationForm = formService.createForm(ProfileCreationForm.class);
         profileCreationForm.setAccount(account);
         formService.sendForm(profileCreationForm, player);

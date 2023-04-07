@@ -16,10 +16,6 @@ public final class ExitForm extends ConfirmationForm {
         super(translationService);
     }
 
-    public Runnable getCallback() {
-        return callback;
-    }
-
     public void setCallback(Runnable callback) {
         this.callback = callback;
     }
@@ -33,6 +29,9 @@ public final class ExitForm extends ConfirmationForm {
 
     @Override
     public Form copy(Form other) {
+        if (other instanceof ExitForm form) {
+            callback = form.callback;
+        }
         return this;
     }
 
