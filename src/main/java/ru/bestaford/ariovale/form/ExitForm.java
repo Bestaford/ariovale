@@ -2,6 +2,7 @@ package ru.bestaford.ariovale.form;
 
 import cn.nukkit.Player;
 import ru.bestaford.ariovale.form.base.ConfirmationForm;
+import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
@@ -28,6 +29,11 @@ public final class ExitForm extends ConfirmationForm {
         super.build(player);
         setTitle(translationService.getString("exit.form.title", player));
         setContent(translationService.getString("exit.form.content", player));
+    }
+
+    @Override
+    public Form copy(Form other) {
+        return this;
     }
 
     @Override

@@ -6,6 +6,7 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
+import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
@@ -49,6 +50,11 @@ public final class RegistrationForm extends CustomForm {
                 translationService.getString("registration.form.input.placeholder", player),
                 Objects.requireNonNullElse(account.getPassword(), "")
         ));
+    }
+
+    @Override
+    public Form copy(Form other) {
+        return this;
     }
 
     @Override

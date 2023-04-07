@@ -6,4 +6,6 @@ public interface Form {
 
     void build(Player player);
 
+    Form copy(Form other);
+
 }

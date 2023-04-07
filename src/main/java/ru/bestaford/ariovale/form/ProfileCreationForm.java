@@ -7,6 +7,7 @@ import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
+import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.util.Sex;
@@ -52,6 +53,11 @@ public final class ProfileCreationForm extends CustomForm {
                 (float) Account.MAX_AGE,
                 1
         ));
+    }
+
+    @Override
+    public Form copy(Form other) {
+        return this;
     }
 
     @Override

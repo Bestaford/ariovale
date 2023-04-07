@@ -37,6 +37,11 @@ public final class FormServiceImpl implements FormService {
     }
 
     @Override
+    public <T extends Form> void sendCopy(T form, Player player) {
+        sendForm(createForm(form.getClass()).copy(form), player);
+    }
+
+    @Override
     public <T extends Form> void sendForm(T form, Player player) {
         form.build(player);
         player.showFormWindow((FormWindow) form);

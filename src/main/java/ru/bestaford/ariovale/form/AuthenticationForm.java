@@ -5,6 +5,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.form.base.CustomForm;
+import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
@@ -26,22 +27,6 @@ public final class AuthenticationForm extends CustomForm {
         this.authenticationService = authenticationService;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
     @Override
     public void build(Player player) {
         setTitle(translationService.getString("authentication.form.title", player));
@@ -54,31 +39,31 @@ public final class AuthenticationForm extends CustomForm {
     }
 
     @Override
+    public Form copy(Form other) {
+        if (other instanceof AuthenticationForm form) {
+            name = form.name;
+            error = form.error;
+        }
+        return this;
+    }
+
+    @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
         if (wasClosed) {
             ExitForm exitForm = formService.createForm(ExitForm.class);
-            exitForm.setCallback(() -> {
-                AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);
-                authenticationForm.setName(name);
-                authenticationForm.setError(error);
-                formService.sendForm(authenticationForm, player);
-            });
+            exitForm.setCallback(() -> formService.sendCopy(this, player));
             formService.sendForm(exitForm, player);
             return;
         }
-        String name = response.getInputResponse(1);
+        name = response.getInputResponse(1);
         if (name.isBlank()) {
-            AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);
-            authenticationForm.setName(name);
-            authenticationForm.setError("authentication.form.input.error.empty");
-            formService.sendForm(authenticationForm, player);
+            error = "authentication.form.input.error.empty";
+            formService.sendCopy(this, player);
             return;
         }
         if (!name.matches("^\\p{L}{1,30} \\p{L}{1,30}$")) {
-            AuthenticationForm authenticationForm = formService.createForm(AuthenticationForm.class);
-            authenticationForm.setName(name);
-            authenticationForm.setError("authentication.form.input.error.invalid");
-            formService.sendForm(authenticationForm, player);
+            error = "authentication.form.input.error.invalid";
+            formService.sendCopy(this, player);
             return;
         }
         StringBuilder finalName = new StringBuilder();
@@ -89,6 +74,7 @@ public final class AuthenticationForm extends CustomForm {
                 .append(" ")
                 .append(nameParts[1].substring(0, 1).toUpperCase())
                 .append(nameParts[1].substring(1).toLowerCase());
-        authenticationService.authenticate(player, finalName.toString());
+        name = finalName.toString();
+        authenticationService.authenticate(player, name);
     }
 }
