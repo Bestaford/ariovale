@@ -25,16 +25,8 @@ public final class AuthenticationTask extends AsyncTask implements Task {
         this.formService = formService;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
