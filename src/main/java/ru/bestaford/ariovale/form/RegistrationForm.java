@@ -59,6 +59,7 @@ public final class RegistrationForm extends CustomForm {
         }
         String password = response.getInputResponse(1);
         account.setPassword(password);
+        error = null;
         if (password.isBlank()) {
             error = "registration.form.input.error.empty";
             formService.sendCopy(this, player);
@@ -69,7 +70,6 @@ public final class RegistrationForm extends CustomForm {
             formService.sendCopy(this, player);
             return;
         }
-        error = null;
         ProfileCreationForm profileCreationForm = formService.createForm(ProfileCreationForm.class);
         profileCreationForm.setAccount(account);
         formService.sendForm(profileCreationForm, player);
