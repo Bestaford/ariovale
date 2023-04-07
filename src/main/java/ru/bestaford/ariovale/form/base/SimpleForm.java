@@ -14,7 +14,5 @@ public abstract class SimpleForm extends FormWindowSimple implements Form {
         this.translationService = translationService;
     }
 
-    public abstract void build(Player player);
-
     public abstract void handle(Player player, boolean wasClosed, FormResponseSimple response);
 }
