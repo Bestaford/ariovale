@@ -36,7 +36,9 @@ public final class AuthenticationTask extends AsyncTask implements Task {
     @Override
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
-            isRegistered = session.get(Account.class, name) != null;
+            isRegistered = session.createSelectionQuery("select a.name from Account a where a.name = :name")
+                    .setParameter("name", name)
+                    .uniqueResult() != null;
         }
     }
 
