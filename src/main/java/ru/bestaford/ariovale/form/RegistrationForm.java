@@ -7,12 +7,14 @@ import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Form;
+import ru.bestaford.ariovale.form.base.Required;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 import java.util.Objects;
 
+@Required
 public final class RegistrationForm extends CustomForm {
 
     private final transient FormService formService;
