@@ -15,15 +15,20 @@ import ru.bestaford.ariovale.service.FormService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
 @Singleton
 public final class FormServiceImpl implements FormService {
 
     private final Injector injector;
+    private final Map<Player, Stack<Form>> formStackMap;
 
     @Inject
     public FormServiceImpl(Injector injector) {
         this.injector = injector;
+        formStackMap = new HashMap<>();
     }
 
     @Override
@@ -45,6 +50,11 @@ public final class FormServiceImpl implements FormService {
     public <T extends Form> void sendForm(T form, Player player) {
         form.build(player);
         player.showFormWindow((FormWindow) form);
+        if (!formStackMap.containsKey(player)) {
+            formStackMap.put(player, new Stack<>());
+        }
+        Stack<Form> formStack = formStackMap.get(player);
+        formStack.push(form);
     }
 
     @Override
