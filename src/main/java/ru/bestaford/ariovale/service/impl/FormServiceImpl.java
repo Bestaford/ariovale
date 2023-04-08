@@ -52,7 +52,14 @@ public final class FormServiceImpl implements FormService {
                 formStackMap.put(player, new Stack<>());
             }
             Stack<Form> formStack = formStackMap.get(player);
-            formStack.push(form);
+            if(formStack.empty()) {
+                formStack.push(form);
+            } else {
+                if(formStack.peek().getClass().equals(form.getClass())) {
+                    formStack.pop();
+                }
+                formStack.push(form);
+            }
             player.sendMessage(formStack.toString());
         }
     }
