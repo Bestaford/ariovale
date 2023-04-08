@@ -7,10 +7,7 @@ import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
 import com.google.inject.Injector;
-import ru.bestaford.ariovale.form.base.CustomForm;
-import ru.bestaford.ariovale.form.base.Form;
-import ru.bestaford.ariovale.form.base.ModalForm;
-import ru.bestaford.ariovale.form.base.SimpleForm;
+import ru.bestaford.ariovale.form.base.*;
 import ru.bestaford.ariovale.service.FormService;
 
 import javax.inject.Inject;
@@ -50,11 +47,14 @@ public final class FormServiceImpl implements FormService {
     public <T extends Form> void sendForm(T form, Player player) {
         form.build(player);
         player.showFormWindow((FormWindow) form);
-        if (!formStackMap.containsKey(player)) {
-            formStackMap.put(player, new Stack<>());
+        if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
+            if (!formStackMap.containsKey(player)) {
+                formStackMap.put(player, new Stack<>());
+            }
+            Stack<Form> formStack = formStackMap.get(player);
+            formStack.push(form);
+            player.sendMessage(formStack.toString());
         }
-        Stack<Form> formStack = formStackMap.get(player);
-        formStack.push(form);
     }
 
     @Override
