@@ -51,12 +51,6 @@ public final class AuthenticationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        if (wasClosed) {
-            ExitForm exitForm = formService.createForm(ExitForm.class);
-            exitForm.setCallback(() -> formService.sendCopy(this, player));
-            formService.sendForm(exitForm, player);
-            return;
-        }
         name = response.getInputResponse(1);
         error = null;
         if (name.isBlank()) {

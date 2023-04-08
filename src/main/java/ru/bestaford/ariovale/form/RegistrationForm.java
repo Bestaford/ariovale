@@ -53,12 +53,6 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        if (wasClosed) {
-            ExitForm exitForm = formService.createForm(ExitForm.class);
-            exitForm.setCallback(() -> formService.sendCopy(this, player));
-            formService.sendForm(exitForm, player);
-            return;
-        }
         String password = response.getInputResponse(1);
         account.setPassword(password);
         error = null;
