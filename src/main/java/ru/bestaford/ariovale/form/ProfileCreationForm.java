@@ -36,8 +36,9 @@ public final class ProfileCreationForm extends CustomForm {
     @Override
     public void build(Player player) {
         setTitle(translationService.getString("profile.creation.form.title", player) + " [2/2]");
+        addElement(new ElementLabel(translationService.getString("profile.creation.form.label", player)));
         addElement(new ElementLabel(
-                translationService.getString("profile.creation.form.label", player) + ": " + account.getName()
+                translationService.getString("profile.creation.form.name", player) + ": " + account.getName()
         ));
         addElement(new ElementDropdown(
                 translationService.getString("sex.title", player),
