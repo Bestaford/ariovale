@@ -61,14 +61,22 @@ public final class FormServiceImpl implements FormService {
     }
 
     @Override
-    public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
-        if (window instanceof Form) {
-            if (window instanceof SimpleForm) {
-                ((SimpleForm) window).handle(player, wasClosed, (FormResponseSimple) response);
-            } else if (window instanceof ModalForm) {
-                ((ModalForm) window).handle(player, wasClosed, (FormResponseModal) response);
-            } else if (window instanceof CustomForm) {
-                ((CustomForm) window).handle(player, wasClosed, (FormResponseCustom) response);
+    public void handleResponse(FormWindow form, Player player, boolean wasClosed, FormResponse response) {
+        if (form instanceof Form) {
+            if ((wasClosed) && (!form.getClass().isAnnotationPresent(IgnoreStack.class))) {
+                Stack<Form> formStack = formStackMap.get(player);
+                formStack.remove(form);
+                if (!formStack.empty()) {
+                    sendCopy(formStack.pop(), player);
+                }
+            } else {
+                if (form instanceof SimpleForm) {
+                    ((SimpleForm) form).handle(player, wasClosed, (FormResponseSimple) response);
+                } else if (form instanceof ModalForm) {
+                    ((ModalForm) form).handle(player, wasClosed, (FormResponseModal) response);
+                } else if (form instanceof CustomForm) {
+                    ((CustomForm) form).handle(player, wasClosed, (FormResponseCustom) response);
+                }
             }
         }
     }
