@@ -2,11 +2,13 @@ package ru.bestaford.ariovale.service.impl;
 
 import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
+import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TaskService;
 import ru.bestaford.ariovale.task.AuthenticationTask;
+import ru.bestaford.ariovale.task.RegistrationTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -53,5 +55,13 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
         authenticationTask.setPlayer(player);
         authenticationTask.setName(name);
         taskService.scheduleAsyncTask(authenticationTask);
+    }
+
+    @Override
+    public void register(Player player, Account account) {
+        RegistrationTask registrationTask = taskService.createTask(RegistrationTask.class);
+        registrationTask.setPlayer(player);
+        registrationTask.setAccount(account);
+        taskService.scheduleAsyncTask(registrationTask);
     }
 }

@@ -9,6 +9,7 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.form.base.Required;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.util.Sex;
 
@@ -19,11 +20,13 @@ import java.util.stream.Collectors;
 @Required
 public final class ProfileCreationForm extends CustomForm {
 
+    private final transient AuthenticationService authenticationService;
     private transient Account account;
 
     @Inject
-    public ProfileCreationForm(TranslationService translationService) {
+    public ProfileCreationForm(TranslationService translationService, AuthenticationService authenticationService) {
         super(translationService);
+        this.authenticationService = authenticationService;
     }
 
     public void setAccount(Account account) {
@@ -65,5 +68,6 @@ public final class ProfileCreationForm extends CustomForm {
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
         account.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
         account.setAge((int) response.getSliderResponse(3));
+        authenticationService.register(player, account);
     }
 }
