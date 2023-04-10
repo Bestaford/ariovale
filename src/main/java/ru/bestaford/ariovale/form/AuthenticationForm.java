@@ -51,9 +51,10 @@ public final class AuthenticationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        name = response.getInputResponse(1);
+        name = response.getInputResponse(1).trim();
         error = null;
         if (name.isBlank()) {
+            name = null;
             error = "authentication.form.input.error.empty";
             formService.sendCopy(this, player);
             return;

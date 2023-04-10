@@ -57,6 +57,7 @@ public final class RegistrationForm extends CustomForm {
         account.setPassword(password);
         error = null;
         if (password.isBlank()) {
+            account.setPassword(null);
             error = "registration.form.input.error.empty";
             formService.sendCopy(this, player);
             return;

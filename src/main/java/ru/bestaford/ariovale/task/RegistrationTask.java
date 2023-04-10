@@ -7,18 +7,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.util.Utils;
 
 import javax.inject.Inject;
 
 public final class RegistrationTask extends AsyncTask implements Task {
 
     private final SessionFactory sessionFactory;
+    private final Utils utils;
     private Player player;
     private Account account;
+    private boolean success;
 
     @Inject
-    public RegistrationTask(SessionFactory sessionFactory) {
+    public RegistrationTask(SessionFactory sessionFactory, Utils utils) {
         this.sessionFactory = sessionFactory;
+        this.utils = utils;
     }
 
     public void setPlayer(Player player) {
@@ -36,6 +40,7 @@ public final class RegistrationTask extends AsyncTask implements Task {
         try (session) {
             session.persist(account);
             transaction.commit();
+            success = true;
         } catch (Exception e) {
             transaction.rollback();
             throw new RuntimeException(e);
@@ -44,6 +49,10 @@ public final class RegistrationTask extends AsyncTask implements Task {
 
     @Override
     public void onCompletion(Server server) {
+        if (success) {
 
+        } else {
+            utils.hardError(player);
+        }
     }
 }

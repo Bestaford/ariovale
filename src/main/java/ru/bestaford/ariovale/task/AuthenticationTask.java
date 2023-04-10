@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.RegistrationForm;
 import ru.bestaford.ariovale.service.FormService;
+import ru.bestaford.ariovale.util.Utils;
 
 import javax.inject.Inject;
 
@@ -15,14 +16,17 @@ public final class AuthenticationTask extends AsyncTask implements Task {
 
     private final SessionFactory sessionFactory;
     private final FormService formService;
+    private final Utils utils;
     private Player player;
     private String name;
     private boolean isRegistered;
+    private boolean success;
 
     @Inject
-    public AuthenticationTask(SessionFactory sessionFactory, FormService formService) {
+    public AuthenticationTask(SessionFactory sessionFactory, FormService formService, Utils utils) {
         this.sessionFactory = sessionFactory;
         this.formService = formService;
+        this.utils = utils;
     }
 
     public void setPlayer(Player player) {
@@ -37,19 +41,24 @@ public final class AuthenticationTask extends AsyncTask implements Task {
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
             isRegistered = session.get(Account.class, name) != null;
+            success = true;
         }
     }
 
     @Override
     public void onCompletion(Server server) {
-        if (isRegistered) {
-
+        if (success) {
+            if (isRegistered) {
+                player.sendMessage("registered");
+            } else {
+                Account account = new Account();
+                account.setName(name);
+                RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
+                registrationForm.setAccount(account);
+                formService.sendForm(registrationForm, player);
+            }
         } else {
-            Account account = new Account();
-            account.setName(name);
-            RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
-            registrationForm.setAccount(account);
-            formService.sendForm(registrationForm, player);
+            utils.hardError(player);
         }
     }
 }

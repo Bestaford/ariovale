@@ -23,18 +23,20 @@ import ru.bestaford.ariovale.service.impl.AuthenticationServiceImpl;
 import ru.bestaford.ariovale.service.impl.FormServiceImpl;
 import ru.bestaford.ariovale.service.impl.TaskServiceImpl;
 import ru.bestaford.ariovale.service.impl.TranslationServiceImpl;
+import ru.bestaford.ariovale.util.Utils;
 
 public final class Core extends PluginBase {
 
     @Override
     public void onEnable() {
-        PluginManager pluginManager = getServer().getPluginManager();
         try {
             Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
 
+            PluginManager pluginManager = getServer().getPluginManager();
             pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
             pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
         } catch (Exception e) {
+            getLogger().error(e.getMessage());
             System.exit(1);
         }
     }
@@ -67,6 +69,9 @@ public final class Core extends PluginBase {
             //Listeners
             bind(AuthenticationListener.class).to(AuthenticationListenerImpl.class).asEagerSingleton();
             bind(FormListener.class).to(FormListenerImpl.class).asEagerSingleton();
+
+            //Misc
+            bind(Utils.class);
         }
     }
 }
