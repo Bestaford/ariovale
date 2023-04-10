@@ -28,11 +28,15 @@ public final class Core extends PluginBase {
 
     @Override
     public void onEnable() {
-        Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
-
         PluginManager pluginManager = getServer().getPluginManager();
-        pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
-        pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
+        try {
+            Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
+
+            pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
+            pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
+        } catch (Exception e) {
+            System.exit(1);
+        }
     }
 
     private static final class Module extends AbstractModule {
