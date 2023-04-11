@@ -1,5 +1,6 @@
 package ru.bestaford.ariovale.task;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
@@ -38,6 +39,8 @@ public final class RegistrationTask extends AsyncTask implements Task {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         try (session) {
+            String hashedPassword = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, account.getPassword().toCharArray());
+            account.setPassword(hashedPassword);
             session.persist(account);
             transaction.commit();
             success = true;
