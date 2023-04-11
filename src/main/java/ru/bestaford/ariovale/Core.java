@@ -15,15 +15,8 @@ import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.listener.impl.AuthenticationListenerImpl;
 import ru.bestaford.ariovale.listener.impl.FormListenerImpl;
-import ru.bestaford.ariovale.service.AuthenticationService;
-import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.TaskService;
-import ru.bestaford.ariovale.service.TranslationService;
-import ru.bestaford.ariovale.service.impl.AuthenticationServiceImpl;
-import ru.bestaford.ariovale.service.impl.FormServiceImpl;
-import ru.bestaford.ariovale.service.impl.TaskServiceImpl;
-import ru.bestaford.ariovale.service.impl.TranslationServiceImpl;
-import ru.bestaford.ariovale.util.Utils;
+import ru.bestaford.ariovale.service.*;
+import ru.bestaford.ariovale.service.impl.*;
 
 public final class Core extends PluginBase {
 
@@ -65,13 +58,11 @@ public final class Core extends PluginBase {
             bind(FormService.class).to(FormServiceImpl.class).asEagerSingleton();
             bind(TaskService.class).to(TaskServiceImpl.class).asEagerSingleton();
             bind(TranslationService.class).to(TranslationServiceImpl.class).asEagerSingleton();
+            bind(UtilsService.class).to(UtilsServiceImpl.class).asEagerSingleton();
 
             //Listeners
             bind(AuthenticationListener.class).to(AuthenticationListenerImpl.class).asEagerSingleton();
             bind(FormListener.class).to(FormListenerImpl.class).asEagerSingleton();
-
-            //Misc
-            bind(Utils.class);
         }
     }
 }
