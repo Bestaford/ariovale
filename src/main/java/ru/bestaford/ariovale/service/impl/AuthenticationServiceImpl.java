@@ -12,17 +12,22 @@ import ru.bestaford.ariovale.task.RegistrationTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public final class AuthenticationServiceImpl implements AuthenticationService {
 
     private final FormService formService;
     private final TaskService taskService;
+    private final Map<UUID, Account> loggedPlayers;
 
     @Inject
     public AuthenticationServiceImpl(FormService formService, TaskService taskService) {
         this.formService = formService;
         this.taskService = taskService;
+        loggedPlayers = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -63,5 +68,10 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
         registrationTask.setPlayer(player);
         registrationTask.setAccount(account);
         taskService.scheduleAsyncTask(registrationTask);
+    }
+
+    @Override
+    public void completeRegistration(Player player, Account account) {
+        loggedPlayers.put(player.getUniqueId(), account);
     }
 }

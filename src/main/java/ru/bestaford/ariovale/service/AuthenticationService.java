@@ -15,4 +15,6 @@ public interface AuthenticationService {
 
     void register(Player player, Account account);
 
+    void completeRegistration(Player player, Account account);
+
 }

@@ -47,7 +47,7 @@ public final class AuthenticationTask extends AsyncTask implements Task {
 
     @Override
     public void onCompletion(Server server) {
-        if (success) {
+        if (player.isOnline() && success) {
             if (isRegistered) {
                 player.sendMessage("registered");
             } else {
