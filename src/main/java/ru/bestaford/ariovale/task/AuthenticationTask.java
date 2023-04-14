@@ -6,6 +6,7 @@ import cn.nukkit.scheduler.AsyncTask;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.form.RegistrationForm;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.UtilsService;
@@ -20,6 +21,7 @@ public final class AuthenticationTask extends AsyncTask implements Task {
     private Player player;
     private String name;
     private boolean isRegistered;
+    private boolean isLoggedIn;
     private boolean success;
 
     @Inject
@@ -41,6 +43,7 @@ public final class AuthenticationTask extends AsyncTask implements Task {
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
             isRegistered = session.get(Account.class, name) != null;
+            isLoggedIn = false;
             success = true;
         }
     }
@@ -49,7 +52,11 @@ public final class AuthenticationTask extends AsyncTask implements Task {
     public void onCompletion(Server server) {
         if (player.isOnline() && success) {
             if (isRegistered) {
-                player.sendMessage("registered");
+                if (isLoggedIn) {
+                    player.sendMessage("logged in");
+                } else {
+                    formService.sendForm(LoginForm.class, player);
+                }
             } else {
                 Account account = new Account();
                 account.setName(name);
