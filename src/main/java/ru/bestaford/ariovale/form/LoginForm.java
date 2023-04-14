@@ -6,15 +6,23 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Form;
+import ru.bestaford.ariovale.form.base.Required;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 
+@Required
 public final class LoginForm extends CustomForm {
+
+    private transient String name;
 
     @Inject
     public LoginForm(TranslationService translationService) {
         super(translationService);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -29,6 +37,9 @@ public final class LoginForm extends CustomForm {
 
     @Override
     public Form copy(Form other) {
+        if (other instanceof LoginForm) {
+            name = ((LoginForm) other).name;
+        }
         return this;
     }
 
