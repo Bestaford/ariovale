@@ -28,7 +28,7 @@ public final class LoginForm extends CustomForm {
     @Override
     public void build(Player player) {
         setTitle(translationService.getString("login.form.title", player));
-        addElement(new ElementLabel(translationService.getString("login.form.label", player)));
+        addElement(new ElementLabel(translationService.getString("login.form.label", player) + ": " + name));
         addElement(new ElementInput(
                 translationService.getString("login.form.input.text", player),
                 translationService.getString("login.form.input.placeholder", player)

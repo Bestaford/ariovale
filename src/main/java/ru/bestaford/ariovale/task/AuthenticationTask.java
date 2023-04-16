@@ -55,7 +55,9 @@ public final class AuthenticationTask extends AsyncTask implements Task {
                 if (isLoggedIn) {
                     player.sendMessage("logged in");
                 } else {
-                    formService.sendForm(LoginForm.class, player);
+                    LoginForm loginForm = formService.createForm(LoginForm.class);
+                    loginForm.setName(name);
+                    formService.sendForm(loginForm, player);
                 }
             } else {
                 Account account = new Account();
