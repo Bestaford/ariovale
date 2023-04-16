@@ -20,6 +20,7 @@ public final class AuthenticationTask extends AsyncTask implements Task {
     private final UtilsService utilsService;
     private Player player;
     private String name;
+    private Account account;
     private boolean isRegistered;
     private boolean isLoggedIn;
     private boolean success;
@@ -42,7 +43,8 @@ public final class AuthenticationTask extends AsyncTask implements Task {
     @Override
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
-            isRegistered = session.get(Account.class, name) != null;
+            account = session.get(Account.class, name);
+            isRegistered = account != null;
             isLoggedIn = false;
             success = true;
         }
@@ -56,11 +58,11 @@ public final class AuthenticationTask extends AsyncTask implements Task {
                     player.sendMessage("logged in");
                 } else {
                     LoginForm loginForm = formService.createForm(LoginForm.class);
-                    loginForm.setName(name);
+                    loginForm.setAccount(account);
                     formService.sendForm(loginForm, player);
                 }
             } else {
-                Account account = new Account();
+                account = new Account();
                 account.setName(name);
                 RegistrationForm registrationForm = formService.createForm(RegistrationForm.class);
                 registrationForm.setAccount(account);
