@@ -12,6 +12,7 @@ import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
+import java.util.Objects;
 
 @Required
 public final class LoginForm extends CustomForm {
@@ -44,7 +45,8 @@ public final class LoginForm extends CustomForm {
         }
         addElement(new ElementInput(
                 translationService.getString("login.form.input.text", player),
-                translationService.getString("login.form.input.placeholder", player)
+                translationService.getString("login.form.input.placeholder", player),
+                Objects.requireNonNullElse(account.getPassword(), "")
         ));
     }
 
