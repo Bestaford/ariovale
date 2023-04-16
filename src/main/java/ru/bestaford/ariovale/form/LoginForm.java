@@ -12,7 +12,6 @@ import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
-import java.util.Objects;
 
 @Required
 public final class LoginForm extends CustomForm {
@@ -38,7 +37,11 @@ public final class LoginForm extends CustomForm {
     @Override
     public void build(Player player) {
         setTitle(translationService.getString("login.form.title", player));
-        addElement(new ElementLabel(translationService.getString(Objects.requireNonNullElse(error, "login.form.label"), player)));
+        if (error == null) {
+            addElement(new ElementLabel(translationService.getString("login.form.label", player) + ": " + account.getName()));
+        } else {
+            addElement(new ElementLabel(translationService.getString(error, player)));
+        }
         addElement(new ElementInput(
                 translationService.getString("login.form.input.text", player),
                 translationService.getString("login.form.input.placeholder", player)
