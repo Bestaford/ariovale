@@ -8,6 +8,7 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Form;
 import ru.bestaford.ariovale.form.base.Required;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
@@ -18,13 +19,15 @@ import java.util.Objects;
 public final class LoginForm extends CustomForm {
 
     private final transient FormService formService;
+    private final AuthenticationService authenticationService;
     private transient Account account;
     private transient String error;
 
     @Inject
-    public LoginForm(TranslationService translationService, FormService formService) {
+    public LoginForm(TranslationService translationService, FormService formService, AuthenticationService authenticationService) {
         super(translationService);
         this.formService = formService;
+        this.authenticationService = authenticationService;
     }
 
     public void setAccount(Account account) {
@@ -70,5 +73,6 @@ public final class LoginForm extends CustomForm {
             formService.sendCopy(this, player);
             return;
         }
+        authenticationService.login(player, account);
     }
 }

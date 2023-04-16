@@ -8,6 +8,7 @@ import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TaskService;
 import ru.bestaford.ariovale.task.AuthenticationTask;
+import ru.bestaford.ariovale.task.LoginTask;
 import ru.bestaford.ariovale.task.RegistrationTask;
 
 import javax.inject.Inject;
@@ -72,6 +73,19 @@ public final class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void completeRegistration(Player player, Account account) {
-        loggedPlayers.put(player.getUniqueId(), account);
+        player.sendMessage("completeRegistration");
+    }
+
+    @Override
+    public void login(Player player, Account account) {
+        LoginTask loginTask = taskService.createTask(LoginTask.class);
+        loginTask.setPlayer(player);
+        loginTask.setAccount(account);
+        taskService.scheduleAsyncTask(loginTask);
+    }
+
+    @Override
+    public void completeLogin(Player player, Account account) {
+        player.sendMessage("completeLogin");
     }
 }
