@@ -12,12 +12,7 @@ import javax.inject.Singleton;
 @Singleton
 public final class FormListener implements Listener {
 
-    private final FormService formService;
-
-    @Inject
-    public FormListener(FormService formService) {
-        this.formService = formService;
-    }
+    @Inject private FormService formService;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerFormResponded(PlayerFormRespondedEvent event) {

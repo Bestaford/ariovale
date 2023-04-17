@@ -19,13 +19,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Singleton
 public final class FormService {
 
-    private final Injector injector;
     private final Map<FormWindow, Form> windowMap;
     private final Map<Player, Stack<Form>> formStackMap;
 
-    @Inject
-    public FormService(Injector injector) {
-        this.injector = injector;
+    @Inject private Injector injector;
+
+    public FormService() {
         windowMap = new ConcurrentHashMap<>();
         formStackMap = new ConcurrentHashMap<>();
     }

@@ -11,16 +11,9 @@ import javax.inject.Singleton;
 @Singleton
 public final class TaskService {
 
-    private final Injector injector;
-    private final Core core;
-    private final ServerScheduler scheduler;
-
-    @Inject
-    public TaskService(Injector injector, Core core, ServerScheduler scheduler) {
-        this.injector = injector;
-        this.core = core;
-        this.scheduler = scheduler;
-    }
+    @Inject private Injector injector;
+    @Inject private Core core;
+    @Inject private ServerScheduler scheduler;
 
     public void scheduleAsyncTask(AsyncTask task) {
         injector.injectMembers(task);

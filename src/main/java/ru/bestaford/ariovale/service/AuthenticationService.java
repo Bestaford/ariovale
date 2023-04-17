@@ -10,12 +10,7 @@ import javax.inject.Singleton;
 @Singleton
 public final class AuthenticationService {
 
-    private final FormService formService;
-
-    @Inject
-    public AuthenticationService(FormService formService) {
-        this.formService = formService;
-    }
+    @Inject private FormService formService;
 
     public void initialize(Player player) {
         player.setGamemode(Player.SURVIVAL);

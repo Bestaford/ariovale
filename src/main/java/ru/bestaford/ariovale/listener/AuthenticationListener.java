@@ -13,12 +13,7 @@ import javax.inject.Singleton;
 @Singleton
 public final class AuthenticationListener implements Listener {
 
-    private final AuthenticationService authenticationService;
-
-    @Inject
-    public AuthenticationListener(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
-    }
+    @Inject private AuthenticationService authenticationService;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {

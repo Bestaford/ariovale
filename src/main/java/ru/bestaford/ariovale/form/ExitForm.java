@@ -11,6 +11,7 @@ import javax.inject.Inject;
 public final class ExitForm extends ConfirmationForm {
 
     private final Runnable runnable;
+
     @Inject private TranslationService translationService;
 
     public ExitForm(Runnable runnable) {

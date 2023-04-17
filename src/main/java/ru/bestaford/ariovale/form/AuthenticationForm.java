@@ -19,6 +19,7 @@ public final class AuthenticationForm extends CustomForm {
 
     private String name;
     private String error;
+
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
     @Inject private AuthenticationService authenticationService;
