@@ -13,7 +13,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
-import ru.bestaford.ariovale.service.*;
+import ru.bestaford.ariovale.service.AuthenticationService;
+import ru.bestaford.ariovale.service.FormService;
+import ru.bestaford.ariovale.service.TranslationService;
 
 public final class Core extends PluginBase {
 
@@ -53,9 +55,7 @@ public final class Core extends PluginBase {
             //Services
             bind(AuthenticationService.class).asEagerSingleton();
             bind(FormService.class).asEagerSingleton();
-            bind(TaskService.class).asEagerSingleton();
             bind(TranslationService.class).asEagerSingleton();
-            bind(UtilsService.class).asEagerSingleton();
 
             //Listeners
             bind(AuthenticationListener.class).asEagerSingleton();

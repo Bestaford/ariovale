@@ -3,15 +3,13 @@ package ru.bestaford.ariovale.form.base;
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindowCustom;
-import ru.bestaford.ariovale.service.TranslationService;
 
-public abstract class CustomForm extends FormWindowCustom implements Form {
+public abstract class CustomForm implements Form {
 
-    protected final transient TranslationService translationService;
+    protected final FormWindowCustom window;
 
-    public CustomForm(TranslationService translationService) {
-        super("");
-        this.translationService = translationService;
+    public CustomForm() {
+        window = new FormWindowCustom("");
     }
 
     public abstract void handle(Player player, boolean wasClosed, FormResponseCustom response);
