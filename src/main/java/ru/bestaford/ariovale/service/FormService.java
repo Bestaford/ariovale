@@ -7,6 +7,7 @@ import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
 import com.google.inject.Injector;
+import ru.bestaford.ariovale.form.ExitForm;
 import ru.bestaford.ariovale.form.base.*;
 
 import javax.inject.Inject;
@@ -50,6 +51,16 @@ public final class FormService {
             if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
                 Stack<Form> formStack = formStackMap.get(player);
                 formStack.remove(form);
+                if (wasClosed) {
+                    if (formStack.empty()) {
+                        if (form.getClass().isAnnotationPresent(Required.class)) {
+                            sendForm(new ExitForm(() -> sendForm(form, player)), player);
+                        }
+                    } else {
+                        sendForm(formStack.pop(), player);
+                    }
+                    return;
+                }
             }
             if (form instanceof SimpleForm) {
                 ((SimpleForm) form).handle(player, wasClosed, (FormResponseSimple) response);
