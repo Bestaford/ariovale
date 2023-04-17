@@ -46,6 +46,10 @@ public final class FormService {
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
         if (windowMap.containsKey(window)) {
             Form form = windowMap.get(window);
+            if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
+                Stack<Form> formStack = formStackMap.get(player);
+                formStack.remove(form);
+            }
             if (form instanceof SimpleForm) {
                 ((SimpleForm) form).handle(player, wasClosed, (FormResponseSimple) response);
             } else if (form instanceof ModalForm) {
