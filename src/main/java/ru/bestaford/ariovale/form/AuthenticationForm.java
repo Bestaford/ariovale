@@ -34,6 +34,18 @@ public final class AuthenticationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        player.sendMessage(response.getInputResponse(1));
+        name = response.getInputResponse(1).trim();
+        error = null;
+        if (name.isBlank()) {
+            name = null;
+            error = "authentication.form.input.error.empty";
+            formService.sendForm(this, player);
+            return;
+        }
+        if (!name.matches("^\\p{L}{1,20}\\s+\\p{L}{1,20}$")) {
+            error = "authentication.form.input.error.invalid";
+            formService.sendForm(this, player);
+            return;
+        }
     }
 }
