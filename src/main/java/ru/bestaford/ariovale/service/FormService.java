@@ -46,6 +46,7 @@ public final class FormService {
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
         if (windowMap.containsKey(window)) {
             Form form = windowMap.get(window);
+            windowMap.remove(window);
             if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
                 Stack<Form> formStack = formStackMap.get(player);
                 formStack.remove(form);
@@ -57,7 +58,6 @@ public final class FormService {
             } else if (form instanceof CustomForm) {
                 ((CustomForm) form).handle(player, wasClosed, (FormResponseCustom) response);
             }
-            windowMap.remove(window);
         }
     }
 }
