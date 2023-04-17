@@ -33,4 +33,8 @@ public final class AuthenticationService {
     public void process(Player player) {
         formService.sendForm(new AuthenticationForm(), player);
     }
+
+    public void authenticate(Player player, String name) {
+        player.sendMessage(name);
+    }
 }

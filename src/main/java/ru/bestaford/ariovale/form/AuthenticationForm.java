@@ -7,6 +7,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import org.apache.commons.lang3.StringUtils;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
@@ -20,6 +21,7 @@ public final class AuthenticationForm extends CustomForm {
     private String error;
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
+    @Inject private AuthenticationService authenticationService;
 
     @Override
     protected void build(Player player) {
@@ -56,6 +58,6 @@ public final class AuthenticationForm extends CustomForm {
                 .append(nameParts[1].substring(0, 1).toUpperCase())
                 .append(nameParts[1].substring(1).toLowerCase());
         name = finalName.toString().trim();
-        formService.sendForm(this, player);
+        authenticationService.authenticate(player, name);
     }
 }
