@@ -52,9 +52,10 @@ public final class AuthenticationForm extends CustomForm {
         finalName
                 .append(nameParts[0].substring(0, 1).toUpperCase())
                 .append(nameParts[0].substring(1).toLowerCase())
-                .append(" ")
+                .append(StringUtils.SPACE)
                 .append(nameParts[1].substring(0, 1).toUpperCase())
                 .append(nameParts[1].substring(1).toLowerCase());
         name = finalName.toString().trim();
+        formService.sendForm(this, player);
     }
 }
