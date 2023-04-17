@@ -3,6 +3,7 @@ package ru.bestaford.ariovale.service;
 import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.form.AuthenticationForm;
+import ru.bestaford.ariovale.task.AuthenticationTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,6 +12,7 @@ import javax.inject.Singleton;
 public final class AuthenticationService {
 
     @Inject private FormService formService;
+    @Inject private TaskService taskService;
 
     public void initialize(Player player) {
         player.setGamemode(Player.SURVIVAL);
@@ -30,6 +32,6 @@ public final class AuthenticationService {
     }
 
     public void authenticate(Player player, String name) {
-        player.sendMessage(name);
+        taskService.scheduleAsyncTask(new AuthenticationTask(player, name));
     }
 }
