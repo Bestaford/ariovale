@@ -2,11 +2,20 @@ package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
+import ru.bestaford.ariovale.form.AuthenticationForm;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public final class AuthenticationService {
+
+    private final FormService formService;
+
+    @Inject
+    public AuthenticationService(FormService formService) {
+        this.formService = formService;
+    }
 
     public void initialize(Player player) {
         player.setGamemode(Player.SURVIVAL);
@@ -22,6 +31,6 @@ public final class AuthenticationService {
     }
 
     public void process(Player player) {
-        player.sendMessage("process");
+        formService.sendForm(new AuthenticationForm(), player);
     }
 }
