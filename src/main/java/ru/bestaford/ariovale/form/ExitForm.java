@@ -2,10 +2,12 @@ package ru.bestaford.ariovale.form;
 
 import cn.nukkit.Player;
 import ru.bestaford.ariovale.form.base.ConfirmationForm;
+import ru.bestaford.ariovale.form.base.IgnoreStack;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 
+@IgnoreStack
 public final class ExitForm extends ConfirmationForm {
 
     private final Runnable runnable;

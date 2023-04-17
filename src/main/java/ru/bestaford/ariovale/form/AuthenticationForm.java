@@ -6,12 +6,14 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import org.apache.commons.lang3.StringUtils;
 import ru.bestaford.ariovale.form.base.CustomForm;
+import ru.bestaford.ariovale.form.base.Required;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 import java.util.Objects;
 
+@Required
 public final class AuthenticationForm extends CustomForm {
 
     private String name;
@@ -32,6 +34,6 @@ public final class AuthenticationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        formService.sendForm(this, player);
+        player.sendMessage(response.getInputResponse(1));
     }
 }
