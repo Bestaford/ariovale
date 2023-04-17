@@ -1,16 +1,41 @@
 package ru.bestaford.ariovale.listener;
 
+import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerLocallyInitializedEvent;
 import cn.nukkit.event.player.PlayerPreLoginEvent;
+import ru.bestaford.ariovale.service.AuthenticationService;
 
-public interface AuthenticationListener extends Listener {
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-    void onPlayerPreLogin(PlayerPreLoginEvent event);
+@Singleton
+public final class AuthenticationListener implements Listener {
 
-    void onPlayerJoin(PlayerJoinEvent event);
+    private final AuthenticationService authenticationService;
 
-    void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event);
+    @Inject
+    public AuthenticationListener(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerPreLogin(PlayerPreLoginEvent event) {
+        if (!authenticationService.isValidSession(event.getPlayer())) {
+            event.setKickMessage("not valid"); //TODO: change message
+            event.setCancelled();
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        authenticationService.initialize(event.getPlayer());
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event) {
+        authenticationService.process(event.getPlayer());
+    }
 }

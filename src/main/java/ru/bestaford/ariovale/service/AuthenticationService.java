@@ -1,24 +1,80 @@
 package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
+import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.form.AuthenticationForm;
+import ru.bestaford.ariovale.task.AuthenticationTask;
+import ru.bestaford.ariovale.task.LoginTask;
+import ru.bestaford.ariovale.task.RegistrationTask;
 
-public interface AuthenticationService {
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
-    boolean isValidSession(Player player);
+@Singleton
+public final class AuthenticationService {
 
-    void initialize(Player player);
+    private final FormService formService;
+    private final TaskService taskService;
+    private final Map<UUID, Account> loggedPlayers;
 
-    void process(Player player);
+    @Inject
+    public AuthenticationService(FormService formService, TaskService taskService) {
+        this.formService = formService;
+        this.taskService = taskService;
+        loggedPlayers = new ConcurrentHashMap<>();
+    }
 
-    void authenticate(Player player, String name);
+    public boolean isValidSession(Player player) {
+        return true; //TODO: implement
+    }
 
-    void register(Player player, Account account);
+    public void initialize(Player player) {
+        player.setGamemode(Player.SURVIVAL);
+        player.setAllowModifyWorld(false);
+        player.setAllowInteract(false);
+        player.setCheckMovement(false);
+        player.setOp(false);
+        int x = player.getFloorX();
+        int z = player.getFloorZ();
+        int y = player.getLevel().getHighestBlockAt(x, z);
+        player.teleport(new Vector3(x, y, z));
+        player.pitch = 0;
+    }
 
-    void completeRegistration(Player player, Account account);
+    public void process(Player player) {
+        formService.sendForm(AuthenticationForm.class, player);
+    }
 
-    void login(Player player, Account account);
+    public void authenticate(Player player, String name) {
+        AuthenticationTask authenticationTask = taskService.createTask(AuthenticationTask.class);
+        authenticationTask.setPlayer(player);
+        authenticationTask.setName(name);
+        taskService.scheduleAsyncTask(authenticationTask);
+    }
 
-    void completeLogin(Player player, Account account);
+    public void register(Player player, Account account) {
+        RegistrationTask registrationTask = taskService.createTask(RegistrationTask.class);
+        registrationTask.setPlayer(player);
+        registrationTask.setAccount(account);
+        taskService.scheduleAsyncTask(registrationTask);
+    }
 
+    public void completeRegistration(Player player, Account account) {
+        player.sendMessage("completeRegistration");
+    }
+
+    public void login(Player player, Account account) {
+        LoginTask loginTask = taskService.createTask(LoginTask.class);
+        loginTask.setPlayer(player);
+        loginTask.setAccount(account);
+        taskService.scheduleAsyncTask(loginTask);
+    }
+
+    public void completeLogin(Player player, Account account) {
+        player.sendMessage("completeLogin");
+    }
 }

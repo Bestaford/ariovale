@@ -13,10 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
-import ru.bestaford.ariovale.listener.impl.AuthenticationListenerImpl;
-import ru.bestaford.ariovale.listener.impl.FormListenerImpl;
 import ru.bestaford.ariovale.service.*;
-import ru.bestaford.ariovale.service.impl.*;
 
 public final class Core extends PluginBase {
 
@@ -54,15 +51,15 @@ public final class Core extends PluginBase {
             bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
 
             //Services
-            bind(AuthenticationService.class).to(AuthenticationServiceImpl.class).asEagerSingleton();
-            bind(FormService.class).to(FormServiceImpl.class).asEagerSingleton();
-            bind(TaskService.class).to(TaskServiceImpl.class).asEagerSingleton();
-            bind(TranslationService.class).to(TranslationServiceImpl.class).asEagerSingleton();
-            bind(UtilsService.class).to(UtilsServiceImpl.class).asEagerSingleton();
+            bind(AuthenticationService.class).asEagerSingleton();
+            bind(FormService.class).asEagerSingleton();
+            bind(TaskService.class).asEagerSingleton();
+            bind(TranslationService.class).asEagerSingleton();
+            bind(UtilsService.class).asEagerSingleton();
 
             //Listeners
-            bind(AuthenticationListener.class).to(AuthenticationListenerImpl.class).asEagerSingleton();
-            bind(FormListener.class).to(FormListenerImpl.class).asEagerSingleton();
+            bind(AuthenticationListener.class).asEagerSingleton();
+            bind(FormListener.class).asEagerSingleton();
         }
     }
 }
