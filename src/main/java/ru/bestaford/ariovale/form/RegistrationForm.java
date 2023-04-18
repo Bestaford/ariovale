@@ -5,6 +5,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import org.apache.commons.lang3.StringUtils;
+import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
 import ru.bestaford.ariovale.service.FormService;
@@ -49,7 +50,7 @@ public final class RegistrationForm extends CustomForm {
             formService.sendForm(this, player);
             return;
         }
-        if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!\\\"#$%&'()*+,\\-./:;<=>?@\\[\\\\\\]^_`{|}~])\\S{8,}$")) {
+        if (!Account.PASSWORD_PATTERN.matcher(password).matches()) {
             error = "registration.form.input.error.invalid";
             formService.sendForm(this, player);
             return;

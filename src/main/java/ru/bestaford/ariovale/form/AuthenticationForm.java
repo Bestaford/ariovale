@@ -5,6 +5,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import org.apache.commons.lang3.StringUtils;
+import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
 import ru.bestaford.ariovale.service.AuthenticationService;
@@ -45,7 +46,7 @@ public final class AuthenticationForm extends CustomForm {
             formService.sendForm(this, player);
             return;
         }
-        if (!name.matches("^\\p{L}{1,20}\\s+\\p{L}{1,20}$")) {
+        if (!Account.NAME_PATTERN.matcher(name).matches()) {
             error = "authentication.form.input.error.invalid";
             formService.sendForm(this, player);
             return;
