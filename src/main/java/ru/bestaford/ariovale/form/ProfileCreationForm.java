@@ -49,6 +49,7 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-
+        account.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
+        account.setAge((int) response.getSliderResponse(3));
     }
 }
