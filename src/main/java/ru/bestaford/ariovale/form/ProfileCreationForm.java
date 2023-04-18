@@ -30,7 +30,7 @@ public final class ProfileCreationForm extends CustomForm {
     protected void build(Player player) {
         window.setTitle(translationService.getString("profile.creation.form.title", player) + " [2/2]");
         window.addElement(new ElementLabel(translationService.getString("profile.creation.form.label", player)));
-        window.addElement(new ElementLabel(translationService.getString("profile.creation.form.name", player) + ": " + account.getName()));
+        window.addElement(new ElementLabel(translationService.getString("profile.creation.form.name.final", player) + account.getName()));
         window.addElement(new ElementDropdown(
                 translationService.getString("sex.title", player),
                 Arrays.stream(Sex.values()).map(
