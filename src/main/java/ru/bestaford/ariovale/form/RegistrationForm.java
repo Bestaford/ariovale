@@ -17,16 +17,15 @@ import java.util.Objects;
 @Required
 public final class RegistrationForm extends CustomForm {
 
-    private final String name;
+    private final Account account;
 
-    private String password;
     private String error;
 
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
 
-    public RegistrationForm(String name) {
-        this.name = name;
+    public RegistrationForm(Account account) {
+        this.account = account;
     }
 
     @Override
@@ -36,21 +35,21 @@ public final class RegistrationForm extends CustomForm {
         window.addElement(new ElementInput(
                 translationService.getString("registration.form.input.text", player),
                 translationService.getString("registration.form.input.placeholder", player),
-                Objects.requireNonNullElse(password, StringUtils.EMPTY)
+                Objects.requireNonNullElse(account.getPassword(), StringUtils.EMPTY)
         ));
     }
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        password = response.getInputResponse(1);
+        account.setPassword(response.getInputResponse(1));
         error = null;
-        if (password.isBlank()) {
-            password = null;
+        if (account.getPassword().isBlank()) {
+            account.setPassword(null);
             error = "registration.form.input.error.empty";
             formService.sendForm(this, player);
             return;
         }
-        if (!Account.PASSWORD_PATTERN.matcher(password).matches()) {
+        if (!Account.PASSWORD_PATTERN.matcher(account.getPassword()).matches()) {
             error = "registration.form.input.error.invalid";
             formService.sendForm(this, player);
             return;
