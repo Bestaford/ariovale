@@ -8,6 +8,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.util.Sex;
 
@@ -21,6 +22,7 @@ public final class ProfileCreationForm extends CustomForm {
     private final Account account;
 
     @Inject private TranslationService translationService;
+    @Inject private AuthenticationService authenticationService;
 
     public ProfileCreationForm(Account account) {
         this.account = account;
@@ -51,5 +53,6 @@ public final class ProfileCreationForm extends CustomForm {
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
         account.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
         account.setAge((int) response.getSliderResponse(3));
+        authenticationService.register(player, account);
     }
 }

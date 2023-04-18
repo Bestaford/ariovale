@@ -2,8 +2,10 @@ package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
+import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
+import ru.bestaford.ariovale.task.RegistrationTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -33,5 +35,9 @@ public final class AuthenticationService {
 
     public void authenticate(Player player, String name) {
         taskService.scheduleAsyncTask(new AuthenticationTask(player, name));
+    }
+
+    public void register(Player player, Account account) {
+        taskService.scheduleAsyncTask(new RegistrationTask(player, account));
     }
 }
