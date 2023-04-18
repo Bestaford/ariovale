@@ -30,7 +30,7 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(translationService.getString("registration.form.title", player));
+        window.setTitle(translationService.getString("registration.form.title", player) + " [1/2]");
         window.addElement(new ElementLabel(translationService.getString(Objects.requireNonNullElse(error, "registration.form.label"), player)));
         window.addElement(new ElementInput(
                 translationService.getString("registration.form.input.text", player),
@@ -54,5 +54,6 @@ public final class RegistrationForm extends CustomForm {
             formService.sendForm(this, player);
             return;
         }
+        formService.sendForm(new ProfileCreationForm(account), player);
     }
 }
