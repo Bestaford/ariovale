@@ -38,8 +38,6 @@ public final class AuthenticationTask extends AsyncTask {
             registered = account != null;
             logined = false;
             success = true;
-        } catch (Exception exception) {
-            utilsService.throwError(player, exception);
         }
     }
 
@@ -58,7 +56,7 @@ public final class AuthenticationTask extends AsyncTask {
                 formService.sendForm(new RegistrationForm(account), player);
             }
         } else {
-            utilsService.throwError(player);
+            utilsService.closeWithError(player);
         }
     }
 }

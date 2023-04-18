@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
+import cn.nukkit.utils.MainLogger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,6 +22,7 @@ public final class RegistrationTask extends AsyncTask {
 
     @Inject private SessionFactory sessionFactory;
     @Inject private UtilsService utilsService;
+    @Inject private MainLogger logger;
 
     public RegistrationTask(Player player, Account account) {
         this.player = player;
@@ -39,7 +41,7 @@ public final class RegistrationTask extends AsyncTask {
             success = true;
         } catch (Exception exception) {
             transaction.rollback();
-            utilsService.throwError(player, exception);
+            logger.logException(exception);
         }
     }
 
@@ -48,7 +50,7 @@ public final class RegistrationTask extends AsyncTask {
         if (player.isOnline() && success) {
 
         } else {
-            utilsService.throwError(player);
+            utilsService.closeWithError(player);
         }
     }
 }

@@ -6,6 +6,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
+import cn.nukkit.utils.MainLogger;
 import com.google.inject.Injector;
 import ru.bestaford.ariovale.form.ExitForm;
 import ru.bestaford.ariovale.form.base.*;
@@ -24,6 +25,7 @@ public final class FormService {
 
     @Inject private Injector injector;
     @Inject private UtilsService utilsService;
+    @Inject private MainLogger logger;
 
     public void sendForm(Form form, Player player) {
         injector.injectMembers(form);
@@ -65,7 +67,8 @@ public final class FormService {
                     }
                 }
             } catch (Exception exception) {
-                utilsService.throwError(player, exception);
+                logger.logException(exception);
+                utilsService.closeWithError(player);
             } finally {
                 windowMap.remove(window);
             }
