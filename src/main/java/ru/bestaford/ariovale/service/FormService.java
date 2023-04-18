@@ -64,8 +64,8 @@ public final class FormService {
                         ((CustomForm) form).handle(player, wasClosed, (FormResponseCustom) response);
                     }
                 }
-            } catch (Throwable throwable) {
-                utilsService.throwError(player);
+            } catch (Exception exception) {
+                utilsService.throwError(player, exception);
             } finally {
                 windowMap.remove(window);
             }

@@ -4,7 +4,7 @@ import cn.nukkit.Server;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import cn.nukkit.scheduler.ServerScheduler;
-import cn.nukkit.utils.Logger;
+import cn.nukkit.utils.MainLogger;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -25,8 +25,8 @@ public final class Core extends PluginBase {
             PluginManager pluginManager = getServer().getPluginManager();
             pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
             pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
-        } catch (Exception e) {
-            getLogger().error(e.getMessage());
+        } catch (Throwable throwable) {
+            getServer().getLogger().logException(throwable);
             System.exit(1);
         }
     }
@@ -43,9 +43,10 @@ public final class Core extends PluginBase {
         protected void configure() {
             //Core
             bind(Core.class).toInstance(core);
-            bind(Logger.class).toInstance(core.getLogger());
-            bind(Server.class).toInstance(core.getServer());
-            bind(ServerScheduler.class).toInstance(core.getServer().getScheduler());
+            Server server = core.getServer();
+            bind(Server.class).toInstance(server);
+            bind(MainLogger.class).toInstance(server.getLogger());
+            bind(ServerScheduler.class).toInstance(server.getScheduler());
 
             //Hibernate
             bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());

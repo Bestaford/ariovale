@@ -39,6 +39,7 @@ public final class RegistrationTask extends AsyncTask {
             success = true;
         } catch (Exception exception) {
             transaction.rollback();
+            utilsService.throwError(player, exception);
         }
     }
 
