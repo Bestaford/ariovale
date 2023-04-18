@@ -34,35 +34,34 @@ public final class FormService {
                 formStackMap.put(player, new Stack<>());
             }
             Stack<Form> formStack = formStackMap.get(player);
-            formStack.push(form);
+            if (!formStack.contains(form)) {
+                formStack.push(form);
+            }
         }
     }
 
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
         if (windowMap.containsKey(window)) {
             Form form = windowMap.get(window);
-            windowMap.remove(window);
-            if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
+            if (!form.getClass().isAnnotationPresent(IgnoreStack.class) && wasClosed) {
                 Stack<Form> formStack = formStackMap.get(player);
-                formStack.remove(form);
-                if (wasClosed) {
-                    if (formStack.empty()) {
-                        if (form.getClass().isAnnotationPresent(Required.class)) {
-                            sendForm(new ExitForm(() -> sendForm(form, player)), player);
-                        }
-                    } else {
-                        sendForm(formStack.pop(), player);
+                if (formStack.empty()) {
+                    if (form.getClass().isAnnotationPresent(Required.class)) {
+                        sendForm(new ExitForm(() -> sendForm(form, player)), player);
                     }
-                    return;
+                } else {
+                    sendForm(formStack.pop(), player);
+                }
+            } else {
+                if (form instanceof SimpleForm) {
+                    ((SimpleForm) form).handle(player, wasClosed, (FormResponseSimple) response);
+                } else if (form instanceof ModalForm) {
+                    ((ModalForm) form).handle(player, wasClosed, (FormResponseModal) response);
+                } else if (form instanceof CustomForm) {
+                    ((CustomForm) form).handle(player, wasClosed, (FormResponseCustom) response);
                 }
             }
-            if (form instanceof SimpleForm) {
-                ((SimpleForm) form).handle(player, wasClosed, (FormResponseSimple) response);
-            } else if (form instanceof ModalForm) {
-                ((ModalForm) form).handle(player, wasClosed, (FormResponseModal) response);
-            } else if (form instanceof CustomForm) {
-                ((CustomForm) form).handle(player, wasClosed, (FormResponseCustom) response);
-            }
+            windowMap.remove(window);
         }
     }
 }
