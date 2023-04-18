@@ -7,7 +7,6 @@ import cn.nukkit.form.response.FormResponseCustom;
 import org.apache.commons.lang3.StringUtils;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
-import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
@@ -24,7 +23,6 @@ public final class RegistrationForm extends CustomForm {
 
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
-    @Inject private AuthenticationService authenticationService;
 
     public RegistrationForm(String name) {
         this.name = name;
@@ -43,6 +41,18 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-
+        password = response.getInputResponse(1);
+        error = null;
+        if (password.isBlank()) {
+            password = null;
+            error = "registration.form.input.error.empty";
+            formService.sendForm(this, player);
+            return;
+        }
+        if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!\\\"#$%&'()*+,\\-./:;<=>?@\\[\\\\\\]^_`{|}~])\\S{8,}$")) {
+            error = "registration.form.input.error.invalid";
+            formService.sendForm(this, player);
+            return;
+        }
     }
 }
