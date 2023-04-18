@@ -45,6 +45,7 @@ public final class FormService {
             Form form = windowMap.get(window);
             if (!form.getClass().isAnnotationPresent(IgnoreStack.class) && wasClosed) {
                 Stack<Form> formStack = formStackMap.get(player);
+                formStack.remove(form);
                 if (formStack.empty()) {
                     if (form.getClass().isAnnotationPresent(Required.class)) {
                         sendForm(new ExitForm(() -> sendForm(form, player)), player);
