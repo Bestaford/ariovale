@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
+import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
 import ru.bestaford.ariovale.task.RegistrationTask;
 
@@ -39,5 +40,9 @@ public final class AuthenticationService {
 
     public void register(Player player, Account account) {
         taskService.scheduleAsyncTask(new RegistrationTask(player, account));
+    }
+
+    public void completeRegistration(Player player, Account account) {
+        formService.sendForm(new InformationForm("registration.complete"), player);
     }
 }

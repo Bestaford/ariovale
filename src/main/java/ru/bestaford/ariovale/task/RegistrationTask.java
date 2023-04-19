@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.UtilsService;
 
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ public final class RegistrationTask extends AsyncTask {
     private boolean success;
 
     @Inject private SessionFactory sessionFactory;
+    @Inject private AuthenticationService authenticationService;
     @Inject private UtilsService utilsService;
     @Inject private MainLogger logger;
 
@@ -48,7 +50,7 @@ public final class RegistrationTask extends AsyncTask {
     @Override
     public void onCompletion(Server server) {
         if (player.isOnline() && success) {
-
+            authenticationService.completeRegistration(player, account);
         } else {
             utilsService.closeWithError(player);
         }
