@@ -6,6 +6,7 @@ import cn.nukkit.scheduler.AsyncTask;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.form.RegistrationForm;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.UtilsService;
@@ -48,7 +49,7 @@ public final class AuthenticationTask extends AsyncTask {
                 if (logined) {
                     player.sendMessage("logined");
                 } else {
-                    player.sendMessage("not logined");
+                    formService.sendForm(new LoginForm(account), player);
                 }
             } else {
                 account = new Account();
