@@ -43,4 +43,6 @@ public interface Strings {
     String PORTAL_NAME_RAW = CITY_NAME_RAW + SPACE + "ID";
     String PORTAL_NAME_TITLE = FORMAT_BOLD + PORTAL_NAME_RAW;
     String PORTAL_NAME_COLORIZED = THEME_PRIMARY + FORMAT_BOLD + PORTAL_NAME_RAW + FORMAT_RESET;
+
+    String EXAMPLE_NAMES = "Юрий Абрамов" + LF + "Judy Evans" + LF + "Аделмар Гюнтер" + LF + "Sanako Murakami";
 }
