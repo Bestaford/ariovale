@@ -43,6 +43,13 @@ public final class FormService {
         }
     }
 
+    public void clearStack(Player player) {
+        if (formStackMap.containsKey(player)) {
+            Stack<Form> formStack = formStackMap.get(player);
+            formStack.clear();
+        }
+    }
+
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
         if (windowMap.containsKey(window)) {
             try {
