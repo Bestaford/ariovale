@@ -11,7 +11,7 @@ public final class UtilsService {
     @Inject TranslationService translationService;
 
     public void closeWithError(Player player) {
-        String message = translationService.getString("error.text", player);
+        String message = translationService.getString(player, "error.text");
         player.close(message, message);
     }
 }

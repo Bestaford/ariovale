@@ -30,11 +30,11 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(translationService.getString("registration.form.title", player) + " [1/2]");
-        window.addElement(new ElementLabel(translationService.getString(Objects.requireNonNullElse(error, "registration.form.label"), player)));
+        window.setTitle(translationService.getString(player, "registration.form.title") + " [1/2]");
+        window.addElement(new ElementLabel(translationService.getString(player, Objects.requireNonNullElse(error, "registration.form.label"))));
         window.addElement(new ElementInput(
-                translationService.getString("registration.form.input.text", player),
-                translationService.getString("registration.form.input.placeholder", player),
+                translationService.getString(player, "registration.form.input.text"),
+                translationService.getString(player, "registration.form.input.placeholder"),
                 Objects.requireNonNullElse(account.getPassword(), StringUtils.EMPTY)
         ));
     }

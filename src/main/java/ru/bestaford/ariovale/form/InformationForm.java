@@ -19,8 +19,8 @@ public final class InformationForm extends SimpleForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(translationService.getString("information.form.title", player));
-        window.setContent(translationService.getString(content, player));
+        window.setTitle(translationService.getString(player, "information.form.title"));
+        window.setContent(translationService.getString(player, content));
     }
 
     @Override

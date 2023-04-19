@@ -25,7 +25,7 @@ public class LoginForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(translationService.getString("login.form.title", player));
+        window.setTitle(translationService.getString(player, "login.form.title"));
     }
 
     @Override

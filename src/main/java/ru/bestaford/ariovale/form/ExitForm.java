@@ -21,14 +21,14 @@ public final class ExitForm extends ConfirmationForm {
     @Override
     protected void build(Player player) {
         super.build(player);
-        window.setTitle(translationService.getString("exit.form.title", player));
-        window.setContent(translationService.getString("exit.form.content", player));
+        window.setTitle(translationService.getString(player, "exit.form.title"));
+        window.setContent(translationService.getString(player, "exit.form.content"));
     }
 
     @Override
     public void handle(Player player, boolean confirmed) {
         if (confirmed) {
-            String message = translationService.getString("exit.text", player);
+            String message = translationService.getString(player, "exit.text");
             player.close(message, message);
         } else {
             runnable.run();

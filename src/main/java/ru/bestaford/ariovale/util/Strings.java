@@ -1,40 +1,46 @@
 package ru.bestaford.ariovale.util;
 
-import cn.nukkit.utils.TextFormat;
-import org.apache.commons.lang3.StringUtils;
+public interface Strings {
 
-public enum Strings {
+    String EMPTY = "";
+    String SPACE = " ";
+    String LF = "\n";
+    String CR = "\r";
 
-    THEME_PRIMARY(TextFormat.AQUA),
-    THEME_SUCCESS(TextFormat.GREEN),
-    THEME_ERROR(TextFormat.RED),
-    THEME_TITLE(TextFormat.BOLD),
-    THEME_OOC(TextFormat.GRAY),
+    String ESCAPE = "§";
 
-    CITY_NAME_RAW("Ariоvale"),
-    CITY_NAME_TITLE(THEME_TITLE, CITY_NAME_RAW),
-    CITY_NAME_COLORIZED(THEME_PRIMARY, TextFormat.BOLD, CITY_NAME_RAW, TextFormat.RESET),
+    String COLOR_BLACK = ESCAPE + "0";
+    String COLOR_DARK_BLUE = ESCAPE + "1";
+    String COLOR_DARK_GREEN = ESCAPE + "2";
+    String COLOR_DARK_AQUA = ESCAPE + "3";
+    String COLOR_DARK_RED = ESCAPE + "4";
+    String COLOR_DARK_PURPLE = ESCAPE + "5";
+    String COLOR_GOLD = ESCAPE + "6";
+    String COLOR_GRAY = ESCAPE + "7";
+    String COLOR_DARK_GRAY = ESCAPE + "8";
+    String COLOR_BLUE = ESCAPE + "9";
+    String COLOR_GREEN = ESCAPE + "a";
+    String COLOR_AQUA = ESCAPE + "b";
+    String COLOR_RED = ESCAPE + "c";
+    String COLOR_LIGHT_PURPLE = ESCAPE + "d";
+    String COLOR_YELLOW = ESCAPE + "e";
+    String COLOR_WHITE = ESCAPE + "f";
+    String COLOR_MINECOIN_GOLD = ESCAPE + "g";
 
-    PORTAL_NAME_RAW(CITY_NAME_RAW, StringUtils.SPACE, "ID"),
-    PORTAL_NAME_TITLE(THEME_TITLE, PORTAL_NAME_RAW),
-    PORTAL_NAME_COLORIZED(THEME_PRIMARY, TextFormat.BOLD, PORTAL_NAME_RAW, TextFormat.RESET);
+    String FORMAT_OBFUSCATED = ESCAPE + "k";
+    String FORMAT_BOLD = ESCAPE + "l";
+    String FORMAT_STRIKETHROUGH = ESCAPE + "m";
+    String FORMAT_UNDERLINE = ESCAPE + "n";
+    String FORMAT_ITALIC = ESCAPE + "o";
+    String FORMAT_RESET = ESCAPE + "r";
 
-    private final String string;
+    String THEME_PRIMARY = COLOR_AQUA;
 
-    Strings(String string) {
-        this.string = string;
-    }
+    String CITY_NAME_RAW = "Ariovale";
+    String CITY_NAME_TITLE = FORMAT_BOLD + CITY_NAME_RAW;
+    String CITY_NAME_COLORIZED = THEME_PRIMARY + FORMAT_BOLD + CITY_NAME_RAW + FORMAT_RESET;
 
-    Strings(Object... objects) {
-        StringBuilder result = new StringBuilder();
-        for (Object object : objects) {
-            result.append(object.toString());
-        }
-        string = result.toString();
-    }
-
-    @Override
-    public String toString() {
-        return string;
-    }
+    String PORTAL_NAME_RAW = CITY_NAME_RAW + SPACE + "ID";
+    String PORTAL_NAME_TITLE = FORMAT_BOLD + PORTAL_NAME_RAW;
+    String PORTAL_NAME_COLORIZED = THEME_PRIMARY + FORMAT_BOLD + PORTAL_NAME_RAW + FORMAT_RESET;
 }

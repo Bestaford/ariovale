@@ -32,18 +32,18 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(translationService.getString("profile.creation.form.title", player) + " [2/2]");
-        window.addElement(new ElementLabel(translationService.getString("profile.creation.form.label", player)));
-        window.addElement(new ElementLabel(translationService.getString("profile.creation.form.name.final", player) + account.getName()));
+        window.setTitle(translationService.getString(player, "profile.creation.form.title") + " [2/2]");
+        window.addElement(new ElementLabel(translationService.getString(player, "profile.creation.form.label")));
+        window.addElement(new ElementLabel(translationService.getString(player, "profile.creation.form.name.final") + account.getName()));
         window.addElement(new ElementDropdown(
-                translationService.getString("sex.title", player),
+                translationService.getString(player, "sex.title"),
                 Arrays.stream(Sex.values()).map(
-                        sex -> translationService.getString("sex." + sex.toString().toLowerCase(), player)
+                        sex -> translationService.getString(player, "sex." + sex.toString().toLowerCase())
                 ).collect(Collectors.toList()),
                 account.getSex() == null ? 0 : account.getSex().ordinal()
         ));
         window.addElement(new ElementSlider(
-                translationService.getString("age", player),
+                translationService.getString(player, "age"),
                 Account.MIN_AGE,
                 Account.MAX_AGE,
                 1,
