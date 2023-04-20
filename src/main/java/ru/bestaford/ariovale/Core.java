@@ -54,9 +54,9 @@ public final class Core extends PluginBase {
             //Services
             bind(AuthenticationService.class).asEagerSingleton();
             bind(FormService.class).asEagerSingleton();
+            bind(GameService.class).asEagerSingleton();
             bind(TaskService.class).asEagerSingleton();
             bind(TranslationService.class).asEagerSingleton();
-            bind(UtilsService.class).asEagerSingleton();
 
             //Listeners
             bind(AuthenticationListener.class).asEagerSingleton();

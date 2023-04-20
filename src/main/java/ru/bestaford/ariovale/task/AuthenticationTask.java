@@ -9,7 +9,7 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.form.RegistrationForm;
 import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.UtilsService;
+import ru.bestaford.ariovale.service.GameService;
 
 import javax.inject.Inject;
 
@@ -24,7 +24,7 @@ public final class AuthenticationTask extends AsyncTask {
     private boolean success;
 
     @Inject private SessionFactory sessionFactory;
-    @Inject private UtilsService utilsService;
+    @Inject private GameService gameService;
     @Inject private FormService formService;
 
     public AuthenticationTask(Player player, String name) {
@@ -57,7 +57,7 @@ public final class AuthenticationTask extends AsyncTask {
                 formService.sendForm(new RegistrationForm(account), player);
             }
         } else {
-            utilsService.closeWithError(player);
+            gameService.closeWithError(player);
         }
     }
 }

@@ -6,9 +6,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public final class UtilsService {
+public final class GameService {
 
-    @Inject TranslationService translationService;
+    @Inject private TranslationService translationService;
 
     public void closeWithError(Player player) {
         String message = translationService.getString(player, "error.text");

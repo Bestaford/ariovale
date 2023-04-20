@@ -3,15 +3,10 @@ package ru.bestaford.ariovale.form;
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseSimple;
 import ru.bestaford.ariovale.form.base.SimpleForm;
-import ru.bestaford.ariovale.service.TranslationService;
-
-import javax.inject.Inject;
 
 public final class InformationForm extends SimpleForm {
 
     private final String content;
-
-    @Inject private TranslationService translationService;
 
     public InformationForm(String content) {
         this.content = content;
@@ -19,8 +14,8 @@ public final class InformationForm extends SimpleForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(translationService.getString(player, "information.form.title"));
-        window.setContent(translationService.getString(player, content));
+        window.setTitle(CITY_NAME);
+        window.setContent(content);
     }
 
     @Override
