@@ -6,6 +6,7 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
 import ru.bestaford.ariovale.task.RegistrationTask;
+import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -44,6 +45,6 @@ public final class AuthenticationService {
     }
 
     public void completeRegistration(Player player, Account account) {
-
+        gameService.information(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED);
     }
 }
