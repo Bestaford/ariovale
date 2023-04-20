@@ -6,6 +6,7 @@ public interface Strings {
     String SPACE = " ";
     String LF = "\n";
     String CR = "\r";
+    String COLON = ":";
 
     String ESCAPE = "§";
 
@@ -46,4 +47,7 @@ public interface Strings {
     String PORTAL_NAME_COLORIZED = THEME_PRIMARY + FORMAT_BOLD + PORTAL_NAME + FORMAT_RESET;
 
     String EXAMPLE_NAMES = LF + LF + THEME_SUCCESS + "Юрий Абрамов" + LF + "Judy Evans" + LF + "Аделмар Гюнтер" + LF + "Sanako Murakami";
+
+    String REGISTRATION_STAGE_1 = "[1/2]";
+    String REGISTRATION_STAGE_2 = "[2/2]";
 }

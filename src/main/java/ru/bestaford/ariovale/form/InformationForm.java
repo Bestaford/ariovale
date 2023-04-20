@@ -14,7 +14,7 @@ public final class InformationForm extends SimpleForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(CITY_NAME);
+        window.setTitle(FORMAT_BOLD + CITY_NAME);
         window.setContent(content);
     }
 

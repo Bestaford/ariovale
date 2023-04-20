@@ -29,8 +29,12 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(translationService.getString(player, "registration.form.title") + " [1/2]");
-        window.addElement(new ElementLabel(translationService.getString(player, Objects.requireNonNullElse(error, "registration.form.label"))));
+        window.setTitle(FORMAT_BOLD + PORTAL_NAME + COLON + SPACE + translationService.getString(player, "registration.form.title") + SPACE + REGISTRATION_STAGE_1);
+        if (error == null) {
+            window.addElement(new ElementLabel(translationService.getString(player, "registration.form.label", PORTAL_NAME_COLORIZED)));
+        } else {
+            window.addElement(new ElementLabel(error));
+        }
         window.addElement(new ElementInput(
                 translationService.getString(player, "registration.form.input.text"),
                 translationService.getString(player, "registration.form.input.placeholder"),
@@ -44,12 +48,12 @@ public final class RegistrationForm extends CustomForm {
         error = null;
         if (account.getPassword().isBlank()) {
             account.setPassword(null);
-            error = "registration.form.input.error.empty";
+            error = translationService.getString(player, "registration.form.input.error.empty");
             formService.sendForm(this, player);
             return;
         }
         if (!Account.PASSWORD_PATTERN.matcher(account.getPassword()).matches()) {
-            error = "registration.form.input.error.invalid";
+            error = translationService.getString(player, "registration.form.input.error.invalid");
             formService.sendForm(this, player);
             return;
         }
