@@ -48,12 +48,12 @@ public final class RegistrationForm extends CustomForm {
         error = null;
         if (account.getPassword().isBlank()) {
             account.setPassword(null);
-            error = translationService.getString(player, "registration.form.input.error.empty");
+            error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.empty");
             formService.sendForm(this, player);
             return;
         }
         if (!Account.PASSWORD_PATTERN.matcher(account.getPassword()).matches()) {
-            error = translationService.getString(player, "registration.form.input.error.invalid");
+            error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.invalid");
             formService.sendForm(this, player);
             return;
         }
