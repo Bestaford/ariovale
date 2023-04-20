@@ -29,7 +29,7 @@ public final class AuthenticationForm extends CustomForm {
     protected void build(Player player) {
         window.setTitle(PORTAL_NAME_TITLE);
         if (error == null) {
-            window.addElement(new ElementLabel(translationService.getString(player, "authentication.form.label", PORTAL_NAME_COLORIZED, CITY_NAME_COLORIZED)));
+            window.addElement(new ElementLabel(translationService.getString(player, "authentication.form.label", PORTAL_NAME_COLORIZED, CITY_NAME_COLORIZED, THEME_OOC)));
         } else {
             window.addElement(new ElementLabel(error));
         }
@@ -46,12 +46,12 @@ public final class AuthenticationForm extends CustomForm {
         error = null;
         if (name.isBlank()) {
             name = null;
-            error = "authentication.form.input.error.empty";
+            error = translationService.getString(player, "authentication.form.input.error.empty");
             formService.sendForm(this, player);
             return;
         }
         if (!Account.NAME_PATTERN.matcher(name).matches()) {
-            error = "authentication.form.input.error.invalid";
+            error = translationService.getString(player, "authentication.form.input.error.invalid");
             formService.sendForm(this, player);
             return;
         }

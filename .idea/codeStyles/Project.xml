@@ -4,8 +4,5 @@
     <JavaCodeStyleSettings>
       <option name="DO_NOT_WRAP_AFTER_SINGLE_ANNOTATION" value="true" />
     </JavaCodeStyleSettings>
-    <Properties>
-      <option name="KEEP_BLANK_LINES" value="true" />
-    </Properties>
   </code_scheme>
 </component>

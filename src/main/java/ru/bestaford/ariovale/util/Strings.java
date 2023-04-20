@@ -35,6 +35,9 @@ public interface Strings {
     String FORMAT_RESET = ESCAPE + "r";
 
     String THEME_PRIMARY = COLOR_AQUA;
+    String THEME_SUCCESS = COLOR_GREEN;
+    String THEME_ERROR = COLOR_RED;
+    String THEME_OOC = COLOR_GRAY;
 
     String CITY_NAME_RAW = "Ariovale";
     String CITY_NAME_TITLE = FORMAT_BOLD + CITY_NAME_RAW;
