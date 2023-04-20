@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
-import org.apache.commons.lang3.StringUtils;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
@@ -35,7 +34,7 @@ public final class RegistrationForm extends CustomForm {
         window.addElement(new ElementInput(
                 translationService.getString(player, "registration.form.input.text"),
                 translationService.getString(player, "registration.form.input.placeholder"),
-                Objects.requireNonNullElse(account.getPassword(), StringUtils.EMPTY)
+                Objects.requireNonNullElse(account.getPassword(), EMPTY)
         ));
     }
 
