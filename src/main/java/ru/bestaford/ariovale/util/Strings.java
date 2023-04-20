@@ -40,7 +40,7 @@ public interface Strings {
     String THEME_ERROR = COLOR_RED;
     String THEME_OOC = COLOR_GRAY;
 
-    String CITY_NAME = "Ariovale";
+    String CITY_NAME = "Аriovale";
     String CITY_NAME_COLORIZED = THEME_PRIMARY + FORMAT_BOLD + CITY_NAME + FORMAT_RESET;
 
     String PORTAL_NAME = CITY_NAME + SPACE + "ID";
