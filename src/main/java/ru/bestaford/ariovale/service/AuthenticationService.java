@@ -16,7 +16,6 @@ public final class AuthenticationService {
 
     @Inject private FormService formService;
     @Inject private TaskService taskService;
-    @Inject private TranslationService translationService;
     @Inject private GameService gameService;
 
     public void initialize(Player player) {
