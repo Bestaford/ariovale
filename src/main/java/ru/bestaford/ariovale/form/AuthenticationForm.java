@@ -46,12 +46,12 @@ public final class AuthenticationForm extends CustomForm {
         error = null;
         if (name.isBlank()) {
             name = null;
-            error = translationService.getString(player, "authentication.form.input.error.empty");
+            error = THEME_ERROR + translationService.getString(player, "authentication.form.input.error.empty");
             formService.sendForm(this, player);
             return;
         }
         if (!Account.NAME_PATTERN.matcher(name).matches()) {
-            error = translationService.getString(player, "authentication.form.input.error.invalid");
+            error = THEME_ERROR + translationService.getString(player, "authentication.form.input.error.invalid");
             formService.sendForm(this, player);
             return;
         }
