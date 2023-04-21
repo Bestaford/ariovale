@@ -7,6 +7,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
+import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ public final class LoginForm extends CustomForm {
     private String error;
 
     @Inject private TranslationService translationService;
+    @Inject private FormService formService;
 
     public LoginForm(Account account) {
         this.account = account;
@@ -39,6 +41,13 @@ public final class LoginForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-
+        password = response.getInputResponse(1);
+        error = null;
+        if (password.isBlank()) {
+            password = null;
+            error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.empty");
+            formService.sendForm(this, player);
+            return;
+        }
     }
 }
