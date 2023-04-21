@@ -14,7 +14,7 @@ import javax.inject.Inject;
 public final class LoginTask extends AsyncTask {
 
     private final Player player;
-    private final String name;
+    private final Account account;
     private final String password;
 
     private boolean verified;
@@ -23,17 +23,18 @@ public final class LoginTask extends AsyncTask {
     @Inject private SessionFactory sessionFactory;
     @Inject private GameService gameService;
 
-    public LoginTask(Player player, String name, String password) {
+    public LoginTask(Player player, Account account, String password) {
         this.player = player;
-        this.name = name;
+        this.account = account;
         this.password = password;
     }
 
     @Override
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
-            Account account = session.get(Account.class, name);
-            verified = BCrypt.verifyer().verify(password.toCharArray(), account.getPassword().toCharArray()).verified;
+            BCrypt.Verifyer verifyer = BCrypt.verifyer();
+            BCrypt.Result result = verifyer.verify(password.toCharArray(), session.getReference(account).getPassword().toCharArray());
+            verified = result.verified;
             success = true;
         }
     }

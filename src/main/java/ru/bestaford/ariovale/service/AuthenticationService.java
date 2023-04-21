@@ -48,7 +48,7 @@ public final class AuthenticationService {
         gameService.information(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED);
     }
 
-    public void login(Player player, String name, String password) {
-        taskService.scheduleAsyncTask(new LoginTask(player, name, password));
+    public void login(Player player, Account account, String password) {
+        taskService.scheduleAsyncTask(new LoginTask(player, account, password));
     }
 }
