@@ -5,6 +5,7 @@ import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
+import ru.bestaford.ariovale.task.LoginTask;
 import ru.bestaford.ariovale.task.RegistrationTask;
 import ru.bestaford.ariovale.util.Strings;
 
@@ -48,6 +49,6 @@ public final class AuthenticationService {
     }
 
     public void login(Player player, Account account, String password) {
-        player.sendMessage("login");
+        taskService.scheduleAsyncTask(new LoginTask(player, account, password));
     }
 }
