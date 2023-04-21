@@ -18,8 +18,8 @@ import java.util.Objects;
 @Required
 public final class AuthenticationForm extends CustomForm {
 
-    private String name;
-    private String error;
+    public String name;
+    public String error;
 
     @Inject private FormService formService;
     @Inject private TranslationService translationService;

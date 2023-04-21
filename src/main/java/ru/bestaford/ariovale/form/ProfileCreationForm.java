@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Required
 public final class ProfileCreationForm extends CustomForm {
 
-    private final Account account;
+    public final Account account;
 
     @Inject private TranslationService translationService;
     @Inject private FormService formService;

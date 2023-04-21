@@ -6,7 +6,7 @@ import ru.bestaford.ariovale.form.base.SimpleForm;
 
 public final class InformationForm extends SimpleForm {
 
-    private final String content;
+    public final String content;
 
     public InformationForm(String content) {
         this.content = content;

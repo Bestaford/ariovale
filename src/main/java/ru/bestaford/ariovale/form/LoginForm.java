@@ -17,10 +17,10 @@ import java.util.Objects;
 @Required
 public final class LoginForm extends CustomForm {
 
-    private final Account account;
+    public final Account account;
 
-    private String password;
-    private String error;
+    public String password;
+    public String error;
 
     @Inject private TranslationService translationService;
     @Inject private FormService formService;
