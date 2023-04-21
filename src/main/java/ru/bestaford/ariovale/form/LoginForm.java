@@ -7,6 +7,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 
@@ -23,6 +24,7 @@ public final class LoginForm extends CustomForm {
 
     @Inject private TranslationService translationService;
     @Inject private FormService formService;
+    @Inject private AuthenticationService authenticationService;
 
     public LoginForm(Account account) {
         this.account = account;
@@ -49,5 +51,7 @@ public final class LoginForm extends CustomForm {
             formService.sendForm(this, player);
             return;
         }
+        formService.clearStack(player);
+        authenticationService.login(player, account, password);
     }
 }

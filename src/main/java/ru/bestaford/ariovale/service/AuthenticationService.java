@@ -46,4 +46,8 @@ public final class AuthenticationService {
     public void completeRegistration(Player player, Account account) {
         gameService.information(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED);
     }
+
+    public void login(Player player, Account account, String password) {
+        player.sendMessage("login");
+    }
 }
