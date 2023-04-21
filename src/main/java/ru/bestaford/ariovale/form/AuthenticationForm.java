@@ -28,11 +28,7 @@ public final class AuthenticationForm extends CustomForm {
     @Override
     protected void build(Player player) {
         window.setTitle(FORMAT_BOLD + PORTAL_NAME);
-        if (error == null) {
-            window.addElement(new ElementLabel(translationService.getString(player, "authentication.form.label", PORTAL_NAME_COLORIZED, CITY_NAME_COLORIZED, THEME_OOC)));
-        } else {
-            window.addElement(new ElementLabel(error));
-        }
+        window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () -> translationService.getString(player, "authentication.form.label", PORTAL_NAME_COLORIZED, CITY_NAME_COLORIZED, THEME_OOC))));
         window.addElement(new ElementInput(
                 translationService.getString(player, "authentication.form.input.text"),
                 translationService.getString(player, "authentication.form.input.placeholder"),
