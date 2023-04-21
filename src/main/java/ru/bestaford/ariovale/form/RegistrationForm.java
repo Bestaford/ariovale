@@ -31,7 +31,12 @@ public final class RegistrationForm extends CustomForm {
     protected void build(Player player) {
         window.setTitle(FORMAT_BOLD + PORTAL_NAME + COLON + SPACE + translationService.getString(player, "registration.form.title") + SPACE + REGISTRATION_STAGE_1);
         if (error == null) {
-            window.addElement(new ElementLabel(translationService.getString(player, "registration.form.label", PORTAL_NAME_COLORIZED)));
+            window.addElement(new ElementLabel(
+                    translationService.getString(player, "registration.form.label", PORTAL_NAME_COLORIZED)
+                            + LF
+                            + LF
+                            + translationService.getString(player, "registration.form.label.part2")
+            ));
         } else {
             window.addElement(new ElementLabel(error));
         }
