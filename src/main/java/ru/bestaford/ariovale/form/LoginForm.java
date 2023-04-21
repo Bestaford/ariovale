@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import java.util.Objects;
 
 @Required
-public class LoginForm extends CustomForm {
+public final class LoginForm extends CustomForm {
 
     private final Account account;
 
