@@ -1,7 +1,7 @@
 package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
-import cn.nukkit.math.Vector3;
+import cn.nukkit.level.Location;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
@@ -27,9 +27,8 @@ public final class AuthenticationService {
         player.setOp(false);
         int x = player.getFloorX();
         int z = player.getFloorZ();
-        int y = player.getLevel().getHighestBlockAt(x, z);
-        player.teleport(new Vector3(x, y, z));
-        player.pitch = 0;
+        int y = player.getLevel().getHighestBlockAt(x, z) + 1;
+        player.teleport(new Location(x, y, z, 0, 0, 0, player.getLevel()));
     }
 
     public void process(Player player) {
