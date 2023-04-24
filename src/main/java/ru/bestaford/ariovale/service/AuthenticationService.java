@@ -1,6 +1,9 @@
 package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockAir;
+import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
@@ -27,8 +30,15 @@ public final class AuthenticationService {
         player.setOp(false);
         int x = player.getFloorX();
         int z = player.getFloorZ();
-        int y = player.getLevel().getHighestBlockAt(x, z) + 1;
-        player.teleport(new Location(x, y, z, 0, 0, 0, player.getLevel()));
+        Level level = player.getLevel();
+        for (int y = player.getFloorY(); y <= level.getMaxHeight(); y++) {
+            Block block1 = level.getBlock(x, y, z);
+            Block block2 = level.getBlock(x, y + 1, z);
+            if (block1 instanceof BlockAir && block2 instanceof BlockAir) {
+                player.teleport(new Location(x, y, z));
+                break;
+            }
+        }
     }
 
     public void process(Player player) {
