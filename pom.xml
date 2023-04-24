@@ -13,22 +13,22 @@
             <id>home</id>
             <activation>
                 <file>
-                    <exists>C:\Users\Bestaford\Documents\Nukkit</exists>
+                    <exists>C:\Users\Bestaford\Documents\PNX</exists>
                 </file>
             </activation>
             <properties>
-                <server.directory>C:\Users\Bestaford\Documents\Nukkit</server.directory>
+                <server.directory>C:\Users\Bestaford\Documents\PNX</server.directory>
             </properties>
         </profile>
         <profile>
             <id>work</id>
             <activation>
                 <file>
-                    <exists>/home/bestaford/Документы/Nukkit</exists>
+                    <exists>/home/bestaford/Документы/PNX</exists>
                 </file>
             </activation>
             <properties>
-                <server.directory>/home/bestaford/Документы/Nukkit</server.directory>
+                <server.directory>/home/bestaford/Документы/PNX</server.directory>
             </properties>
         </profile>
     </profiles>
@@ -39,65 +39,63 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>opencollab-repo-release</id>
-            <url>https://repo.opencollab.dev/maven-releases</url>
-        </repository>
-        <repository>
-            <id>opencollab-repo-snapshot</id>
-            <url>https://repo.opencollab.dev/maven-snapshots</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
-            <groupId>cn.nukkit</groupId>
-            <artifactId>nukkit</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>cn.powernukkitx</groupId>
+            <artifactId>powernukkitx</artifactId>
+            <version>1.19.70-r2</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.20.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>5.1.0</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.6.0</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.1.7.Final</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-hikaricp</artifactId>
             <version>6.1.7.Final</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
             <version>2.20.0</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>at.favre.lib</groupId>
             <artifactId>bcrypt</artifactId>
             <version>0.10.2</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>1.10.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
