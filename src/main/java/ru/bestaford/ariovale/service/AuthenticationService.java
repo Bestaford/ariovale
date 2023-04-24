@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockAir;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.Location;
+import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
@@ -28,14 +28,14 @@ public final class AuthenticationService {
         player.setAllowInteract(false);
         player.setCheckMovement(false);
         player.setOp(false);
-        int x = player.getFloorX();
-        int z = player.getFloorZ();
+        int floorX = player.getFloorX();
+        int floorZ = player.getFloorZ();
         Level level = player.getLevel();
-        for (int y = player.getFloorY(); y <= level.getMaxHeight(); y++) {
-            Block block1 = level.getBlock(x, y, z);
-            Block block2 = level.getBlock(x, y + 1, z);
+        for (int floorY = player.getFloorY(); floorY <= level.getMaxHeight(); floorY++) {
+            Block block1 = level.getBlock(floorX, floorY, floorZ);
+            Block block2 = level.getBlock(floorX, floorY + 1, floorZ);
             if (block1 instanceof BlockAir && block2 instanceof BlockAir) {
-                player.teleport(new Location(x, y, z));
+                player.teleport(new Vector3(player.getX(), floorY, player.getZ()));
                 break;
             }
         }
