@@ -4,7 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
-import cn.nukkit.utils.MainLogger;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,6 +14,7 @@ import ru.bestaford.ariovale.service.GameService;
 
 import javax.inject.Inject;
 
+@Log4j2
 public final class RegistrationTask extends AsyncTask {
 
     private final Player player;
@@ -24,7 +25,6 @@ public final class RegistrationTask extends AsyncTask {
     @Inject private SessionFactory sessionFactory;
     @Inject private AuthenticationService authenticationService;
     @Inject private GameService gameService;
-    @Inject private MainLogger logger;
 
     public RegistrationTask(Player player, Account account) {
         this.player = player;
@@ -43,7 +43,7 @@ public final class RegistrationTask extends AsyncTask {
             success = true;
         } catch (Exception exception) {
             transaction.rollback();
-            logger.logException(exception);
+            log.error("An error occurred during transaction", exception);
         }
     }
 

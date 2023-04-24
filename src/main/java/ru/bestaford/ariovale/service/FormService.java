@@ -6,8 +6,8 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
-import cn.nukkit.utils.MainLogger;
 import com.google.inject.Injector;
+import lombok.extern.log4j.Log4j2;
 import ru.bestaford.ariovale.form.ExitForm;
 import ru.bestaford.ariovale.form.base.*;
 
@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Log4j2
 @Singleton
 public final class FormService {
 
@@ -25,7 +26,6 @@ public final class FormService {
 
     @Inject private Injector injector;
     @Inject private GameService gameService;
-    @Inject private MainLogger logger;
 
     public void sendForm(Form form, Player player) {
         injector.injectMembers(form);
@@ -74,7 +74,7 @@ public final class FormService {
                     }
                 }
             } catch (Exception exception) {
-                logger.logException(exception);
+                log.error("An error occurred during form handling", exception);
                 gameService.closeWithError(player);
             } finally {
                 windowMap.remove(window);
