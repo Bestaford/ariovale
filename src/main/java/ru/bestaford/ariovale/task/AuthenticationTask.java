@@ -15,13 +15,13 @@ import javax.inject.Inject;
 
 public final class AuthenticationTask extends AsyncTask {
 
-    private final Player player;
-    private final String name;
+    public final Player player;
+    public final String name;
 
-    private Account account;
-    private boolean registered;
-    private boolean loggedIn;
-    private boolean success;
+    public Account account;
+    public boolean registered;
+    public boolean loggedIn;
+    public boolean success;
 
     @Inject private SessionFactory sessionFactory;
     @Inject private GameService gameService;

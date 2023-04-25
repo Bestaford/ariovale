@@ -17,10 +17,10 @@ import javax.inject.Inject;
 @Log4j2
 public final class RegistrationTask extends AsyncTask {
 
-    private final Player player;
-    private final Account account;
+    public final Player player;
+    public final Account account;
 
-    private boolean success;
+    public boolean success;
 
     @Inject private SessionFactory sessionFactory;
     @Inject private AuthenticationService authenticationService;

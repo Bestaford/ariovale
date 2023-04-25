@@ -6,34 +6,32 @@ import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.service.GameService;
 
 import javax.inject.Inject;
 
 public final class LoginTask extends AsyncTask {
 
-    private final Player player;
-    private final Account account;
-    private final String password;
+    public final Player player;
+    public final LoginForm loginForm;
 
-    private boolean verified;
-    private boolean success;
+    public boolean verified;
+    public boolean success;
 
     @Inject private SessionFactory sessionFactory;
     @Inject private GameService gameService;
 
-    public LoginTask(Player player, Account account, String password) {
+    public LoginTask(Player player, LoginForm loginForm) {
         this.player = player;
-        this.account = account;
-        this.password = password;
+        this.loginForm = loginForm;
     }
 
     @Override
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
             BCrypt.Verifyer verifyer = BCrypt.verifyer();
-            BCrypt.Result result = verifyer.verify(password.toCharArray(), session.getReference(account).getPassword().toCharArray());
+            BCrypt.Result result = verifyer.verify(loginForm.password.toCharArray(), session.getReference(loginForm.account).getPassword().toCharArray());
             verified = result.verified;
             success = true;
         }

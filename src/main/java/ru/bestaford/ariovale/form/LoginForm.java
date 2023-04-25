@@ -51,7 +51,6 @@ public final class LoginForm extends CustomForm {
             formService.sendForm(this, player);
             return;
         }
-        formService.clearStack(player);
-        authenticationService.login(player, account, password);
+        authenticationService.login(player, this);
     }
 }

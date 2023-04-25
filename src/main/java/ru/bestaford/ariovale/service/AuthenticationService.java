@@ -7,6 +7,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
+import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
 import ru.bestaford.ariovale.task.LoginTask;
 import ru.bestaford.ariovale.task.RegistrationTask;
@@ -57,7 +58,7 @@ public final class AuthenticationService {
         gameService.information(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED);
     }
 
-    public void login(Player player, Account account, String password) {
-        taskService.scheduleAsyncTask(new LoginTask(player, account, password));
+    public void login(Player player, LoginForm loginForm) {
+        taskService.scheduleAsyncTask(new LoginTask(player, loginForm));
     }
 }
