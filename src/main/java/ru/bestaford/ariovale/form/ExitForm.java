@@ -10,7 +10,7 @@ import javax.inject.Inject;
 @IgnoreStack
 public final class ExitForm extends ConfirmationForm {
 
-    public final Runnable runnable;
+    private final Runnable runnable;
 
     @Inject private TranslationService translationService;
 
