@@ -16,9 +16,9 @@ import java.util.Objects;
 @Required
 public final class RegistrationForm extends CustomForm {
 
-    private final Account account;
+    public final Account account;
 
-    private String error;
+    public String error;
 
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
