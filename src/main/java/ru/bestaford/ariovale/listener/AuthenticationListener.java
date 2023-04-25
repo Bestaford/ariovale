@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
+import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerLocallyInitializedEvent;
 import ru.bestaford.ariovale.service.AuthenticationService;
 
@@ -14,6 +15,11 @@ import javax.inject.Singleton;
 public final class AuthenticationListener implements Listener {
 
     @Inject private AuthenticationService authenticationService;
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        authenticationService.initialize(event.getPlayer());
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event) {
