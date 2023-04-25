@@ -21,7 +21,6 @@ public final class LoginForm extends CustomForm {
 
     public String password;
     public String error;
-    public boolean incorrect;
 
     @Inject private TranslationService translationService;
     @Inject private FormService formService;
@@ -34,9 +33,6 @@ public final class LoginForm extends CustomForm {
     @Override
     protected void build(Player player) {
         window.setTitle(FORMAT_BOLD + PORTAL_NAME + COLON + SPACE + translationService.getString(player, "login.form.title"));
-        if (incorrect) {
-            error = THEME_ERROR + translationService.getString(player, "login.form.input.error.incorrect");
-        }
         window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () -> translationService.getString(player, "login.form.label") + COLON + SPACE + THEME_PRIMARY + account.getName())));
         window.addElement(new ElementInput(
                 translationService.getString(player, "registration.form.input.text"),
@@ -49,7 +45,6 @@ public final class LoginForm extends CustomForm {
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
         password = response.getInputResponse(1);
         error = null;
-        incorrect = false;
         if (password.isBlank()) {
             password = null;
             error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.empty");

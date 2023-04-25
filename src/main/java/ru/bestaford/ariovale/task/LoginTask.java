@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.GameService;
+import ru.bestaford.ariovale.service.TranslationService;
+import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
 
@@ -23,6 +25,7 @@ public final class LoginTask extends AsyncTask {
     @Inject private SessionFactory sessionFactory;
     @Inject private GameService gameService;
     @Inject private FormService formService;
+    @Inject private TranslationService translationService;
 
     public LoginTask(Player player, LoginForm loginForm) {
         this.player = player;
@@ -46,7 +49,7 @@ public final class LoginTask extends AsyncTask {
                 player.sendMessage("login");
             } else {
                 loginForm.password = null;
-                loginForm.incorrect = true;
+                loginForm.error = Strings.THEME_ERROR + translationService.getString(player, "login.form.input.error.incorrect");
                 formService.sendForm(loginForm, player);
             }
         } else {
