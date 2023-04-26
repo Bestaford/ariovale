@@ -28,10 +28,16 @@ public final class FormService {
     @Inject private UtilsService utilsService;
 
     public void sendForm(Form form, Player player) {
+        sendForm(form, player, false);
+    }
+
+    public void sendForm(Form form, Player player, boolean silent) {
         injector.injectMembers(form);
         FormWindow window = form.getWindow(player);
-        windowMap.put(window, form);
-        player.showFormWindow(window);
+        if (!silent) {
+            player.showFormWindow(window);
+            windowMap.put(window, form);
+        }
         if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
             if (!formStackMap.containsKey(player)) {
                 formStackMap.put(player, new Stack<>());

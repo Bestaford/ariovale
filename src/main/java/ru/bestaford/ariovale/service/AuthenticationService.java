@@ -50,10 +50,14 @@ public final class AuthenticationService {
 
     public void process(Player player) {
         UUID uuid = player.getUniqueId();
+        AuthenticationForm authenticationForm = new AuthenticationForm();
         if (onlinePlayers.containsKey(uuid)) {
-            authenticate(player, onlinePlayers.get(uuid));
+            String name = onlinePlayers.get(uuid);
+            authenticationForm.name = name;
+            formService.sendForm(authenticationForm, player, true);
+            authenticate(player, name);
         } else {
-            formService.sendForm(new AuthenticationForm(), player);
+            formService.sendForm(authenticationForm, player);
         }
     }
 
