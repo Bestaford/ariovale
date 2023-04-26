@@ -30,6 +30,7 @@ public final class AuthenticationService {
     @Inject private TranslationService translationService;
 
     public void initialize(Player player) {
+//TODO: split to different methods, remove redundant call
         player.setGamemode(Player.SURVIVAL);
         player.setAllowModifyWorld(false);
         player.setAllowInteract(false);
@@ -49,6 +50,7 @@ public final class AuthenticationService {
     }
 
     public void process(Player player) {
+//TODO: schedule AuthenticationTask instantly
         UUID uuid = player.getUniqueId();
         AuthenticationForm authenticationForm = new AuthenticationForm();
         if (onlinePlayers.containsKey(uuid)) {
