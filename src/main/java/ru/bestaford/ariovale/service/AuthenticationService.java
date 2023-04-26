@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Singleton
 public final class AuthenticationService {
 
-    public final Map<UUID, Account> onlinePlayers = new ConcurrentHashMap<>();
+    public final Map<UUID, String> onlinePlayers = new ConcurrentHashMap<>();
 
     @Inject private FormService formService;
     @Inject private TaskService taskService;
@@ -70,6 +70,6 @@ public final class AuthenticationService {
 
     public void completeLogin(Player player, Account account) {
         player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
-        onlinePlayers.put(account.getUUID(), account);
+        onlinePlayers.put(account.getUUID(), account.getName());
     }
 }
