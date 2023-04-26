@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.form.RegistrationForm;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.UtilsService;
 
@@ -26,6 +27,7 @@ public final class AuthenticationTask extends AsyncTask {
     @Inject private SessionFactory sessionFactory;
     @Inject private UtilsService utilsService;
     @Inject private FormService formService;
+    @Inject private AuthenticationService authenticationService;
 
     public AuthenticationTask(Player player, String name) {
         this.player = player;
@@ -51,7 +53,7 @@ public final class AuthenticationTask extends AsyncTask {
         if (player.isOnline() && success) {
             if (registered) {
                 if (loggedIn) {
-                    player.sendMessage("logined");
+                    authenticationService.completeLogin(player, account, false);
                 } else {
                     formService.sendForm(new LoginForm(account), player);
                 }
