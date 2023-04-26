@@ -29,11 +29,11 @@ public class Account {
     private PermissionLevel permissionLevel;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastDate;
 
     @Column(nullable = false)
@@ -103,19 +103,19 @@ public class Account {
         this.address = address;
     }
 
-    public UUID getUuid() {
+    public UUID getUUID() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUUID(UUID uuid) {
         this.uuid = uuid;
     }
 
-    public String getXuid() {
+    public String getXUID() {
         return xuid;
     }
 
-    public void setXuid(String xuid) {
+    public void setXUID(String xuid) {
         this.xuid = xuid;
     }
 
