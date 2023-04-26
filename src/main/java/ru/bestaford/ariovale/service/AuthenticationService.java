@@ -62,4 +62,8 @@ public final class AuthenticationService {
     public void login(Player player, LoginForm loginForm) {
         taskService.scheduleAsyncTask(new LoginTask(player, loginForm));
     }
+
+    public void completeLogin(Player player, Account account) {
+        player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
+    }
 }

@@ -7,6 +7,7 @@ import cn.nukkit.scheduler.AsyncTask;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.form.LoginForm;
+import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.service.UtilsService;
@@ -26,6 +27,7 @@ public final class LoginTask extends AsyncTask {
     @Inject private UtilsService utilsService;
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
+    @Inject private AuthenticationService authenticationService;
 
     public LoginTask(Player player, LoginForm loginForm) {
         this.player = player;
@@ -46,7 +48,7 @@ public final class LoginTask extends AsyncTask {
     public void onCompletion(Server server) {
         if (player.isOnline() && success) {
             if (verified) {
-                player.sendMessage("login");
+                authenticationService.completeLogin(player, loginForm.account);
             } else {
                 loginForm.password = null;
                 loginForm.error = Strings.THEME_ERROR + translationService.getString(player, "login.form.input.error.incorrect");
