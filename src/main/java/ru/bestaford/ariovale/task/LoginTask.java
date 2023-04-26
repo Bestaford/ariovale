@@ -8,8 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.GameService;
 import ru.bestaford.ariovale.service.TranslationService;
+import ru.bestaford.ariovale.service.UtilsService;
 import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
@@ -23,7 +23,7 @@ public final class LoginTask extends AsyncTask {
     public boolean success;
 
     @Inject private SessionFactory sessionFactory;
-    @Inject private GameService gameService;
+    @Inject private UtilsService utilsService;
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
 
@@ -53,7 +53,7 @@ public final class LoginTask extends AsyncTask {
                 formService.sendForm(loginForm, player);
             }
         } else {
-            gameService.closeWithError(player);
+            utilsService.closeWithError(player);
         }
     }
 }

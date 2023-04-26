@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public final class GameService {
+public final class UtilsService {
 
     @Inject private TranslationService translationService;
     @Inject private FormService formService;

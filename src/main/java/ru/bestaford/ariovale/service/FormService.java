@@ -25,7 +25,7 @@ public final class FormService {
     private final Map<Player, Stack<Form>> formStackMap = new ConcurrentHashMap<>();
 
     @Inject private Injector injector;
-    @Inject private GameService gameService;
+    @Inject private UtilsService utilsService;
 
     public void sendForm(Form form, Player player) {
         injector.injectMembers(form);
@@ -75,7 +75,7 @@ public final class FormService {
                 }
             } catch (Exception exception) {
                 log.error("An error occurred during form handling", exception);
-                gameService.closeWithError(player);
+                utilsService.closeWithError(player);
             } finally {
                 windowMap.remove(window);
             }
