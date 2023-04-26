@@ -47,8 +47,7 @@ public final class FormService {
     }
 
     public void clearStack(Player player) {
-        Stack<Form> formStack = stackMap.get(player);
-        formStack.clear();
+        stackMap.get(player).clear();
     }
 
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
