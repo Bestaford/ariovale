@@ -49,7 +49,12 @@ public final class AuthenticationService {
     }
 
     public void process(Player player) {
-        formService.sendForm(new AuthenticationForm(), player);
+        UUID uuid = player.getUniqueId();
+        if (onlinePlayers.containsKey(uuid)) {
+            authenticate(player, onlinePlayers.get(uuid));
+        } else {
+            formService.sendForm(new AuthenticationForm(), player);
+        }
     }
 
     public void authenticate(Player player, String name) {
