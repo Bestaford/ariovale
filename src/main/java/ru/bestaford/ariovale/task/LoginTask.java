@@ -71,7 +71,7 @@ public final class LoginTask extends AsyncTask {
         if (player.isOnline() && success) {
             if (verified) {
                 formService.clearStack(player);
-                authenticationService.completeLogin(player, account);
+                authenticationService.completeLogin(player, account, false);
             } else {
                 loginForm.password = null;
                 loginForm.error = Strings.THEME_ERROR + translationService.getString(player, "login.form.input.error.incorrect");

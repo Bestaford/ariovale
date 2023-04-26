@@ -71,14 +71,17 @@ public final class AuthenticationService {
 
     public void completeRegistration(Player player, Account account) {
         formService.sendForm(new InformationForm(translationService.getString(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED)), player);
+        completeLogin(player, account, true);
     }
 
     public void login(Player player, LoginForm loginForm) {
         taskService.scheduleAsyncTask(new LoginTask(player, loginForm));
     }
 
-    public void completeLogin(Player player, Account account) {
-        player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
+    public void completeLogin(Player player, Account account, boolean silent) {
+        if (!silent) {
+            player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
+        }
         onlinePlayers.put(account.getUUID(), account.getName());
     }
 }
