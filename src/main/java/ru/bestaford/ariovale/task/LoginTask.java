@@ -70,6 +70,7 @@ public final class LoginTask extends AsyncTask {
     public void onCompletion(Server server) {
         if (player.isOnline() && success) {
             if (verified) {
+                formService.clearStack(player);
                 authenticationService.completeLogin(player, account);
             } else {
                 loginForm.password = null;
