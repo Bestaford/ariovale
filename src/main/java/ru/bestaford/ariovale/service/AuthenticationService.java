@@ -7,6 +7,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
+import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
 import ru.bestaford.ariovale.task.LoginTask;
@@ -21,7 +22,7 @@ public final class AuthenticationService {
 
     @Inject private FormService formService;
     @Inject private TaskService taskService;
-    @Inject private UtilsService utilsService;
+    @Inject private TranslationService translationService;
 
     public void initialize(Player player) {
         player.setGamemode(Player.SURVIVAL);
@@ -55,7 +56,7 @@ public final class AuthenticationService {
     }
 
     public void completeRegistration(Player player, Account account) {
-        utilsService.information(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED);
+        formService.sendForm(new InformationForm(translationService.getString(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED)), player);
     }
 
     public void login(Player player, LoginForm loginForm) {
