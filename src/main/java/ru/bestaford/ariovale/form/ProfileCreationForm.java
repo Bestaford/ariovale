@@ -40,7 +40,7 @@ public final class ProfileCreationForm extends CustomForm {
                 Arrays.stream(Sex.values()).map(
                         sex -> translationService.getString(player, "sex." + sex.toString().toLowerCase())
                 ).collect(Collectors.toList()),
-                account.getSex() == null ? 0 : account.getSex().ordinal()
+                account.getSex() == null ? Sex.OTHER.ordinal() : account.getSex().ordinal()
         ));
         window.addElement(new ElementSlider(
                 translationService.getString(player, "age"),
