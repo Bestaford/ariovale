@@ -21,8 +21,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Singleton
 public final class FormService {
 
-    private final Map<FormWindow, Form> windowMap = new ConcurrentHashMap<>();
-    private final Map<Player, Stack<Form>> formStackMap = new ConcurrentHashMap<>();
+    public final Map<FormWindow, Form> formMap = new ConcurrentHashMap<>();
+    public final Map<Player, Stack<Form>> stackMap = new ConcurrentHashMap<>();
 
     @Inject private Injector injector;
     @Inject private UtilsService utilsService;
@@ -36,13 +36,10 @@ public final class FormService {
         FormWindow window = form.getWindow(player);
         if (!silent) {
             player.showFormWindow(window);
-            windowMap.put(window, form);
+            formMap.put(window, form);
         }
         if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
-            if (!formStackMap.containsKey(player)) {
-                formStackMap.put(player, new Stack<>());
-            }
-            Stack<Form> formStack = formStackMap.get(player);
+            Stack<Form> formStack = stackMap.get(player);
             if (!formStack.contains(form)) {
                 formStack.push(form);
             }
@@ -50,18 +47,16 @@ public final class FormService {
     }
 
     public void clearStack(Player player) {
-        if (formStackMap.containsKey(player)) {
-            Stack<Form> formStack = formStackMap.get(player);
-            formStack.clear();
-        }
+        Stack<Form> formStack = stackMap.get(player);
+        formStack.clear();
     }
 
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
-        if (windowMap.containsKey(window)) {
+        if (formMap.containsKey(window)) {
             try {
-                Form form = windowMap.get(window);
+                Form form = formMap.get(window);
                 if (!form.getClass().isAnnotationPresent(IgnoreStack.class) && wasClosed) {
-                    Stack<Form> formStack = formStackMap.get(player);
+                    Stack<Form> formStack = stackMap.get(player);
                     formStack.remove(form);
                     if (formStack.empty()) {
                         if (form.getClass().isAnnotationPresent(Required.class)) {
@@ -83,7 +78,7 @@ public final class FormService {
                 log.error("An error occurred during form handling", exception);
                 utilsService.closeWithError(player);
             } finally {
-                windowMap.remove(window);
+                formMap.remove(window);
             }
         }
     }
