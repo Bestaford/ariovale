@@ -33,8 +33,8 @@ public final class FormService {
 
     public void sendForm(Form form, Player player, boolean silent) {
         injector.injectMembers(form);
-        FormWindow window = form.getWindow(player); //TODO: move in condition block
         if (!silent) {
+            FormWindow window = form.getWindow(player);
             player.showFormWindow(window);
             formMap.put(window, form);
         }
