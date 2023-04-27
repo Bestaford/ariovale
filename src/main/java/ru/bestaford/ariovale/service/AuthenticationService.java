@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public final class AuthenticationService {
-
+//TODO: move uuid-name bindings to DB
     public final Map<UUID, String> onlinePlayers = new ConcurrentHashMap<>();
 //TODO: different maps for names and accounts
     @Inject private FormService formService;
