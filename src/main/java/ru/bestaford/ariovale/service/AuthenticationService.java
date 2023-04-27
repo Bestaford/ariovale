@@ -31,8 +31,8 @@ public final class AuthenticationService {
     public void update(Player player) {
         boolean loggedIn = isLoggedIn(player);
         player.setGamemode(loggedIn ? Player.SURVIVAL : Player.SPECTATOR);
-        player.setAllowModifyWorld(loggedIn);
-        player.setAllowInteract(loggedIn);
+        player.setAllowModifyWorld(false);
+        player.setAllowInteract(false);
         player.setImmobile(!loggedIn);
         player.setCheckMovement(false);
         player.setOp(false);
