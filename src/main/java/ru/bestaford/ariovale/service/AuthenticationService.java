@@ -84,6 +84,7 @@ public final class AuthenticationService {
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
         }
+        formService.clearStack(player);
         onlinePlayers.put(account.getUUID(), account.getName());
         update(player);
     }
