@@ -147,13 +147,6 @@ public final class AuthenticationListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerGlassBottleFill(PlayerGlassBottleFillEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
-            event.setCancelled();
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         if (!authenticationService.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
