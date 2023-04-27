@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
+import cn.nukkit.PlayerFood;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.form.InformationForm;
@@ -33,6 +34,18 @@ public final class AuthenticationService {
         player.setImmobile(!loggedIn);
         player.setCheckMovement(false);
         player.setOp(false);
+        teleportToSafeSpawn(player);
+    }
+
+    public void reset(Player player) {
+        player.setHealth(player.getMaxHealth());
+        PlayerFood foodData = player.getFoodData();
+        foodData.setLevel(foodData.getMaxLevel());
+        player.getInventory().clearAll();
+        teleportToSafeSpawn(player);
+    }
+
+    public void teleportToSafeSpawn(Player player) {
         player.teleport(player.getLevel().getSafeSpawn(player.getPosition()));
     }
 
@@ -60,6 +73,7 @@ public final class AuthenticationService {
     public void completeRegistration(Player player, Account account) {
         formService.sendForm(new InformationForm(translationService.getString(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED)), player);
         completeLogin(player, account, true);
+        reset(player);
     }
 
     public void login(Player player, LoginForm loginForm) {
