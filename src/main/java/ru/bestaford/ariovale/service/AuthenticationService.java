@@ -101,6 +101,6 @@ public final class AuthenticationService {
     }
 
     public boolean isLoggedIn(Player player) {
-        return onlinePlayers.containsKey(player.getUniqueId());
+        return player.isOnline() && onlinePlayers.containsKey(player.getUniqueId());
     }
 }
