@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.bestaford.ariovale.util.PermissionLevel;
 import ru.bestaford.ariovale.util.Sex;
 
@@ -9,6 +10,8 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "accounts")
 public class Account {
 
