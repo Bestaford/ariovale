@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class AuthenticationService {
 
     public final Map<UUID, String> onlinePlayers = new ConcurrentHashMap<>();
-
+//TODO: different maps for names and accounts
     @Inject private FormService formService;
     @Inject private TaskService taskService;
     @Inject private TranslationService translationService;
