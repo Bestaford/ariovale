@@ -1,10 +1,6 @@
 package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.Block;
-import cn.nukkit.block.BlockAir;
-import cn.nukkit.level.Level;
-import cn.nukkit.math.Vector3;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.form.InformationForm;
@@ -29,24 +25,15 @@ public final class AuthenticationService {
     @Inject private TaskService taskService;
     @Inject private TranslationService translationService;
 
-    public void initialize(Player player) {
-//TODO: split to different methods, remove redundant call
-        player.setGamemode(Player.SURVIVAL);
-        player.setAllowModifyWorld(false);
-        player.setAllowInteract(false);
+    public void update(Player player) {
+        boolean isLoggedIn = isLoggedIn(player);
+        player.setGamemode(isLoggedIn ? Player.SURVIVAL : Player.SPECTATOR);
+        player.setAllowModifyWorld(isLoggedIn);
+        player.setAllowInteract(isLoggedIn);
+        player.setImmobile(!isLoggedIn);
         player.setCheckMovement(false);
         player.setOp(false);
-        int floorX = player.getFloorX();
-        int floorZ = player.getFloorZ();
-        Level level = player.getLevel();
-        for (int floorY = player.getFloorY(); floorY <= level.getMaxHeight(); floorY++) {
-            Block block1 = level.getBlock(floorX, floorY, floorZ);
-            Block block2 = level.getBlock(floorX, floorY + 1, floorZ);
-            if (block1 instanceof BlockAir && block2 instanceof BlockAir) {
-                player.teleport(new Vector3(player.getX(), floorY, player.getZ()));
-                break;
-            }
-        }
+        player.teleport(player.getLevel().getSafeSpawn(player.getPosition()));
     }
 
     public void process(Player player) {
@@ -85,6 +72,7 @@ public final class AuthenticationService {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
         }
         onlinePlayers.put(account.getUUID(), account.getName());
+        update(player);
     }
 
     public boolean isLoggedIn(Player player) {

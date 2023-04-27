@@ -18,13 +18,13 @@ public final class AuthenticationListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        authenticationService.initialize(event.getPlayer());
+        authenticationService.update(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event) {
         Player player = event.getPlayer();
-        authenticationService.initialize(player);
+        authenticationService.update(player);
         authenticationService.process(player);
     }
 }
