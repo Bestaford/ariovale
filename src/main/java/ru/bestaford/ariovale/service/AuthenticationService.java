@@ -26,11 +26,11 @@ public final class AuthenticationService {
     @Inject private TranslationService translationService;
 
     public void update(Player player) {
-        boolean isLoggedIn = isLoggedIn(player);
-        player.setGamemode(isLoggedIn ? Player.SURVIVAL : Player.SPECTATOR);
-        player.setAllowModifyWorld(isLoggedIn);
-        player.setAllowInteract(isLoggedIn);
-        player.setImmobile(!isLoggedIn);
+        boolean loggedIn = isLoggedIn(player);
+        player.setGamemode(loggedIn ? Player.SURVIVAL : Player.SPECTATOR);
+        player.setAllowModifyWorld(loggedIn);
+        player.setAllowInteract(loggedIn);
+        player.setImmobile(!loggedIn);
         player.setCheckMovement(false);
         player.setOp(false);
         player.teleport(player.getLevel().getSafeSpawn(player.getPosition()));
