@@ -114,12 +114,6 @@
                 <version>3.3.0</version>
                 <configuration>
                     <outputDirectory>${server.directory}/plugins</outputDirectory>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>../libs</classpathPrefix>
-                        </manifest>
-                    </archive>
                 </configuration>
             </plugin>
             <plugin>
