@@ -2,6 +2,7 @@ package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
+import cn.nukkit.Server;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.form.InformationForm;
@@ -25,6 +26,7 @@ public final class AuthenticationService {
     @Inject private FormService formService;
     @Inject private TaskService taskService;
     @Inject private TranslationService translationService;
+    @Inject private Server server;
 
     public void update(Player player) {
         boolean loggedIn = isLoggedIn(player);
@@ -82,12 +84,20 @@ public final class AuthenticationService {
     }
 
     public void completeLogin(Player player, Account account, boolean silent) {
+        Map<UUID, Player> serverOnlinePlayers = server.getOnlinePlayers();
+        for (Map.Entry<UUID, String> onlinePlayer : onlinePlayers.entrySet()) {
+            if ((!onlinePlayer.getKey().equals(account.getUUID())) && (onlinePlayer.getValue().equals(account.getName()))) {
+                if (serverOnlinePlayers.containsKey(onlinePlayer.getKey())) {
+                    serverOnlinePlayers.get(onlinePlayer.getKey()).close();
+                }
+            }
+        }
+        onlinePlayers.put(account.getUUID(), account.getName());
+        formService.clearStack(player);
+        update(player);
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
         }
-        formService.clearStack(player);
-        onlinePlayers.put(account.getUUID(), account.getName());
-        update(player);
     }
 
     public boolean isLoggedIn(Player player) {
