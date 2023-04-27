@@ -18,13 +18,14 @@ public final class RegistrationForm extends CustomForm {
 
     public final Account account;
 
+    public String password;
     public String error;
 
     @Inject private FormService formService;
     @Inject private TranslationService translationService;
 
     public RegistrationForm(Account account) {
-        this.account = account;
+        this.account = Objects.requireNonNull(account);
     }
 
     @Override
@@ -38,25 +39,26 @@ public final class RegistrationForm extends CustomForm {
         window.addElement(new ElementInput(
                 translationService.getString(player, "registration.form.input.text"),
                 translationService.getString(player, "registration.form.input.placeholder"),
-                Objects.requireNonNullElse(account.getPassword(), EMPTY)
+                Objects.requireNonNullElse(password, EMPTY)
         ));
     }
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        account.setPassword(response.getInputResponse(1));
+        password = response.getInputResponse(1);
         error = null;
-        if (account.getPassword().isBlank()) {
-            account.setPassword(null);
+        if (password.isBlank()) {
+            password = null;
             error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.empty");
             formService.sendForm(this, player);
             return;
         }
-        if (!Account.PASSWORD_PATTERN.matcher(account.getPassword()).matches()) {
+        if (!Account.PASSWORD_PATTERN.matcher(password).matches()) {
             error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.invalid");
             formService.sendForm(this, player);
             return;
         }
+        account.setPassword(password);
         formService.sendForm(new ProfileCreationForm(account), player);
     }
 }

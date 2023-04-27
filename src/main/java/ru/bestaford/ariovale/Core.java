@@ -15,6 +15,8 @@ import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.service.*;
 
+import java.util.Objects;
+
 @Log4j2
 public final class Core extends PluginBase {
 
@@ -37,7 +39,7 @@ public final class Core extends PluginBase {
         private final Core core;
 
         public Module(Core core) {
-            this.core = core;
+            this.core = Objects.requireNonNull(core);
         }
 
         @Override

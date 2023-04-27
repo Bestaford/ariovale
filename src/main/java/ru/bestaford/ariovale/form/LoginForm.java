@@ -27,7 +27,7 @@ public final class LoginForm extends CustomForm {
     @Inject private AuthenticationService authenticationService;
 
     public LoginForm(Account account) {
-        this.account = account;
+        this.account = Objects.requireNonNull(account);
     }
 
     @Override

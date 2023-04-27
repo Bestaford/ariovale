@@ -18,6 +18,7 @@ import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
 import java.util.Date;
+import java.util.Objects;
 
 @Log4j2
 public final class LoginTask extends AsyncTask {
@@ -36,8 +37,8 @@ public final class LoginTask extends AsyncTask {
     @Inject private AuthenticationService authenticationService;
 
     public LoginTask(Player player, LoginForm loginForm) {
-        this.player = player;
-        this.loginForm = loginForm;
+        this.player = Objects.requireNonNull(player);
+        this.loginForm = Objects.requireNonNull(loginForm);
         account = loginForm.account;
     }
 

@@ -15,6 +15,7 @@ import ru.bestaford.ariovale.util.Sex;
 
 import javax.inject.Inject;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Required
@@ -27,7 +28,7 @@ public final class ProfileCreationForm extends CustomForm {
     @Inject private AuthenticationService authenticationService;
 
     public ProfileCreationForm(Account account) {
-        this.account = account;
+        this.account = Objects.requireNonNull(account);
     }
 
     @Override

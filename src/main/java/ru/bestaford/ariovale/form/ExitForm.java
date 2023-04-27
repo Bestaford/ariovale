@@ -6,6 +6,7 @@ import ru.bestaford.ariovale.form.base.IgnoreStack;
 import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
+import java.util.Objects;
 
 @IgnoreStack
 public final class ExitForm extends ConfirmationForm {
@@ -15,7 +16,7 @@ public final class ExitForm extends ConfirmationForm {
     @Inject private TranslationService translationService;
 
     public ExitForm(Runnable runnable) {
-        this.runnable = runnable;
+        this.runnable = Objects.requireNonNull(runnable);
     }
 
     @Override

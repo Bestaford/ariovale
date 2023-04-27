@@ -6,6 +6,7 @@ import ru.bestaford.ariovale.util.PermissionLevel;
 import ru.bestaford.ariovale.util.Sex;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -63,7 +64,7 @@ public class Account {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = Objects.requireNonNull(name);
     }
 
     public String getPassword() {
@@ -71,7 +72,7 @@ public class Account {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Objects.requireNonNull(password);
     }
 
     public PermissionLevel getPermissionLevel() {
@@ -79,7 +80,7 @@ public class Account {
     }
 
     public void setPermissionLevel(PermissionLevel permissionLevel) {
-        this.permissionLevel = permissionLevel;
+        this.permissionLevel = Objects.requireNonNull(permissionLevel);
     }
 
     public Date getRegistrationDate() {
@@ -87,7 +88,7 @@ public class Account {
     }
 
     public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
+        this.registrationDate = Objects.requireNonNull(registrationDate);
     }
 
     public Date getLoginDate() {
@@ -95,7 +96,7 @@ public class Account {
     }
 
     public void setLoginDate(Date loginDate) {
-        this.loginDate = loginDate;
+        this.loginDate = Objects.requireNonNull(loginDate);
     }
 
     public String getAddress() {
@@ -103,7 +104,7 @@ public class Account {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = Objects.requireNonNull(address);
     }
 
     public UUID getUUID() {
@@ -111,7 +112,7 @@ public class Account {
     }
 
     public void setUUID(UUID uuid) {
-        this.uuid = uuid;
+        this.uuid = Objects.requireNonNull(uuid);
     }
 
     public String getXUID() {
@@ -127,7 +128,7 @@ public class Account {
     }
 
     public void setSex(Sex sex) {
-        this.sex = sex;
+        this.sex = Objects.requireNonNull(sex);
     }
 
     public int getAge() {

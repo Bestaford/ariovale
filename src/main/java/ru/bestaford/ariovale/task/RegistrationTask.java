@@ -15,6 +15,7 @@ import ru.bestaford.ariovale.util.PermissionLevel;
 
 import javax.inject.Inject;
 import java.util.Date;
+import java.util.Objects;
 
 @Log4j2
 public final class RegistrationTask extends AsyncTask {
@@ -29,8 +30,8 @@ public final class RegistrationTask extends AsyncTask {
     @Inject private UtilsService utilsService;
 
     public RegistrationTask(Player player, Account account) {
-        this.player = player;
-        this.account = account;
+        this.player = Objects.requireNonNull(player);
+        this.account = Objects.requireNonNull(account);
     }
 
     @Override

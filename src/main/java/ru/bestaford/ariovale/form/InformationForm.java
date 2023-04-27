@@ -4,12 +4,14 @@ import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseSimple;
 import ru.bestaford.ariovale.form.base.SimpleForm;
 
+import java.util.Objects;
+
 public final class InformationForm extends SimpleForm {
 
     public final String content;
 
     public InformationForm(String content) {
-        this.content = content;
+        this.content = Objects.requireNonNull(content);
     }
 
     @Override

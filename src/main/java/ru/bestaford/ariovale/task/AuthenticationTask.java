@@ -13,6 +13,7 @@ import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.UtilsService;
 
 import javax.inject.Inject;
+import java.util.Objects;
 
 public final class AuthenticationTask extends AsyncTask {
 
@@ -30,8 +31,8 @@ public final class AuthenticationTask extends AsyncTask {
     @Inject private AuthenticationService authenticationService;
 
     public AuthenticationTask(Player player, String name) {
-        this.player = player;
-        this.name = name;
+        this.player = Objects.requireNonNull(player);
+        this.name = Objects.requireNonNull(name);
     }
 
     @Override
