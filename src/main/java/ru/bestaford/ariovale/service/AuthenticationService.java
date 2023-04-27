@@ -86,4 +86,8 @@ public final class AuthenticationService {
         }
         onlinePlayers.put(account.getUUID(), account.getName());
     }
+
+    public boolean isLoggedIn(Player player) {
+        return onlinePlayers.containsKey(player.getUniqueId());
+    }
 }
