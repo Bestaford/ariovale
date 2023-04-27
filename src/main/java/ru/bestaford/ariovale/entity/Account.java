@@ -34,7 +34,7 @@ public class Account {
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastDate;
+    private Date loginDate;
 
     @Column(nullable = false)
     private String address;
@@ -87,12 +87,12 @@ public class Account {
         this.registrationDate = registrationDate;
     }
 
-    public Date getLastDate() {
-        return lastDate;
+    public Date getLoginDate() {
+        return loginDate;
     }
 
-    public void setLastDate(Date lastDate) {
-        this.lastDate = lastDate;
+    public void setLoginDate(Date loginDate) {
+        this.loginDate = loginDate;
     }
 
     public String getAddress() {

@@ -42,7 +42,7 @@ public final class RegistrationTask extends AsyncTask {
             account.setPassword(hashedPassword);
             account.setPermissionLevel(PermissionLevel.PLAYER);
             account.setRegistrationDate(new Date());
-            account.setLastDate(account.getRegistrationDate());
+            account.setLoginDate(account.getRegistrationDate());
             account.setAddress(player.getAddress());
             account.setUUID(player.getUniqueId());
             account.setXUID(player.getLoginChainData().getXUID());

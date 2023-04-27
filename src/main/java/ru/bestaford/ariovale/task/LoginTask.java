@@ -50,7 +50,7 @@ public final class LoginTask extends AsyncTask {
             if (verified) {
                 Transaction transaction = session.beginTransaction();
                 try {
-                    account.setLastDate(new Date());
+                    account.setLoginDate(new Date());
                     account.setAddress(player.getAddress());
                     account.setUUID(player.getUniqueId());
                     account.setXUID(player.getLoginChainData().getXUID());
