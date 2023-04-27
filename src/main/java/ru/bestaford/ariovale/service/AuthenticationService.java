@@ -37,7 +37,6 @@ public final class AuthenticationService {
     }
 
     public void process(Player player) {
-//TODO: schedule AuthenticationTask instantly
         UUID uuid = player.getUniqueId();
         AuthenticationForm authenticationForm = new AuthenticationForm();
         if (onlinePlayers.containsKey(uuid)) {
