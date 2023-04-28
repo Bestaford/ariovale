@@ -31,7 +31,7 @@ public class Account {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private PermissionLevel permissionLevel;
-
+//TODO: use new Java Time API
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
