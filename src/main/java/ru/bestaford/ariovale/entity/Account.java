@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.bestaford.ariovale.util.PermissionLevel;
 import ru.bestaford.ariovale.util.Sex;
@@ -15,6 +16,7 @@ import java.util.regex.Pattern;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
