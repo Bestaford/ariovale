@@ -20,9 +20,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public final class AuthenticationService {
-//TODO: move uuid-name bindings to DB
+    //TODO: move uuid-name bindings to DB
     public final Map<UUID, String> onlinePlayers = new ConcurrentHashMap<>();
-//TODO: different maps for names and accounts
+    //TODO: different maps for names and accounts
     @Inject private FormService formService;
     @Inject private TaskService taskService;
     @Inject private TranslationService translationService;
@@ -86,13 +86,13 @@ public final class AuthenticationService {
     public void completeLogin(Player player, Account account, boolean silent) {
         Map<UUID, Player> serverOnlinePlayers = server.getOnlinePlayers();
         for (Map.Entry<UUID, String> onlinePlayer : onlinePlayers.entrySet()) {
-            if ((!onlinePlayer.getKey().equals(account.getUUID())) && (onlinePlayer.getValue().equals(account.getName()))) {
+            if ((!onlinePlayer.getKey().equals(account.getUniqueId())) && (onlinePlayer.getValue().equals(account.getName()))) {
                 if (serverOnlinePlayers.containsKey(onlinePlayer.getKey())) {
                     serverOnlinePlayers.get(onlinePlayer.getKey()).close();
                 }
             }
         }
-        onlinePlayers.put(account.getUUID(), account.getName());
+        onlinePlayers.put(account.getUniqueId(), account.getName());
         formService.clearStack(player);
         update(player);
         if (!silent) {

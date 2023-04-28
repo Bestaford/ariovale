@@ -41,7 +41,7 @@ public final class AuthenticationTask extends AsyncTask {
             account = session.get(Account.class, name);
             registered = account != null;
             if (registered) {
-                loggedIn = player.getUniqueId().equals(account.getUUID());
+                loggedIn = player.getUniqueId().equals(account.getUniqueId());
             } else {
                 loggedIn = false;
             }

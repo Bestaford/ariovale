@@ -1,19 +1,24 @@
 package ru.bestaford.ariovale.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import ru.bestaford.ariovale.util.PermissionLevel;
 import ru.bestaford.ariovale.util.Sex;
 
-import java.util.Date;
-import java.util.Objects;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "accounts")
+@Table(name = "account")
 public class Account {
 
     public final static Pattern NAME_PATTERN = Pattern.compile("^\\p{L}{1,20}\\s+\\p{L}{1,20}$");
@@ -22,120 +27,35 @@ public class Account {
     public final static int MAX_AGE = 80;
 
     @Id
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "permission_level", nullable = false)
     private PermissionLevel permissionLevel;
-//TODO: use new Java Time API
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date registrationDate;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date loginDate;
+    @Column(name = "registration_date", nullable = false)
+    private LocalDateTime registrationDate;
 
-    @Column(nullable = false)
+    @Column(name = "login_date", nullable = false)
+    private LocalDateTime loginDate;
+
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(nullable = false)
-    private UUID uuid;
+    @Column(name = "uuid", nullable = false)
+    private UUID uniqueId;
 
-    private String xuid;
+    @Column(name = "xuid")
+    private String xboxUserId;
 
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sex", nullable = false)
     private Sex sex;
 
-    @Column(nullable = false)
+    @Column(name = "age", nullable = false)
     private int age;
-
-    public Account() {
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = Objects.requireNonNull(name);
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = Objects.requireNonNull(password);
-    }
-
-    public PermissionLevel getPermissionLevel() {
-        return permissionLevel;
-    }
-
-    public void setPermissionLevel(PermissionLevel permissionLevel) {
-        this.permissionLevel = Objects.requireNonNull(permissionLevel);
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = Objects.requireNonNull(registrationDate);
-    }
-
-    public Date getLoginDate() {
-        return loginDate;
-    }
-
-    public void setLoginDate(Date loginDate) {
-        this.loginDate = Objects.requireNonNull(loginDate);
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = Objects.requireNonNull(address);
-    }
-
-    public UUID getUUID() {
-        return uuid;
-    }
-
-    public void setUUID(UUID uuid) {
-        this.uuid = Objects.requireNonNull(uuid);
-    }
-
-    public String getXUID() {
-        return xuid;
-    }
-
-    public void setXUID(String xuid) {
-        this.xuid = xuid;
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = Objects.requireNonNull(sex);
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }

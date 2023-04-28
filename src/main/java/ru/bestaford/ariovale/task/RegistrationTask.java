@@ -14,7 +14,7 @@ import ru.bestaford.ariovale.service.UtilsService;
 import ru.bestaford.ariovale.util.PermissionLevel;
 
 import javax.inject.Inject;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Log4j2
@@ -42,11 +42,11 @@ public final class RegistrationTask extends AsyncTask {
             String hashedPassword = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, account.getPassword().toCharArray());
             account.setPassword(hashedPassword);
             account.setPermissionLevel(PermissionLevel.PLAYER);
-            account.setRegistrationDate(new Date());
+            account.setRegistrationDate(LocalDateTime.now());
             account.setLoginDate(account.getRegistrationDate());
             account.setAddress(player.getAddress());
-            account.setUUID(player.getUniqueId());
-            account.setXUID(player.getLoginChainData().getXUID());
+            account.setUniqueId(player.getUniqueId());
+            account.setXboxUserId(player.getLoginChainData().getXUID());
             session.persist(account);
             transaction.commit();
             success = true;
