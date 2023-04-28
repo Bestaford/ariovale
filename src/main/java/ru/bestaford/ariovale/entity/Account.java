@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
 
     public final static Pattern NAME_PATTERN = Pattern.compile("^\\p{L}{1,20}\\s+\\p{L}{1,20}$");
