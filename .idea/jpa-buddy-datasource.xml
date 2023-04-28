@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="f90eaa3d-6718-4d1a-8c06-5093fab20024" name="ariovale" url="jdbc:postgresql://localhost/ariovale" driverClass="org.postgresql.Driver" />
+    </data-sources>
+    <data-source-infos>
+      <data-source-info id="f90eaa3d-6718-4d1a-8c06-5093fab20024" persistence-unit-name="ariovale" />
+    </data-source-infos>
+  </component>
+</project>
