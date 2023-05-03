@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "accounts")
 public class Account {
+//TODO: use long id instead of string
 //TODO: remove @ToString
 //TODO: simplify class
     public final static Pattern NAME_PATTERN = Pattern.compile("^\\p{L}{1,20}\\s+\\p{L}{1,20}$");
