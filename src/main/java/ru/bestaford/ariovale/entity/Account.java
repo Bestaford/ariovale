@@ -29,6 +29,7 @@ public class Account {
 //TODO: simplify class
 //TODO: disable @ToString generation
 //TODO: use natural id for name field
+//TODO: remove lombok annotations
     public final static Pattern NAME_PATTERN = Pattern.compile("^\\p{L}{1,20}\\s+\\p{L}{1,20}$");
     public final static Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!\\\"#$%&'()*+,\\-./:;<=>?@\\[\\\\\\]^_`{|}~])\\S{8,}$");
     public final static int MIN_AGE = 18;
