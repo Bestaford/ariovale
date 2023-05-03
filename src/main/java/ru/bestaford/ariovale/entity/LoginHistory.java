@@ -19,7 +19,8 @@ import java.util.UUID;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "login_history")
 public class LoginHistory {
-
+//TODO: simplify
+//TODO: check bidirectional relationship
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
