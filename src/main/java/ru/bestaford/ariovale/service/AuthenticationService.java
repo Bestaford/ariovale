@@ -53,16 +53,7 @@ public final class AuthenticationService {
     }
 
     public void process(Player player) {
-        UUID uuid = player.getUniqueId();
-        AuthenticationForm authenticationForm = new AuthenticationForm();
-        if (onlinePlayers.containsKey(uuid)) {
-            String name = onlinePlayers.get(uuid);
-            authenticationForm.name = name;
-            formService.sendForm(authenticationForm, player, true);
-            authenticate(player, name);
-        } else {
-            formService.sendForm(authenticationForm, player);
-        }
+        formService.sendForm(new AuthenticationForm(), player);
     }
 
     public void authenticate(Player player, String name) {
@@ -84,14 +75,6 @@ public final class AuthenticationService {
     }
 
     public void completeLogin(Player player, Account account, boolean silent) {
-        Map<UUID, Player> serverOnlinePlayers = server.getOnlinePlayers();
-        for (Map.Entry<UUID, String> onlinePlayer : onlinePlayers.entrySet()) {
-            if ((!onlinePlayer.getKey().equals(account.getUniqueId())) && (onlinePlayer.getValue().equals(account.getName()))) {
-                if (serverOnlinePlayers.containsKey(onlinePlayer.getKey())) {
-                    serverOnlinePlayers.get(onlinePlayer.getKey()).close();
-                }
-            }
-        }
         onlinePlayers.put(account.getUniqueId(), account.getName());
         formService.clearStack(player);
         update(player);
