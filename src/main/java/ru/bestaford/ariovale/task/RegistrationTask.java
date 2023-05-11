@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.UtilsService;
-import ru.bestaford.ariovale.util.PermissionLevel;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
@@ -41,7 +40,6 @@ public final class RegistrationTask extends AsyncTask {
         try (session) {
             String hashedPassword = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, account.getPassword().toCharArray());
             account.setPassword(hashedPassword);
-            account.setPermissionLevel(PermissionLevel.PLAYER);
             account.setRegistrationDate(LocalDateTime.now());
             account.setLoginDate(account.getRegistrationDate());
             account.setAddress(player.getAddress());
