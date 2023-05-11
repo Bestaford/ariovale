@@ -23,6 +23,10 @@ public class LoginHistory {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
     @Column(name = "datetime", nullable = false)
     private LocalDateTime datetime;
 

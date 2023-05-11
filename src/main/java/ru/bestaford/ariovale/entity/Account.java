@@ -9,6 +9,8 @@ import org.hibernate.annotations.NaturalId;
 import ru.bestaford.ariovale.util.Sex;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -50,4 +52,7 @@ public class Account {
 
     @Column(name = "age", nullable = false)
     private int age;
+
+    @OneToMany(mappedBy = "account")
+    private List<LoginHistory> loginHistory = new ArrayList<>();
 }
