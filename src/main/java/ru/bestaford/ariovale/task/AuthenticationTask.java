@@ -38,7 +38,7 @@ public final class AuthenticationTask extends AsyncTask {
     @Override
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
-            account = session.get(Account.class, name);
+            account = session.bySimpleNaturalId(Account.class).load(name);
             registered = account != null;
             if (registered) {
                 loggedIn = player.getUniqueId().equals(account.getUniqueId());
