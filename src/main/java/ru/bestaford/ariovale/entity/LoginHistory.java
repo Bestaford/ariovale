@@ -23,8 +23,8 @@ public class LoginHistory {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     @Column(name = "datetime", nullable = false)
