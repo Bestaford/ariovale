@@ -17,7 +17,6 @@ import ru.bestaford.ariovale.service.UtilsService;
 import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Log4j2
@@ -51,10 +50,7 @@ public final class LoginTask extends AsyncTask {
             if (verified) {
                 Transaction transaction = session.beginTransaction();
                 try {
-                    account.setLoginDate(LocalDateTime.now());
-                    account.setAddress(player.getAddress());
                     account.setUniqueId(player.getUniqueId());
-                    account.setXboxUserId(player.getLoginChainData().getXUID());
                     account = session.merge(account);
                     transaction.commit();
                 } catch (Exception exception) {

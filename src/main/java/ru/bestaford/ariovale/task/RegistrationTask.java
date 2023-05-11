@@ -41,10 +41,7 @@ public final class RegistrationTask extends AsyncTask {
             String hashedPassword = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, account.getPassword().toCharArray());
             account.setPassword(hashedPassword);
             account.setRegistrationDate(LocalDateTime.now());
-            account.setLoginDate(account.getRegistrationDate());
-            account.setAddress(player.getAddress());
             account.setUniqueId(player.getUniqueId());
-            account.setXboxUserId(player.getLoginChainData().getXUID());
             session.persist(account);
             transaction.commit();
             success = true;
