@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.entity.LoginHistory;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.UtilsService;
 
@@ -42,6 +43,7 @@ public final class RegistrationTask extends AsyncTask {
             account.setPassword(hashedPassword);
             account.setRegistrationDate(LocalDateTime.now());
             account.setUniqueId(player.getUniqueId());
+            account.getLoginHistory().add(new LoginHistory(player, account));
             session.persist(account);
             transaction.commit();
             success = true;

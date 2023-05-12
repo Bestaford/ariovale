@@ -29,7 +29,7 @@ public class Account {
     public final static int MAX_AGE = 80;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -53,6 +53,6 @@ public class Account {
     @Column(name = "age", nullable = false)
     private int age;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<LoginHistory> loginHistory = new ArrayList<>();
 }

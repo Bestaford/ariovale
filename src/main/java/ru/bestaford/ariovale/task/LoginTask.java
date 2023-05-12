@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.entity.LoginHistory;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
@@ -44,13 +45,15 @@ public final class LoginTask extends AsyncTask {
     @Override
     public void onRun() {
         try (Session session = sessionFactory.openSession()) {
+            account = session.getReference(account);
             BCrypt.Verifyer verifyer = BCrypt.verifyer();
-            BCrypt.Result result = verifyer.verify(loginForm.password.toCharArray(), session.getReference(account).getPassword().toCharArray());
+            BCrypt.Result result = verifyer.verify(loginForm.password.toCharArray(), account.getPassword().toCharArray());
             verified = result.verified;
             if (verified) {
                 Transaction transaction = session.beginTransaction();
                 try {
                     account.setUniqueId(player.getUniqueId());
+                    account.getLoginHistory().add(new LoginHistory(player, account));
                     account = session.merge(account);
                     transaction.commit();
                 } catch (Exception exception) {

@@ -1,5 +1,6 @@
 package ru.bestaford.ariovale.entity;
 
+import cn.nukkit.Player;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class LoginHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -38,4 +39,12 @@ public class LoginHistory {
 
     @Column(name = "xuid")
     private String xboxUserId;
+
+    public LoginHistory(Player player, Account account) {
+        this.account = account;
+        this.datetime = LocalDateTime.now();
+        this.address = player.getAddress();
+        this.uniqueId = player.getUniqueId();
+        this.xboxUserId = player.getLoginChainData().getXUID();
+    }
 }
