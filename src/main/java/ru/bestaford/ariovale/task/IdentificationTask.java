@@ -47,9 +47,11 @@ public final class IdentificationTask extends AsyncTask {
     @Override
     public void onCompletion(Server server) {
         if (player.isOnline() && success) {
+            AuthenticationForm authenticationForm = new AuthenticationForm();
             if (name == null) {
-                formService.sendForm(new AuthenticationForm(), player);
+                formService.sendForm(authenticationForm, player);
             } else {
+                formService.sendForm(authenticationForm, player, true);
                 authenticationService.authenticate(player, name);
             }
         } else {
