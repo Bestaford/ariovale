@@ -75,6 +75,17 @@ public final class AuthenticationService {
     }
 
     public void completeLogin(Player player, Account account, boolean silent) {
+        Map<UUID, Player> serverPlayers = server.getOnlinePlayers();
+        for (Map.Entry<UUID, String> onlinePlayer : onlinePlayers.entrySet()) {
+            UUID uuid = onlinePlayer.getKey();
+            String accountName = onlinePlayer.getValue();
+            if (accountName.equals(account.getName())) {
+                onlinePlayers.remove(uuid);
+                if (serverPlayers.containsKey(uuid)) {
+                    serverPlayers.get(uuid).close("test"); //TODO: change message
+                }
+            }
+        }
         onlinePlayers.put(account.getUniqueId(), account.getName());
         formService.clearStack(player);
         update(player);
