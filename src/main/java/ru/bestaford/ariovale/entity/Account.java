@@ -51,7 +51,7 @@ public class Account {
     private Sex sex;
 
     @Column(name = "age", nullable = false)
-    private int age;
+    private Integer age;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<LoginHistory> loginHistory = new ArrayList<>();
