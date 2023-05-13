@@ -37,14 +37,14 @@ public class LoginHistory {
     @Column(name = "uuid", nullable = false)
     private UUID uniqueId;
 
-    @Column(name = "xuid")
-    private String xboxUserId;
+    @Embedded
+    private CustomLoginChainData customLoginChainData;
 
     public LoginHistory(Player player, Account account) {
         this.account = account;
         this.datetime = LocalDateTime.now();
         this.address = player.getAddress();
         this.uniqueId = player.getUniqueId();
-        this.xboxUserId = player.getLoginChainData().getXUID();
+        this.customLoginChainData = new CustomLoginChainData(player);
     }
 }
