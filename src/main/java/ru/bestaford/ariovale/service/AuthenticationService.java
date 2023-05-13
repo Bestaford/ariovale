@@ -4,10 +4,10 @@ import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
 import ru.bestaford.ariovale.entity.Account;
-import ru.bestaford.ariovale.form.AuthenticationForm;
 import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.task.AuthenticationTask;
+import ru.bestaford.ariovale.task.IdentificationTask;
 import ru.bestaford.ariovale.task.LoginTask;
 import ru.bestaford.ariovale.task.RegistrationTask;
 import ru.bestaford.ariovale.util.Strings;
@@ -53,7 +53,7 @@ public final class AuthenticationService {
     }
 
     public void process(Player player) {
-        formService.sendForm(new AuthenticationForm(), player);
+        taskService.scheduleAsyncTask(new IdentificationTask(player));
     }
 
     public void authenticate(Player player, String name) {
