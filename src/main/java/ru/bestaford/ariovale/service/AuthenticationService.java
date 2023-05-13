@@ -2,7 +2,6 @@ package ru.bestaford.ariovale.service;
 
 import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
-import cn.nukkit.Server;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.form.LoginForm;
@@ -26,7 +25,6 @@ public final class AuthenticationService {
     @Inject private FormService formService;
     @Inject private TaskService taskService;
     @Inject private TranslationService translationService;
-    @Inject private Server server;
 
     public void update(Player player) {
         boolean loggedIn = isLoggedIn(player);
