@@ -20,9 +20,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public final class AuthenticationService {
-    //TODO: move uuid-name bindings to DB
+
     public final Map<UUID, String> onlinePlayers = new ConcurrentHashMap<>();
-    //TODO: different maps for names and accounts
+
     @Inject private FormService formService;
     @Inject private TaskService taskService;
     @Inject private TranslationService translationService;
@@ -81,6 +81,10 @@ public final class AuthenticationService {
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
         }
+    }
+
+    public void processQuit(Player player) {
+        onlinePlayers.remove(player.getUniqueId());
     }
 
     public boolean isLoggedIn(Player player) {

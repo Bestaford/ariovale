@@ -28,6 +28,11 @@ public final class AuthenticationListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        authenticationService.processQuit(event.getPlayer());
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerAchievementAwarded(PlayerAchievementAwardedEvent event) {
         if (!authenticationService.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
