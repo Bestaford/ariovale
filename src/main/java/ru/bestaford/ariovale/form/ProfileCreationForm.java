@@ -48,7 +48,7 @@ public final class ProfileCreationForm extends CustomForm {
                 Account.MIN_AGE,
                 Account.MAX_AGE,
                 1,
-                Math.max(account.getAge(), Account.MIN_AGE)
+                Math.max(Objects.requireNonNullElse(account.getAge(), 0), Account.MIN_AGE)
         ));
     }
 
