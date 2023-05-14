@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale;
 
 import cn.nukkit.Server;
+import cn.nukkit.level.generator.Generator;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import cn.nukkit.scheduler.ServerScheduler;
@@ -14,6 +15,7 @@ import org.hibernate.cfg.Configuration;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.service.*;
+import ru.bestaford.ariovale.util.VoidGenerator;
 
 import java.util.Objects;
 
@@ -23,8 +25,8 @@ public final class Core extends PluginBase {
     @Override
     public void onEnable() {
         try {
+            Generator.addGenerator(VoidGenerator.class, "void", Generator.TYPE_INFINITE);
             Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
-
             PluginManager pluginManager = getServer().getPluginManager();
             pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
             pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
