@@ -82,7 +82,9 @@ public final class AuthenticationService {
             if (accountName.equals(account.getName())) {
                 onlinePlayers.remove(uuid);
                 if (serverPlayers.containsKey(uuid)) {
-                    serverPlayers.get(uuid).close("test"); //TODO: change message
+                    Player playerToKick = serverPlayers.get(uuid);
+                    String message = Strings.THEME_ERROR + translationService.getString(playerToKick, "login.kick");
+                    playerToKick.close("", message);
                 }
             }
         }
