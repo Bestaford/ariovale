@@ -17,6 +17,7 @@ public final class AuthenticationListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
+        event.setJoinMessage("");
         authenticationService.update(event.getPlayer());
     }
 
@@ -29,6 +30,7 @@ public final class AuthenticationListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
+        event.setQuitMessage("");
         authenticationService.processQuit(event.getPlayer());
     }
 
