@@ -13,6 +13,6 @@ public final class UtilsService {
 
     public void closeWithError(Player player) {
         String message = Strings.THEME_ERROR + translationService.getString(player, "error.text");
-        player.close(message, message);
+        player.close("", message);
     }
 }

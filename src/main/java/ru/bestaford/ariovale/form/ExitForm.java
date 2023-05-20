@@ -30,7 +30,7 @@ public final class ExitForm extends ConfirmationForm {
     public void handle(Player player, boolean confirmed) {
         if (confirmed) {
             String message = translationService.getString(player, "exit.text");
-            player.close(message, message);
+            player.close("", message);
         } else {
             runnable.run();
         }
