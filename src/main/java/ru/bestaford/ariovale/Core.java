@@ -29,7 +29,8 @@ public final class Core extends PluginBase {
     @Override
     public void onEnable() {
         try {
-            setupWorld();
+            Generator.addGenerator(VoidGenerator.class, "void", Generator.TYPE_INFINITE);
+            //copyWorld();
             bootstrap();
         } catch (Throwable throwable) {
             log.fatal("An error occurred during startup", throwable);
@@ -37,8 +38,7 @@ public final class Core extends PluginBase {
         }
     }
 
-    private void setupWorld() throws IOException {
-        Generator.addGenerator(VoidGenerator.class, "void", Generator.TYPE_INFINITE);
+    private void copyWorld() throws IOException {
         saveResource("world.zip");
         try (ZipFile zipFile = new ZipFile(new File(getDataFolder(), "world.zip"))) {
             File worldsPath = new File(getServer().getDataPath(), "worlds");
