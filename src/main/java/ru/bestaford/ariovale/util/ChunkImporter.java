@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale.util;
 
 import cn.nukkit.Server;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.format.generic.BaseFullChunk;
 import cn.nukkit.utils.Config;
@@ -34,6 +35,9 @@ public class ChunkImporter {
                 String[] block = blockString.split(":");
                 int id = Integer.parseInt(block[0]);
                 int meta = Integer.parseInt(block[1]);
+                if (id == BlockID.LOG && meta >= 12) {
+                    meta = meta - 12;
+                }
                 //noinspection deprecation
                 chunk.setBlock(x, y, z, id, meta);
             }
