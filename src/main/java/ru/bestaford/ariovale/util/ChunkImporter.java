@@ -24,6 +24,13 @@ public class ChunkImporter {
             int chunkX = Integer.parseInt(parts[0]);
             int chunkZ = Integer.parseInt(parts[1]);
             BaseFullChunk chunk = level.getChunk(chunkX, chunkZ, true);
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
+                    for (int y = level.getMinHeight(); y < level.getMaxHeight(); y++) {
+                        chunk.setBlock(x, y, z, BlockID.AIR);
+                    }
+                }
+            }
             Config chunkConfig = new Config(file, Config.JSON);
             for (Map.Entry<String, Object> configEntry : chunkConfig.getAll().entrySet()) {
                 String positionString = configEntry.getKey();
