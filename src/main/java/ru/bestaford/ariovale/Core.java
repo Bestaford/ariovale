@@ -30,7 +30,7 @@ public final class Core extends PluginBase {
     public void onEnable() {
         try {
             Generator.addGenerator(VoidGenerator.class, "void", Generator.TYPE_INFINITE);
-            //copyWorld();
+            copyWorld();
             bootstrap();
         } catch (Throwable throwable) {
             log.fatal("An error occurred during startup", throwable);
