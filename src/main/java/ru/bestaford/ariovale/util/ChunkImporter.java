@@ -35,7 +35,7 @@ public class ChunkImporter {
                 String[] block = blockString.split(":");
                 int id = Integer.parseInt(block[0]);
                 int meta = Integer.parseInt(block[1]);
-                if (id == BlockID.LOG && meta >= 12) {
+                if ((id == BlockID.LOG || id == BlockID.WOOD2) && meta >= 12) {
                     meta = meta - 12;
                 }
                 //noinspection deprecation
