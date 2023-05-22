@@ -17,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.bestaford.ariovale.command.TestCommand;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
+import ru.bestaford.ariovale.listener.CommandListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.service.*;
 import ru.bestaford.ariovale.util.Strings;
@@ -59,6 +60,7 @@ public final class Bootstrapper extends PluginBase {
         //Events
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
+        pluginManager.registerEvents(injector.getInstance(CommandListener.class), this);
         pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
 
         //Commands
@@ -96,6 +98,7 @@ public final class Bootstrapper extends PluginBase {
 
             //Listeners
             bind(AuthenticationListener.class).asEagerSingleton();
+            bind(CommandListener.class).asEagerSingleton();
             bind(FormListener.class).asEagerSingleton();
         }
     }
