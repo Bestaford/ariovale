@@ -26,6 +26,7 @@ public final class AuthenticationService {
     @Inject private FormService formService;
     @Inject private TaskService taskService;
     @Inject private TranslationService translationService;
+    @Inject private CommandService commandService;
     @Inject private Server server;
 
     public void update(Player player) {
@@ -37,6 +38,7 @@ public final class AuthenticationService {
         player.setCheckMovement(false);
         player.setOp(false);
         teleportToSafeSpawn(player);
+        commandService.updateAvailableCommands(player, loggedIn);
     }
 
     public void reset(Player player) {
