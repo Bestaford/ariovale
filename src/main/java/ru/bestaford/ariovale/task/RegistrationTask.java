@@ -12,6 +12,7 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.LoginHistory;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.UtilsService;
+import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
@@ -49,7 +50,7 @@ public final class RegistrationTask extends AsyncTask {
             success = true;
         } catch (Exception exception) {
             transaction.rollback();
-            log.error("An error occurred during transaction", exception);
+            log.error(Strings.ERROR_TRANSACTION, exception);
         }
     }
 

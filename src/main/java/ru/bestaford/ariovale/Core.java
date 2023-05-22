@@ -17,6 +17,7 @@ import org.hibernate.cfg.Configuration;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.service.*;
+import ru.bestaford.ariovale.util.Strings;
 import ru.bestaford.ariovale.util.VoidGenerator;
 
 import java.io.File;
@@ -33,7 +34,7 @@ public final class Core extends PluginBase {
             copyWorld();
             bootstrap();
         } catch (Throwable throwable) {
-            log.fatal("An error occurred during startup", throwable);
+            log.fatal(Strings.ERROR_STARTUP, throwable);
             System.exit(1);
         }
     }

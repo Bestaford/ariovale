@@ -10,6 +10,7 @@ import com.google.inject.Injector;
 import lombok.extern.log4j.Log4j2;
 import ru.bestaford.ariovale.form.ExitForm;
 import ru.bestaford.ariovale.form.base.*;
+import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -74,7 +75,7 @@ public final class FormService {
                     }
                 }
             } catch (Exception exception) {
-                log.error("An error occurred during form handling", exception);
+                log.error(Strings.ERROR_FORM, exception);
                 utilsService.closeWithError(player);
             } finally {
                 formMap.remove(window);

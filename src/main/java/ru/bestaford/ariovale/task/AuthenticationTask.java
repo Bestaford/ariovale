@@ -14,6 +14,7 @@ import ru.bestaford.ariovale.form.RegistrationForm;
 import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.UtilsService;
+import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
 import java.util.Objects;
@@ -54,7 +55,7 @@ public final class AuthenticationTask extends AsyncTask {
                         transaction.commit();
                     } catch (Exception exception) {
                         transaction.rollback();
-                        log.error("An error occurred during transaction", exception);
+                        log.error(Strings.ERROR_TRANSACTION, exception);
                         return;
                     }
                 }

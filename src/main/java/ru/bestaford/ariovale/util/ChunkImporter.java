@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("ALL")
 @Log4j2
 public class ChunkImporter {
 
@@ -49,7 +50,6 @@ public class ChunkImporter {
                 if ((id == BlockID.LOG || id == BlockID.WOOD2) && meta >= 12) {
                     meta = meta - 12;
                 }
-                //noinspection deprecation
                 chunk.setBlock(x, y, z, id, meta);
             }
         }

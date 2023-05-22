@@ -2,6 +2,10 @@ package ru.bestaford.ariovale.util;
 
 public interface Strings {
 
+    String ERROR_TRANSACTION = "An error occurred during transaction";
+    String ERROR_STARTUP = "An error occurred during startup";
+    String ERROR_FORM = "An error occurred during form handling";
+
     String EMPTY = "";
     String SPACE = " ";
     String LF = "\n";
