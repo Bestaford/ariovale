@@ -58,7 +58,6 @@ public final class LoginTask extends AsyncTask {
                     transaction.commit();
                 } catch (Exception exception) {
                     transaction.rollback();
-                    //TODO: move to Strings interface
                     log.error(Strings.ERROR_TRANSACTION, exception);
                     return;
                 }
