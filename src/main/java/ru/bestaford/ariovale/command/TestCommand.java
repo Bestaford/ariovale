@@ -4,10 +4,10 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 
-public class TestCommand extends Command {
+public class TestCommand extends Command implements CustomCommand {
 
     public TestCommand() {
-        super("qwe", "desc");
+        super("qwe");
     }
 
     @Override

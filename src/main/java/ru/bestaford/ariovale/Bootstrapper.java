@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale;
 
 import cn.nukkit.Server;
+import cn.nukkit.command.SimpleCommandMap;
 import cn.nukkit.level.generator.Generator;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
@@ -61,8 +62,9 @@ public final class Bootstrapper extends PluginBase {
         pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
 
         //Commands
-        CommandService commandService = injector.getInstance(CommandService.class);
-        commandService.register(new TestCommand());
+        SimpleCommandMap commandMap = getServer().getCommandMap();
+        commandMap.clearCommands();
+        commandMap.register("ariovale", new TestCommand());
     }
 
     private static final class Module extends AbstractModule {
