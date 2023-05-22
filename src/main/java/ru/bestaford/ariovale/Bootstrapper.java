@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale;
 
 import cn.nukkit.Server;
+import cn.nukkit.command.CommandMap;
 import cn.nukkit.level.generator.Generator;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
@@ -14,6 +15,7 @@ import net.lingala.zip4j.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import ru.bestaford.ariovale.command.TestCommand;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.FormListener;
 import ru.bestaford.ariovale.service.*;
@@ -25,7 +27,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Log4j2
-public final class Core extends PluginBase {
+public final class Bootstrapper extends PluginBase {
 
     @Override
     public void onEnable() {
@@ -53,24 +55,31 @@ public final class Core extends PluginBase {
 
     private void bootstrap() {
         Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
+
+        //Events
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
         pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
+
+        //Commands
+        CommandMap commandMap = getServer().getCommandMap();
+        commandMap.clearCommands();
+        commandMap.register("ariovale", new TestCommand());
     }
 
     private static final class Module extends AbstractModule {
 
-        private final Core core;
+        private final Bootstrapper bootstrapper;
 
-        public Module(Core core) {
-            this.core = Objects.requireNonNull(core);
+        public Module(Bootstrapper bootstrapper) {
+            this.bootstrapper = Objects.requireNonNull(bootstrapper);
         }
 
         @Override
         protected void configure() {
-            //Core
-            bind(Core.class).toInstance(core);
-            Server server = core.getServer();
+            //Bootstrapper
+            bind(Bootstrapper.class).toInstance(bootstrapper);
+            Server server = bootstrapper.getServer();
             bind(Server.class).toInstance(server);
             bind(ServerScheduler.class).toInstance(server.getScheduler());
 
@@ -79,6 +88,7 @@ public final class Core extends PluginBase {
 
             //Services
             bind(AuthenticationService.class).asEagerSingleton();
+            bind(CommandService.class).asEagerSingleton();
             bind(FormService.class).asEagerSingleton();
             bind(TaskService.class).asEagerSingleton();
             bind(TranslationService.class).asEagerSingleton();

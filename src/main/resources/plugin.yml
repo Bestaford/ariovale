@@ -2,5 +2,5 @@ name: Ariovale
 version: 1.0
 api: 1.0.14
 author: Bestaford
-main: ru.bestaford.ariovale.Core
+main: ru.bestaford.ariovale.Bootstrapper
 load: STARTUP
