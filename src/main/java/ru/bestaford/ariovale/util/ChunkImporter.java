@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.Objects;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("deprecation")
 @Log4j2
 public class ChunkImporter {
 
