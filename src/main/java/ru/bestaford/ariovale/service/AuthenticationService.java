@@ -4,12 +4,10 @@ import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.entity.PlayerLocation;
 import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.form.LoginForm;
-import ru.bestaford.ariovale.task.AuthenticationTask;
-import ru.bestaford.ariovale.task.IdentificationTask;
-import ru.bestaford.ariovale.task.LoginTask;
-import ru.bestaford.ariovale.task.RegistrationTask;
+import ru.bestaford.ariovale.task.authentication.*;
 import ru.bestaford.ariovale.util.OnlinePlayerData;
 import ru.bestaford.ariovale.util.Strings;
 
@@ -94,13 +92,21 @@ public final class AuthenticationService {
         onlinePlayers.put(account.getUniqueId(), new OnlinePlayerData(account.getName(), nextOnlinePlayerIndex()));
         formService.clearStack(player);
         update(player);
+        PlayerLocation lastPlayerLocation = account.getLastPlayerLocation();
+        if (lastPlayerLocation != null) {
+            player.teleport(lastPlayerLocation.asLocation());
+        }
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
         }
     }
 
     public void processQuit(Player player) {
-        onlinePlayers.remove(player.getUniqueId());
+        UUID uuid = player.getUniqueId();
+        if (onlinePlayers.containsKey(uuid)) {
+            taskService.scheduleAsyncTask(new QuitTask(player, onlinePlayers.get(uuid).accountName()));
+            onlinePlayers.remove(uuid);
+        }
     }
 
     public boolean isLoggedIn(Player player) {

@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.task;
+package ru.bestaford.ariovale.task.authentication;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import cn.nukkit.Player;

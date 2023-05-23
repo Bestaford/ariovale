@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.task;
+package ru.bestaford.ariovale.task.authentication;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;

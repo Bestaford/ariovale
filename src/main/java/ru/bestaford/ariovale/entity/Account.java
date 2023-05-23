@@ -43,6 +43,9 @@ public class Account {
     @Column(name = "registration_date", nullable = false)
     private LocalDateTime registrationDate;
 
+    @Embedded
+    private PlayerLocation lastPlayerLocation;
+
     @Column(name = "uuid", nullable = false)
     private UUID uniqueId;
 
