@@ -91,7 +91,7 @@ public final class AuthenticationService {
                 }
             }
         }
-        onlinePlayers.put(account.getUniqueId(), new OnlinePlayerData(account.getName(), 1)); //TODO: find index
+        onlinePlayers.put(account.getUniqueId(), new OnlinePlayerData(account.getName(), nextOnlinePlayerIndex()));
         formService.clearStack(player);
         update(player);
         if (!silent) {
@@ -105,5 +105,22 @@ public final class AuthenticationService {
 
     public boolean isLoggedIn(Player player) {
         return player.isOnline() && onlinePlayers.containsKey(player.getUniqueId());
+    }
+
+    public int nextOnlinePlayerIndex() {
+        int index;
+        for (index = 1; index <= server.getMaxPlayers(); index++) {
+            boolean used = false;
+            for (OnlinePlayerData data : onlinePlayers.values()) {
+                if (data.index() == index) {
+                    used = true;
+                    break;
+                }
+            }
+            if (!used) {
+                break;
+            }
+        }
+        return index;
     }
 }
