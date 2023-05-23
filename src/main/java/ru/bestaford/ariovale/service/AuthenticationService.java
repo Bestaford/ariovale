@@ -10,6 +10,7 @@ import ru.bestaford.ariovale.task.AuthenticationTask;
 import ru.bestaford.ariovale.task.IdentificationTask;
 import ru.bestaford.ariovale.task.LoginTask;
 import ru.bestaford.ariovale.task.RegistrationTask;
+import ru.bestaford.ariovale.util.OnlinePlayerData;
 import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Singleton
 public final class AuthenticationService {
 
-    public final Map<UUID, String> onlinePlayers = new ConcurrentHashMap<>();
+    public final Map<UUID, OnlinePlayerData> onlinePlayers = new ConcurrentHashMap<>();
 
     @Inject private FormService formService;
     @Inject private TaskService taskService;
@@ -78,9 +79,9 @@ public final class AuthenticationService {
 
     public void completeLogin(Player player, Account account, boolean silent) {
         Map<UUID, Player> serverPlayers = server.getOnlinePlayers();
-        for (Map.Entry<UUID, String> onlinePlayer : onlinePlayers.entrySet()) {
+        for (Map.Entry<UUID, OnlinePlayerData> onlinePlayer : onlinePlayers.entrySet()) {
             UUID uuid = onlinePlayer.getKey();
-            String accountName = onlinePlayer.getValue();
+            String accountName = onlinePlayer.getValue().accountName();
             if (accountName.equals(account.getName())) {
                 onlinePlayers.remove(uuid);
                 if (serverPlayers.containsKey(uuid)) {
@@ -90,7 +91,7 @@ public final class AuthenticationService {
                 }
             }
         }
-        onlinePlayers.put(account.getUniqueId(), account.getName());
+        onlinePlayers.put(account.getUniqueId(), new OnlinePlayerData(account.getName(), 1)); //TODO: find index
         formService.clearStack(player);
         update(player);
         if (!silent) {
