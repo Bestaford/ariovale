@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 @Log4j2
-public class ChunkImporter {
+public final class ChunkImporter {
 
     public static void perform(File folder) {
         Level level = Server.getInstance().getDefaultLevel();

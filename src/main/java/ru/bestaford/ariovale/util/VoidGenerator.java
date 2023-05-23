@@ -8,7 +8,7 @@ import cn.nukkit.math.Vector3;
 import java.util.Collections;
 import java.util.Map;
 
-public class VoidGenerator extends Generator {
+public final class VoidGenerator extends Generator {
 
     private ChunkManager chunkManager;
     private final Map<String, Object> options;
