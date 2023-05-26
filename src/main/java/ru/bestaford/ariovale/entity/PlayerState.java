@@ -20,38 +20,48 @@ public class PlayerState {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "x")
+    @Column(name = "x", nullable = false)
     private Double x;
 
-    @Column(name = "y")
+    @Column(name = "y", nullable = false)
     private Double y;
 
-    @Column(name = "z")
+    @Column(name = "z", nullable = false)
     private Double z;
 
-    @Column(name = "level_name")
+    @Column(name = "level_name", nullable = false)
     private String levelName;
 
-    @Column(name = "yaw")
+    @Column(name = "yaw", nullable = false)
     private Double yaw;
 
-    @Column(name = "pitch")
+    @Column(name = "pitch", nullable = false)
     private Double pitch;
 
-    @Column(name = "head_yaw")
+    @Column(name = "head_yaw", nullable = false)
     private Double headYaw;
 
+    @Column(name = "health", nullable = false)
+    private Float health;
+
+    @Column(name = "max_health", nullable = false)
+    private Integer maxHealth;
+
     public PlayerState(Player player) {
-        this.x = player.x;
-        this.y = player.y;
-        this.z = player.z;
-        this.levelName = player.level.getName();
-        this.yaw = player.yaw;
-        this.pitch = player.pitch;
-        this.headYaw = player.headYaw;
+        this.x = player.getX();
+        this.y = player.getY();
+        this.z = player.getZ();
+        this.levelName = player.getLevelName();
+        this.yaw = player.getYaw();
+        this.pitch = player.getPitch();
+        this.headYaw = player.getHeadYaw();
+        this.health = player.getHealth();
+        this.maxHealth = player.getMaxHealth();
     }
 
-    public Location getLocation() {
-        return new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName));
+    public void restore(Player player) {
+        player.teleport(new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName)));
+        player.setMaxHealth(maxHealth);
+        player.setHealth(health);
     }
 }

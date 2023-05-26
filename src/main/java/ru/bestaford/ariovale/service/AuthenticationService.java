@@ -94,7 +94,7 @@ public final class AuthenticationService {
         update(player);
         PlayerState playerState = account.getPlayerState();
         if (playerState != null) {
-            player.teleport(playerState.getLocation());
+            playerState.restore(player);
         }
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
