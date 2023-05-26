@@ -47,6 +47,12 @@ public class PlayerState {
     @Column(name = "max_health", nullable = false)
     private Integer maxHealth;
 
+    @Column(name = "experience", nullable = false)
+    private Integer experience;
+
+    @Column(name = "experience_level", nullable = false)
+    private Integer experienceLevel;
+
     public PlayerState(Player player) {
         this.x = player.getX();
         this.y = player.getY();
@@ -57,11 +63,14 @@ public class PlayerState {
         this.headYaw = player.getHeadYaw();
         this.health = player.getHealth();
         this.maxHealth = player.getMaxHealth();
+        this.experience = player.getExperience();
+        this.experienceLevel = player.getExperienceLevel();
     }
 
     public void restore(Player player) {
         player.teleport(new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName)));
         player.setMaxHealth(maxHealth);
         player.setHealth(health);
+        player.setExperience(experience, experienceLevel);
     }
 }
