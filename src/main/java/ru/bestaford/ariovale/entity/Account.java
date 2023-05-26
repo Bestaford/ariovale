@@ -40,9 +40,6 @@ public class Account {
     @Column(name = "registration_date", nullable = false)
     private LocalDateTime registrationDate;
 
-    @Embedded
-    private PlayerLocation lastPlayerLocation;
-
     @Column(name = "uuid", nullable = false)
     private UUID uniqueId;
 
@@ -53,6 +50,10 @@ public class Account {
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LoginHistory> loginHistory = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "player_state_id")
+    private PlayerState playerState;
 }

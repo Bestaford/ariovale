@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
 import ru.bestaford.ariovale.entity.Account;
-import ru.bestaford.ariovale.entity.PlayerLocation;
+import ru.bestaford.ariovale.entity.PlayerState;
 import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.task.authentication.*;
@@ -92,9 +92,9 @@ public final class AuthenticationService {
         onlinePlayers.put(account.getUniqueId(), new OnlinePlayerData(account.getName(), nextOnlinePlayerIndex()));
         formService.clearStack(player);
         update(player);
-        PlayerLocation lastPlayerLocation = account.getLastPlayerLocation();
-        if (lastPlayerLocation != null) {
-            player.teleport(lastPlayerLocation.asLocation());
+        PlayerState playerState = account.getPlayerState();
+        if (playerState != null) {
+            player.teleport(playerState.getLocation());
         }
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));

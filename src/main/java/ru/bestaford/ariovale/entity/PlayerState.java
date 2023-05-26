@@ -3,10 +3,7 @@ package ru.bestaford.ariovale.entity;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.level.Location;
-import cn.nukkit.level.Position;
-import cn.nukkit.math.Vector3;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +11,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Embeddable
-public class PlayerLocation {
+@Entity
+@Table(name = "player_state")
+public class PlayerState {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "x")
     private Double x;
@@ -38,7 +41,7 @@ public class PlayerLocation {
     @Column(name = "head_yaw")
     private Double headYaw;
 
-    public PlayerLocation(Player player) {
+    public PlayerState(Player player) {
         this.x = player.x;
         this.y = player.y;
         this.z = player.z;
@@ -48,15 +51,7 @@ public class PlayerLocation {
         this.headYaw = player.headYaw;
     }
 
-    public Vector3 asVector3() {
-        return new Vector3(x, y, z);
-    }
-
-    public Position asPosition() {
-        return new Position(x, y, z, Server.getInstance().getLevelByName(levelName));
-    }
-
-    public Location asLocation() {
+    public Location getLocation() {
         return new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName));
     }
 }

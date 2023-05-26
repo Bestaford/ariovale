@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
-import ru.bestaford.ariovale.entity.PlayerLocation;
+import ru.bestaford.ariovale.entity.PlayerState;
 import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
@@ -32,7 +32,7 @@ public final class QuitTask extends AsyncTask {
             if (account != null) {
                 Transaction transaction = session.beginTransaction();
                 try {
-                    account.setLastPlayerLocation(new PlayerLocation(player));
+                    account.setPlayerState(new PlayerState(player));
                     session.merge(account);
                     transaction.commit();
                 } catch (Exception exception) {
