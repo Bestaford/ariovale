@@ -54,6 +54,10 @@ public class PlayerState {
     private Integer experienceLevel;
 
     public PlayerState(Player player) {
+        save(player);
+    }
+
+    public void save(Player player) {
         this.x = player.getX();
         this.y = player.getY();
         this.z = player.getZ();
