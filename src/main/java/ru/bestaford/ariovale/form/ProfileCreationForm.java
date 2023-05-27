@@ -6,6 +6,7 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
 import ru.bestaford.ariovale.entity.Account;
+import ru.bestaford.ariovale.entity.ProfileData;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
 import ru.bestaford.ariovale.service.AuthenticationService;
@@ -41,21 +42,23 @@ public final class ProfileCreationForm extends CustomForm {
                 Arrays.stream(Sex.values()).map(
                         sex -> translationService.getString(player, "sex." + sex.toString().toLowerCase())
                 ).collect(Collectors.toList()),
-                account.getSex() == null ? Sex.OTHER.ordinal() : account.getSex().ordinal()
+                Sex.OTHER.ordinal()
         ));
         window.addElement(new ElementSlider(
                 translationService.getString(player, "age"),
                 Account.MIN_AGE,
                 Account.MAX_AGE,
                 1,
-                Math.max(Objects.requireNonNullElse(account.getAge(), 0), Account.MIN_AGE)
+                Account.MIN_AGE
         ));
     }
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        account.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
-        account.setAge((int) response.getSliderResponse(3));
+        ProfileData profileData = new ProfileData();
+        profileData.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
+        profileData.setAge((int) response.getSliderResponse(3));
+        account.setProfileData(profileData);
         formService.clearStack(player);
         authenticationService.register(player, account);
     }

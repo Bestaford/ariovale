@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
-import ru.bestaford.ariovale.util.Sex;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -43,17 +42,14 @@ public class Account {
     @Column(name = "uuid", nullable = false)
     private UUID uniqueId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sex", nullable = false)
-    private Sex sex;
-
-    @Column(name = "age", nullable = false)
-    private Integer age;
-
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LoginHistory> loginHistory = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "profile_data_id")
+    private ProfileData profileData;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "player_state_id")
     private PlayerState playerState;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoginHistory> loginHistory = new ArrayList<>();
 }
