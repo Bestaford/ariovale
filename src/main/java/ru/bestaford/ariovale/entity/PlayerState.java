@@ -1,6 +1,7 @@
 package ru.bestaford.ariovale.entity;
 
 import cn.nukkit.Player;
+import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
 import cn.nukkit.level.Location;
 import jakarta.persistence.*;
@@ -53,6 +54,12 @@ public class PlayerState {
     @Column(name = "experience_level", nullable = false)
     private Integer experienceLevel;
 
+    @Column(name = "food_level", nullable = false)
+    private Integer foodLevel;
+
+    @Column(name = "saturation_level", nullable = false)
+    private Float saturationLevel;
+
     public PlayerState(Player player) {
         save(player);
     }
@@ -69,6 +76,9 @@ public class PlayerState {
         this.maxHealth = player.getMaxHealth();
         this.experience = player.getExperience();
         this.experienceLevel = player.getExperienceLevel();
+        PlayerFood playerFood = player.getFoodData();
+        this.foodLevel = playerFood.getLevel();
+        this.saturationLevel = playerFood.getFoodSaturationLevel();
     }
 
     public void restore(Player player) {
@@ -76,5 +86,7 @@ public class PlayerState {
         player.setMaxHealth(maxHealth);
         player.setHealth(health);
         player.setExperience(experience, experienceLevel);
+        PlayerFood playerFood = player.getFoodData();
+        playerFood.setLevel(foodLevel, saturationLevel);
     }
 }
