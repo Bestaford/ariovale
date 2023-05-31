@@ -3,11 +3,17 @@ package ru.bestaford.ariovale.entity;
 import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
+import cn.nukkit.inventory.PlayerInventory;
+import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @NoArgsConstructor
 @Getter
@@ -60,6 +66,9 @@ public class PlayerState {
     @Column(name = "saturation_level", nullable = false)
     private Float saturationLevel;
 
+    @OneToMany(mappedBy = "playerState", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InventoryItem> inventoryItems = new ArrayList<>();
+
     public PlayerState(Player player) {
         save(player);
     }
@@ -79,6 +88,10 @@ public class PlayerState {
         PlayerFood playerFood = player.getFoodData();
         this.foodLevel = playerFood.getLevel();
         this.saturationLevel = playerFood.getFoodSaturationLevel();
+        this.inventoryItems.clear();
+        for (Map.Entry<Integer, Item> entry : player.getInventory().getContents().entrySet()) {
+            this.inventoryItems.add(new InventoryItem(this, entry.getKey(), entry.getValue()));
+        }
     }
 
     public void restore(Player player) {
@@ -88,5 +101,10 @@ public class PlayerState {
         player.setExperience(experience, experienceLevel);
         PlayerFood playerFood = player.getFoodData();
         playerFood.setLevel(foodLevel, saturationLevel);
+        PlayerInventory playerInventory = player.getInventory();
+        playerInventory.clearAll();
+        for (InventoryItem item : inventoryItems) {
+            playerInventory.setItem(item.getSlot(), item.restore());
+        }
     }
 }

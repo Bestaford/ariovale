@@ -19,5 +19,6 @@
         <mapping class="ru.bestaford.ariovale.entity.LoginHistory"/>
         <mapping class="ru.bestaford.ariovale.entity.PlayerState"/>
         <mapping class="ru.bestaford.ariovale.entity.ProfileData"/>
+        <mapping class="ru.bestaford.ariovale.entity.InventoryItem"/>
     </session-factory>
 </hibernate-configuration>
