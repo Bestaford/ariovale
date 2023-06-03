@@ -104,7 +104,7 @@ public final class AuthenticationService {
     public void processQuit(Player player) {
         UUID uuid = player.getUniqueId();
         if (onlinePlayers.containsKey(uuid)) {
-            taskService.scheduleAsyncTask(new QuitTask(player, onlinePlayers.get(uuid).accountName()));
+            taskService.scheduleAsyncTask(new QuitTask((Player) player.clone(), onlinePlayers.get(uuid).accountName()));
             onlinePlayers.remove(uuid);
         }
     }
