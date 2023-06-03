@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +70,9 @@ public class PlayerState {
     @OneToMany(mappedBy = "playerState", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InventoryItem> inventoryItems = new ArrayList<>();
 
+    @Transient
+    private Map<Integer, Item> restoredItems = new HashMap<>();
+
     public PlayerState(Player player) {
         save(player);
     }
@@ -94,6 +98,13 @@ public class PlayerState {
         }
     }
 
+    @PostLoad
+    public void postLoad() {
+        for (InventoryItem item : inventoryItems) {
+            restoredItems.put(item.getSlot(), item.restore());
+        }
+    }
+
     public void restore(Player player) {
         player.teleport(new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName)));
         player.setMaxHealth(maxHealth);
@@ -103,8 +114,7 @@ public class PlayerState {
         playerFood.setLevel(foodLevel, saturationLevel);
         PlayerInventory playerInventory = player.getInventory();
         playerInventory.clearAll();
-        for (InventoryItem item : inventoryItems) {
-            playerInventory.setItem(item.getSlot(), item.restore());
-        }
+        playerInventory.setContents(restoredItems);
+        playerInventory.sendContents(player);
     }
 }

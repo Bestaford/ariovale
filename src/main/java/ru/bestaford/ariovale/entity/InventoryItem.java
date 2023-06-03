@@ -34,20 +34,15 @@ public class InventoryItem {
     @Column(name = "item_count", nullable = false)
     private Integer itemCount;
 
-    @Lob
-    @Column(name = "item_tag", nullable = false)
-    private byte[] itemTag;
-
     public InventoryItem(PlayerState playerState, Integer slot, Item item) {
         this.playerState = playerState;
         this.slot = slot;
         this.itemId = item.getId();
         this.itemMeta = item.getDamage();
         this.itemCount = item.getCount();
-        this.itemTag = item.getCompoundTag();
     }
 
     public Item restore() {
-        return Item.get(itemId, itemMeta, itemCount, itemTag);
+        return Item.get(itemId, itemMeta, itemCount);
     }
 }
