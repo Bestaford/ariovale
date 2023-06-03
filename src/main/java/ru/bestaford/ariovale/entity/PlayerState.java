@@ -67,8 +67,11 @@ public class PlayerState {
     @Column(name = "saturation_level", nullable = false)
     private Float saturationLevel;
 
+    @Column(name = "held_item_index", nullable = false)
+    private Integer heldItemIndex;
+
     @OneToMany(mappedBy = "playerState", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InventoryItem> inventoryItems = new ArrayList<>();
+    private List<InventoryItem> persistedItems = new ArrayList<>();
 
     @Transient
     private Map<Integer, Item> restoredItems = new HashMap<>();
@@ -92,15 +95,17 @@ public class PlayerState {
         PlayerFood playerFood = player.getFoodData();
         this.foodLevel = playerFood.getLevel();
         this.saturationLevel = playerFood.getFoodSaturationLevel();
-        this.inventoryItems.clear();
-        for (Map.Entry<Integer, Item> entry : player.getInventory().getContents().entrySet()) {
-            this.inventoryItems.add(new InventoryItem(this, entry.getKey(), entry.getValue()));
+        this.persistedItems.clear();
+        PlayerInventory playerInventory = player.getInventory();
+        for (Map.Entry<Integer, Item> entry : playerInventory.getContents().entrySet()) {
+            this.persistedItems.add(new InventoryItem(this, entry.getKey(), entry.getValue()));
         }
+        this.heldItemIndex = playerInventory.getHeldItemIndex();
     }
 
     @PostLoad
     public void postLoad() {
-        for (InventoryItem item : inventoryItems) {
+        for (InventoryItem item : persistedItems) {
             restoredItems.put(item.getSlot(), item.restore());
         }
     }
@@ -116,5 +121,6 @@ public class PlayerState {
         playerInventory.clearAll();
         playerInventory.setContents(restoredItems);
         playerInventory.sendContents(player);
+        playerInventory.setHeldItemIndex(heldItemIndex);
     }
 }
