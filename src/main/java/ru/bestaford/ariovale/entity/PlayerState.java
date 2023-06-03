@@ -21,7 +21,7 @@ import java.util.Map;
 @Entity
 @Table(name = "player_state")
 public class PlayerState {
-//TODO: persist effects, reset effects
+    //TODO: persist effects, reset effects
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
