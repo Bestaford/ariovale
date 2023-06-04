@@ -20,5 +20,6 @@
         <mapping class="ru.bestaford.ariovale.entity.PlayerState"/>
         <mapping class="ru.bestaford.ariovale.entity.ProfileData"/>
         <mapping class="ru.bestaford.ariovale.entity.InventoryItem"/>
+        <mapping class="ru.bestaford.ariovale.entity.PlayerEffect"/>
     </session-factory>
 </hibernate-configuration>

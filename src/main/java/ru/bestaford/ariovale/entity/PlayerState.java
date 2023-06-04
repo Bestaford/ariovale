@@ -7,6 +7,7 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.inventory.PlayerOffhandInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
+import cn.nukkit.potion.Effect;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -80,6 +81,12 @@ public class PlayerState {
     @Transient
     private Map<Integer, Item> restoredOffhandItems = new HashMap<>();
 
+    @OneToMany(mappedBy = "playerState", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerEffect> persistedEffects = new ArrayList<>();
+
+    @Transient
+    private List<Effect> restoredEffects = new ArrayList<>();
+
     public PlayerState(Player player) {
         save(player);
     }
@@ -109,6 +116,10 @@ public class PlayerState {
             this.persistedItems.add(new InventoryItem(this, InventoryItem.OFFHAND_SLOT, item));
         }
         this.heldItemIndex = playerInventory.getHeldItemIndex();
+        this.persistedEffects.clear();
+        for (Effect effect : player.getEffects().values()) {
+            this.persistedEffects.add(new PlayerEffect(this, effect));
+        }
     }
 
     @PostLoad
@@ -121,6 +132,9 @@ public class PlayerState {
             } else {
                 restoredItems.put(slot, restoredItem);
             }
+        }
+        for (PlayerEffect effect : persistedEffects) {
+            restoredEffects.add(effect.restore());
         }
     }
 
@@ -143,5 +157,9 @@ public class PlayerState {
         playerOffhandInventory.clearAll();
         playerOffhandInventory.setContents(restoredOffhandItems);
         playerOffhandInventory.sendContents(player);
+
+        for (Effect effect : restoredEffects) {
+            player.addEffect(effect);
+        }
     }
 }

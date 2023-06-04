@@ -30,21 +30,21 @@ public class InventoryItem {
     @Column(name = "item_id", nullable = false)
     private Integer itemId;
 
-    @Column(name = "item_meta", nullable = false)
-    private Integer itemMeta;
+    @Column(name = "meta", nullable = false)
+    private Integer meta;
 
-    @Column(name = "item_count", nullable = false)
-    private Integer itemCount;
+    @Column(name = "count", nullable = false)
+    private Integer count;
 
     public InventoryItem(PlayerState playerState, Integer slot, Item item) {
         this.playerState = playerState;
         this.slot = slot;
         this.itemId = item.getId();
-        this.itemMeta = item.getDamage();
-        this.itemCount = item.getCount();
+        this.meta = item.getDamage();
+        this.count = item.getCount();
     }
 
     public Item restore() {
-        return Item.get(itemId, itemMeta, itemCount);
+        return Item.get(itemId, meta, count);
     }
 }
