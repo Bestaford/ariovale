@@ -8,12 +8,14 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
+import cn.nukkit.lang.CommandOutputContainer;
+import cn.nukkit.utils.TextFormat;
 import ru.bestaford.ariovale.command.PlayerCommand;
 import ru.bestaford.ariovale.service.TranslationService;
-import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
 
 @Singleton
 public final class CommandListener implements Listener {
@@ -24,32 +26,17 @@ public final class CommandListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        String message = event.getMessage().trim().substring(1);
-        if (message.isBlank()) {
-            event.setCancelled();
+        String cmdLine = event.getMessage().stripLeading();
+        cmdLine = cmdLine.charAt(0) == '/' ? cmdLine.substring(1) : cmdLine;
+        ArrayList<String> parsed = SimpleCommandMap.parseArguments(cmdLine);
+        if (parsed.size() == 0) {
             return;
         }
-        Command foundCommand = null;
-        SimpleCommandMap commandMap = server.getCommandMap();
-        for (Command command : commandMap.getCommands().values()) {
-            if (!(command instanceof PlayerCommand)) {
-                continue;
-            }
-            if (command.getName().equalsIgnoreCase(message)) {
-                foundCommand = command;
-                break;
-            } else {
-                for (String alias : command.getAliases()) {
-                    if (alias.equalsIgnoreCase(message)) {
-                        foundCommand = command;
-                        break;
-                    }
-                }
-            }
-        }
-        if (foundCommand == null) {
+        String sentCommandLabel = parsed.remove(0).toLowerCase();
+        Command target = server.getCommandMap().getCommand(sentCommandLabel);
+        if ((target != null) && !(target instanceof PlayerCommand)) {
+            player.sendCommandOutput(new CommandOutputContainer(TextFormat.RED + "%commands.generic.unknown", new String[]{sentCommandLabel}, 0));
             event.setCancelled();
-            player.sendMessage(Strings.THEME_ERROR + translationService.getString(player, "command.unknown"));
         }
     }
 }
