@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
 import cn.nukkit.inventory.PlayerInventory;
+import cn.nukkit.inventory.PlayerOffhandInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import jakarta.persistence.*;
@@ -76,6 +77,9 @@ public class PlayerState {
     @Transient
     private Map<Integer, Item> restoredItems = new HashMap<>();
 
+    @Transient
+    private Map<Integer, Item> restoredOffhandItems = new HashMap<>();
+
     public PlayerState(Player player) {
         save(player);
     }
@@ -100,13 +104,23 @@ public class PlayerState {
         for (Map.Entry<Integer, Item> entry : playerInventory.getContents().entrySet()) {
             this.persistedItems.add(new InventoryItem(this, entry.getKey(), entry.getValue()));
         }
+        PlayerOffhandInventory playerOffhandInventory = player.getOffhandInventory();
+        for (Item item : playerOffhandInventory.getContents().values()) {
+            this.persistedItems.add(new InventoryItem(this, InventoryItem.OFFHAND_SLOT, item));
+        }
         this.heldItemIndex = playerInventory.getHeldItemIndex();
     }
 
     @PostLoad
     public void postLoad() {
         for (InventoryItem item : persistedItems) {
-            restoredItems.put(item.getSlot(), item.restore());
+            Integer slot = item.getSlot();
+            Item restoredItem = item.restore();
+            if (slot == InventoryItem.OFFHAND_SLOT) {
+                restoredOffhandItems.put(0, restoredItem);
+            } else {
+                restoredItems.put(slot, restoredItem);
+            }
         }
     }
 
@@ -115,12 +129,19 @@ public class PlayerState {
         player.setMaxHealth(maxHealth);
         player.setHealth(health);
         player.setExperience(experience, experienceLevel);
+
         PlayerFood playerFood = player.getFoodData();
         playerFood.setLevel(foodLevel, saturationLevel);
+
         PlayerInventory playerInventory = player.getInventory();
         playerInventory.clearAll();
         playerInventory.setContents(restoredItems);
         playerInventory.sendContents(player);
         playerInventory.setHeldItemIndex(heldItemIndex);
+
+        PlayerOffhandInventory playerOffhandInventory = player.getOffhandInventory();
+        playerOffhandInventory.clearAll();
+        playerOffhandInventory.setContents(restoredOffhandItems);
+        playerOffhandInventory.sendContents(player);
     }
 }

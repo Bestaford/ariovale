@@ -13,6 +13,8 @@ import lombok.Setter;
 @Table(name = "inventory_items")
 public class InventoryItem {
 
+    public static int OFFHAND_SLOT = -1;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
