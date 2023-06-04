@@ -15,7 +15,7 @@ import net.lingala.zip4j.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.bestaford.ariovale.command.TestCommand;
+import ru.bestaford.ariovale.command.MeCommand;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.CommandListener;
 import ru.bestaford.ariovale.listener.FormListener;
@@ -66,7 +66,7 @@ public final class Bootstrapper extends PluginBase {
         //Commands
         SimpleCommandMap commandMap = getServer().getCommandMap();
         commandMap.clearCommands();
-        commandMap.register("ariovale", new TestCommand());
+        commandMap.register("ariovale", new MeCommand());
     }
 
     private static final class Module extends AbstractModule {
