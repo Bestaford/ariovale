@@ -6,7 +6,10 @@ import cn.nukkit.Server;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.inventory.PlayerOffhandInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
+import cn.nukkit.level.Position;
+import cn.nukkit.math.Vector3;
 import cn.nukkit.potion.Effect;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,7 +27,7 @@ import java.util.Map;
 @Entity
 @Table(name = "player_state")
 public class PlayerState {
-    //TODO: persist effects, reset effects
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -139,7 +142,10 @@ public class PlayerState {
     }
 
     public void restore(Player player) {
-        player.teleport(new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName)));
+        Level level = Server.getInstance().getLevelByName(levelName);
+        Position safeSpawn = level.getSafeSpawn(new Vector3(x, y, z));
+
+        player.teleport(new Location(safeSpawn.getX(), safeSpawn.getY(), safeSpawn.getZ(), yaw, pitch, headYaw, level));
         player.setMaxHealth(maxHealth);
         player.setHealth(health);
         player.setExperience(experience, experienceLevel);
