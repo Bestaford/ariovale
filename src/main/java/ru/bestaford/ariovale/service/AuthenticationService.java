@@ -3,6 +3,8 @@ package ru.bestaford.ariovale.service;
 import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
+import cn.nukkit.level.Location;
+import cn.nukkit.level.Position;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.PlayerState;
 import ru.bestaford.ariovale.form.InformationForm;
@@ -54,7 +56,8 @@ public final class AuthenticationService {
     }
 
     public void teleportToSafeSpawn(Player player) {
-        player.teleport(player.getLevel().getSafeSpawn(player.getPosition()));
+        Position safeSpawn = player.getLevel().getSafeSpawn(player.getPosition());
+        player.teleport(new Location(safeSpawn.getX(), safeSpawn.getY(), safeSpawn.getZ(), 0, 0, 0));
     }
 
     public void process(Player player) {
