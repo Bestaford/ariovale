@@ -47,6 +47,9 @@ public final class AuthenticationService {
         player.getInventory().clearAll();
         player.getOffhandInventory().clearAll();
         player.setExperience(0, 0);
+        player.extinguish();
+        player.resetFallDistance();
+        player.removeAllEffects();
         teleportToSafeSpawn(player);
     }
 
