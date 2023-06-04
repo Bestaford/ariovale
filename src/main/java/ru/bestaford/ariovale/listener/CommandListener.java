@@ -11,7 +11,6 @@ import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
 import cn.nukkit.lang.CommandOutputContainer;
 import cn.nukkit.utils.TextFormat;
 import ru.bestaford.ariovale.command.PlayerCommand;
-import ru.bestaford.ariovale.service.TranslationService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 @Singleton
 public final class CommandListener implements Listener {
 
-    @Inject private TranslationService translationService;
     @Inject private Server server;
 
     @EventHandler(priority = EventPriority.HIGHEST)
