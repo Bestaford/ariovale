@@ -45,6 +45,7 @@ public final class AuthenticationService {
         PlayerFood foodData = player.getFoodData();
         foodData.setLevel(foodData.getMaxLevel());
         player.getInventory().clearAll();
+        player.getOffhandInventory().clearAll();
         player.setExperience(0, 0);
         teleportToSafeSpawn(player);
     }
