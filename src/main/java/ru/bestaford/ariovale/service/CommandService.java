@@ -7,7 +7,7 @@ import cn.nukkit.command.SimpleCommandMap;
 import cn.nukkit.command.data.CommandData;
 import cn.nukkit.command.data.CommandDataVersions;
 import cn.nukkit.network.protocol.AvailableCommandsPacket;
-import ru.bestaford.ariovale.command.CustomCommand;
+import ru.bestaford.ariovale.command.PlayerCommand;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -26,7 +26,7 @@ public final class CommandService {
         Map<String, CommandDataVersions> commands = new HashMap<>();
         if (loggedIn) {
             for (Command command : commandMap.getCommands().values()) {
-                if (!(command.testPermissionSilent(player)) || !(command instanceof CustomCommand)) {
+                if (!(command.testPermissionSilent(player)) || !(command instanceof PlayerCommand)) {
                     continue;
                 }
                 CommandDataVersions dataVersions = command.generateCustomCommandData(player);

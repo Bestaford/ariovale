@@ -8,7 +8,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
-import ru.bestaford.ariovale.command.CustomCommand;
+import ru.bestaford.ariovale.command.PlayerCommand;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.util.Strings;
 
@@ -32,7 +32,7 @@ public final class CommandListener implements Listener {
         Command foundCommand = null;
         SimpleCommandMap commandMap = server.getCommandMap();
         for (Command command : commandMap.getCommands().values()) {
-            if (!(command instanceof CustomCommand)) {
+            if (!(command instanceof PlayerCommand)) {
                 continue;
             }
             if (command.getName().equalsIgnoreCase(message)) {
