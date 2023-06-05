@@ -140,10 +140,7 @@ public class PlayerState {
     }
 
     public void restore(Player player) {
-        Level level = Server.getInstance().getLevelByName(levelName);
-        Position safeSpawn = level.getSafeSpawn(new Vector3(x, y, z));
-
-        player.teleport(new Location(safeSpawn.getX(), safeSpawn.getY(), safeSpawn.getZ(), yaw, pitch, headYaw, level));
+        player.teleport(new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName)));
         player.setMaxHealth(maxHealth);
         player.setHealth(health);
         player.setExperience(experience, experienceLevel);
