@@ -16,10 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @NoArgsConstructor
 @Getter
@@ -95,6 +92,7 @@ public class PlayerState {
     }
 
     public void save(Player player) {
+        Objects.requireNonNull(player);
         this.x = player.getX();
         this.y = player.getY();
         this.z = player.getZ();

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -38,7 +40,8 @@ public class PlayerEffect {
     private Boolean ambient;
 
     public PlayerEffect(PlayerState playerState, Effect effect) {
-        this.playerState = playerState;
+        this.playerState = Objects.requireNonNull(playerState);
+        Objects.requireNonNull(effect);
         this.effectId = effect.getId();
         this.amplifier = effect.getAmplifier();
         this.duration = effect.getDuration();

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -37,8 +39,9 @@ public class InventoryItem {
     private Integer count;
 
     public InventoryItem(PlayerState playerState, Integer slot, Item item) {
-        this.playerState = playerState;
-        this.slot = slot;
+        this.playerState = Objects.requireNonNull(playerState);
+        this.slot = Objects.requireNonNull(slot);
+        Objects.requireNonNull(item);
         this.itemId = item.getId();
         this.meta = item.getDamage();
         this.count = item.getCount();

@@ -13,6 +13,7 @@ import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.UtilsService;
 
 import javax.inject.Inject;
+import java.util.Objects;
 
 public final class IdentificationTask extends AsyncTask {
 
@@ -27,7 +28,7 @@ public final class IdentificationTask extends AsyncTask {
     @Inject private FormService formService;
 
     public IdentificationTask(Player player) {
-        this.player = player;
+        this.player = Objects.requireNonNull(player);
     }
 
     @Override

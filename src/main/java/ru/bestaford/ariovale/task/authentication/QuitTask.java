@@ -10,6 +10,7 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.util.Strings;
 
 import javax.inject.Inject;
+import java.util.Objects;
 
 @Log4j2
 public final class QuitTask extends AsyncTask {
@@ -20,8 +21,8 @@ public final class QuitTask extends AsyncTask {
     private @Inject SessionFactory sessionFactory;
 
     public QuitTask(Player player, String name) {
-        this.player = player;
-        this.name = name;
+        this.player = Objects.requireNonNull(player);
+        this.name = Objects.requireNonNull(name);
     }
 
     @Override

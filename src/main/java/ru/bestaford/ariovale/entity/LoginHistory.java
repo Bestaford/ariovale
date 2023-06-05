@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -78,7 +79,8 @@ public class LoginHistory {
     private Integer defaultInputMode;
 
     public LoginHistory(Player player, Account account) {
-        this.account = account;
+        Objects.requireNonNull(player);
+        this.account = Objects.requireNonNull(account);
         this.datetime = LocalDateTime.now();
         this.address = player.getAddress();
         this.uniqueId = player.getUniqueId();
