@@ -6,13 +6,11 @@ import cn.nukkit.command.data.CommandParameter;
 
 public class MeCommand extends PlayerCommand {
 
-    public MeCommand() {
-        super("me");
-        this.commandParameters.clear();
+    public MeCommand(String name) {
+        super(name);
         this.commandParameters.put("default", new CommandParameter[]{
-                CommandParameter.newType("message", CommandParamType.MESSAGE)
+                CommandParameter.newType("message", CommandParamType.RAWTEXT)
         });
-        this.enableParamTree();
     }
 
     @Override

@@ -66,7 +66,7 @@ public final class Bootstrapper extends PluginBase {
         //Commands
         SimpleCommandMap commandMap = getServer().getCommandMap();
         commandMap.clearCommands();
-        commandMap.register("ariovale", new MeCommand());
+        commandMap.register("ariovale", new MeCommand("me"));
     }
 
     private static final class Module extends AbstractModule {

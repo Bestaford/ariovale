@@ -12,7 +12,7 @@ public abstract class PlayerCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-        return sender instanceof Player && execute((Player) sender, commandLabel, args);
+        return sender.isPlayer() && execute(sender.asPlayer(), commandLabel, args);
     }
 
     public abstract boolean execute(Player player, String commandLabel, String[] args);
