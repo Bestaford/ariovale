@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run" type="Application" factoryName="Application">
+  <configuration default="false" name="Run (work)" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="cn.nukkit.Nukkit" />
     <module name="ariovale" />
     <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8 -Djansi.passthrough=true -Dterminal.ansi=true -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+EnableJVMCI --module-path=./libs/truffle-api-22.2.0.jar:./libs/graal-sdk-22.2.0.jar: --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED -cp ./powernukkitx.jar:./libs/*:./plugins/*" />
