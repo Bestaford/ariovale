@@ -3,6 +3,7 @@
   <component name="JpaBuddyIdeaProjectConfig" ddlActionDbType="postgres">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
+    <option name="snapshotDbValue" value="f90eaa3d-6718-4d1a-8c06-5093fab20024" />
     <option name="newEntityIdType" value="Long" />
     <option name="newEntityIdStrategy" value="Identity" />
   </component>
