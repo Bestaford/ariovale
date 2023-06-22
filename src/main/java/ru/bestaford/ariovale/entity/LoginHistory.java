@@ -36,46 +36,46 @@ public class LoginHistory {
     @Column(name = "uuid", nullable = false)
     private UUID uniqueId;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "client_uuid")
+    @Column(name = "client_uuid", nullable = false)
     private UUID clientUUID;
 
     @Column(name = "xuid")
     private String xuid;
 
-    @Column(name = "identity_public_key")
+    @Column(name = "identity_public_key", nullable = false)
     private String identityPublicKey;
 
-    @Column(name = "client_id")
+    @Column(name = "client_id", nullable = false)
     private Long clientId;
 
-    @Column(name = "server_address")
+    @Column(name = "server_address", nullable = false)
     private String serverAddress;
 
-    @Column(name = "device_model")
+    @Column(name = "device_model", nullable = false)
     private String deviceModel;
 
-    @Column(name = "device_os")
+    @Column(name = "device_os", nullable = false)
     private Integer deviceOS;
 
-    @Column(name = "device_id")
+    @Column(name = "device_id", nullable = false)
     private String deviceId;
 
-    @Column(name = "game_version")
+    @Column(name = "game_version", nullable = false)
     private String gameVersion;
 
-    @Column(name = "gui_scale")
+    @Column(name = "gui_scale", nullable = false)
     private Integer guiScale;
 
-    @Column(name = "language_code")
+    @Column(name = "language_code", nullable = false)
     private String languageCode;
 
-    @Column(name = "current_input_mode")
+    @Column(name = "current_input_mode", nullable = false)
     private Integer currentInputMode;
 
-    @Column(name = "default_input_mode")
+    @Column(name = "default_input_mode", nullable = false)
     private Integer defaultInputMode;
 
     public LoginHistory(Player player, Account account) {
