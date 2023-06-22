@@ -7,6 +7,7 @@
                     <package value="ru.bestaford.ariovale.entity"/>
                 </packages>
             </persistence-unit>
+            <persistence-unit moduleName="ariovale" name="Default"/>
         </persistence-units>
     </component>
 </project>

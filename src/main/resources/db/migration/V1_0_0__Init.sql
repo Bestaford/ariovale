@@ -4,8 +4,8 @@ CREATE TABLE accounts (
    password VARCHAR(255) NOT NULL,
    registration_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
    uuid UUID NOT NULL,
-   profile_data_id BIGINT,
-   player_state_id BIGINT,
+   profile_data_id BIGINT NOT NULL,
+   player_state_id BIGINT NOT NULL,
    CONSTRAINT pk_accounts PRIMARY KEY (id)
 );
 
