@@ -6,6 +6,7 @@
 
     <groupId>ru.bestaford.ariovale</groupId>
     <artifactId>ariovale</artifactId>
+    <name>Ariovale</name>
     <version>1.0.0</version>
 
     <profiles>
@@ -34,6 +35,10 @@
     </profiles>
 
     <properties>
+        <plugin.api>1.0.14</plugin.api>
+        <plugin.author>Bestaford</plugin.author>
+        <plugin.main>ru.bestaford.ariovale.Bootstrapper</plugin.main>
+        <plugin.load>STARTUP</plugin.load>
         <log4j.version>2.20.0</log4j.version>
         <hibernate.version>6.2.1.Final</hibernate.version>
         <maven.compiler.source>17</maven.compiler.source>
@@ -112,6 +117,19 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

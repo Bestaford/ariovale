@@ -1,6 +1,6 @@
-name: Ariovale
-version: 1.0
-api: 1.0.14
-author: Bestaford
-main: ru.bestaford.ariovale.Bootstrapper
-load: STARTUP
+name: ${project.name}
+version: ${project.version}
+api: ${plugin.api}
+author: ${plugin.author}
+main: ${plugin.main}
+load: ${plugin.load}
