@@ -6,10 +6,10 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import ru.bestaford.ariovale.service.FormService;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.Stack;
 
 @Singleton

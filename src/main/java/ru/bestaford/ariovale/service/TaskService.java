@@ -3,10 +3,9 @@ package ru.bestaford.ariovale.service;
 import cn.nukkit.scheduler.AsyncTask;
 import cn.nukkit.scheduler.ServerScheduler;
 import com.google.inject.Injector;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import ru.bestaford.ariovale.Bootstrapper;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public final class TaskService {

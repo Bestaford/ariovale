@@ -1,11 +1,11 @@
 package ru.bestaford.ariovale.form;
 
 import cn.nukkit.Player;
+import jakarta.inject.Inject;
 import ru.bestaford.ariovale.form.base.ConfirmationForm;
 import ru.bestaford.ariovale.form.base.IgnoreStack;
 import ru.bestaford.ariovale.service.TranslationService;
 
-import javax.inject.Inject;
 import java.util.Objects;
 
 @IgnoreStack

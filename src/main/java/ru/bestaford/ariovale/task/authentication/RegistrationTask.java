@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
+import jakarta.inject.Inject;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,7 +16,6 @@ import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.UtilsService;
 import ru.bestaford.ariovale.util.Strings;
 
-import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

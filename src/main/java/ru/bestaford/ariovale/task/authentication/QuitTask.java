@@ -2,6 +2,7 @@ package ru.bestaford.ariovale.task.authentication;
 
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.AsyncTask;
+import jakarta.inject.Inject;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +10,6 @@ import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.util.Strings;
 
-import javax.inject.Inject;
 import java.util.Objects;
 
 @Log4j2

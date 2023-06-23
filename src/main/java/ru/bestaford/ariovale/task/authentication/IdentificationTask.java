@@ -3,6 +3,7 @@ package ru.bestaford.ariovale.task.authentication;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
+import jakarta.inject.Inject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.SelectionQuery;
@@ -12,7 +13,6 @@ import ru.bestaford.ariovale.service.AuthenticationService;
 import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.UtilsService;
 
-import javax.inject.Inject;
 import java.util.Objects;
 
 public final class IdentificationTask extends AsyncTask {

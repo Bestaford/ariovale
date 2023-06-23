@@ -5,6 +5,7 @@ import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
+import jakarta.inject.Inject;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.ProfileData;
 import ru.bestaford.ariovale.form.base.CustomForm;
@@ -14,7 +15,6 @@ import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.util.Sex;
 
-import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
