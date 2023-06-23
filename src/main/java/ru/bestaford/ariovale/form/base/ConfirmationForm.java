@@ -2,7 +2,7 @@ package ru.bestaford.ariovale.form.base;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseModal;
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import ru.bestaford.ariovale.service.TranslationService;
 
 public abstract class ConfirmationForm extends ModalForm {

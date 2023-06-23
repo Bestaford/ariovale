@@ -7,8 +7,8 @@ import cn.nukkit.command.SimpleCommandMap;
 import cn.nukkit.command.data.CommandData;
 import cn.nukkit.command.data.CommandDataVersions;
 import cn.nukkit.network.protocol.AvailableCommandsPacket;
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import ru.bestaford.ariovale.command.PlayerCommand;
 
 import java.util.HashMap;

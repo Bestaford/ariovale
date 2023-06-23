@@ -5,7 +5,7 @@ import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.ProfileData;
 import ru.bestaford.ariovale.form.base.CustomForm;

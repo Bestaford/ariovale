@@ -2,9 +2,9 @@ package ru.bestaford.ariovale.service;
 
 import cn.nukkit.scheduler.AsyncTask;
 import cn.nukkit.scheduler.ServerScheduler;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import com.google.inject.Singleton;
 import ru.bestaford.ariovale.Bootstrapper;
 
 @Singleton

@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
-import jakarta.inject.Inject;
+import com.google.inject.Inject;
 import org.apache.commons.text.WordUtils;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;

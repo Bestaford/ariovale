@@ -10,8 +10,8 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
 import cn.nukkit.lang.CommandOutputContainer;
 import cn.nukkit.utils.TextFormat;
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import ru.bestaford.ariovale.command.PlayerCommand;
 
 import java.util.ArrayList;

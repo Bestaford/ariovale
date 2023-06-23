@@ -5,8 +5,8 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.*;
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import ru.bestaford.ariovale.service.AuthenticationService;
 
 @Singleton
