@@ -40,7 +40,7 @@
         <plugin.main>ru.bestaford.ariovale.Bootstrapper</plugin.main>
         <plugin.load>STARTUP</plugin.load>
         <log4j.version>2.20.0</log4j.version>
-        <hibernate.version>6.2.1.Final</hibernate.version>
+        <hibernate.version>6.2.5.Final</hibernate.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
