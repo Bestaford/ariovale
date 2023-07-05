@@ -1,56 +1,28 @@
 package ru.bestaford.ariovale.util;
 
+import cn.nukkit.utils.TextFormat;
+
 public interface Strings {
 
     String ERROR_TRANSACTION = "An error occurred during transaction";
     String ERROR_STARTUP = "An error occurred during startup";
     String ERROR_FORM = "An error occurred during form handling";
 
-    String EMPTY = "";
-    String SPACE = " ";
-    String LF = "\n";
-    String CR = "\r";
-    String COLON = ":";
+    String FORMAT_BOLD = TextFormat.BOLD.toString();
+    String FORMAT_RESET = TextFormat.RESET.toString();
 
-    String ESCAPE = "§";
-
-    String COLOR_BLACK = ESCAPE + "0";
-    String COLOR_DARK_BLUE = ESCAPE + "1";
-    String COLOR_DARK_GREEN = ESCAPE + "2";
-    String COLOR_DARK_AQUA = ESCAPE + "3";
-    String COLOR_DARK_RED = ESCAPE + "4";
-    String COLOR_DARK_PURPLE = ESCAPE + "5";
-    String COLOR_GOLD = ESCAPE + "6";
-    String COLOR_GRAY = ESCAPE + "7";
-    String COLOR_DARK_GRAY = ESCAPE + "8";
-    String COLOR_BLUE = ESCAPE + "9";
-    String COLOR_GREEN = ESCAPE + "a";
-    String COLOR_AQUA = ESCAPE + "b";
-    String COLOR_RED = ESCAPE + "c";
-    String COLOR_LIGHT_PURPLE = ESCAPE + "d";
-    String COLOR_YELLOW = ESCAPE + "e";
-    String COLOR_WHITE = ESCAPE + "f";
-    String COLOR_MINECOIN_GOLD = ESCAPE + "g";
-
-    String FORMAT_OBFUSCATED = ESCAPE + "k";
-    String FORMAT_BOLD = ESCAPE + "l";
-    String FORMAT_STRIKETHROUGH = ESCAPE + "m";
-    String FORMAT_UNDERLINE = ESCAPE + "n";
-    String FORMAT_ITALIC = ESCAPE + "o";
-    String FORMAT_RESET = ESCAPE + "r";
-
-    String THEME_PRIMARY = COLOR_AQUA;
-    String THEME_SUCCESS = COLOR_GREEN;
-    String THEME_ERROR = COLOR_RED;
-    String THEME_OOC = COLOR_GRAY;
+    String THEME_PRIMARY = TextFormat.AQUA.toString();
+    String THEME_SUCCESS = TextFormat.GREEN.toString();
+    String THEME_ERROR = TextFormat.RED.toString();
+    String THEME_OOC = TextFormat.GRAY.toString();
 
     String CITY_NAME = "Аriovale";
     String CITY_NAME_COLORIZED = THEME_PRIMARY + FORMAT_BOLD + CITY_NAME + FORMAT_RESET;
 
-    String PORTAL_NAME = CITY_NAME + SPACE + "ID";
+    String PORTAL_NAME = CITY_NAME + " ID";
     String PORTAL_NAME_COLORIZED = THEME_PRIMARY + FORMAT_BOLD + PORTAL_NAME + FORMAT_RESET;
 
-    String EXAMPLE_NAMES = LF + LF + THEME_SUCCESS + "Юрий Абрамов" + LF + "Judy Evans" + LF + "Аделмар Гюнтер" + LF + "Sanako Murakami";
+    String EXAMPLE_NAMES = "\n\n" + THEME_SUCCESS + "Юрий Абрамов\nJudy Evans\nАделмар Гюнтер\nSanako Murakami";
 
     String REGISTRATION_STAGE_1 = "[1/2]";
     String REGISTRATION_STAGE_2 = "[2/2]";

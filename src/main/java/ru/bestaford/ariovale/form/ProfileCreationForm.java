@@ -34,7 +34,7 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(FORMAT_BOLD + PORTAL_NAME + COLON + SPACE + translationService.getString(player, "profile.creation.form.title") + SPACE + REGISTRATION_STAGE_2);
+        window.setTitle(FORMAT_BOLD + PORTAL_NAME + ": " + translationService.getString(player, "profile.creation.form.title") + " " + REGISTRATION_STAGE_2);
         window.addElement(new ElementLabel(translationService.getString(player, "profile.creation.form.label", THEME_OOC)));
         window.addElement(new ElementLabel(translationService.getString(player, "profile.creation.form.name", THEME_PRIMARY + account.getName())));
         window.addElement(new ElementDropdown(

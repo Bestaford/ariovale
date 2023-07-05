@@ -32,7 +32,7 @@ public final class AuthenticationForm extends CustomForm {
         window.addElement(new ElementInput(
                 translationService.getString(player, "authentication.form.input.text"),
                 translationService.getString(player, "authentication.form.input.placeholder"),
-                Objects.requireNonNullElse(name, EMPTY)
+                Objects.requireNonNullElse(name, "")
         ));
     }
 

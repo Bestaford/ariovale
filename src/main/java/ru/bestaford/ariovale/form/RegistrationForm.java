@@ -30,16 +30,13 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(FORMAT_BOLD + PORTAL_NAME + COLON + SPACE + translationService.getString(player, "registration.form.title") + SPACE + REGISTRATION_STAGE_1);
+        window.setTitle(FORMAT_BOLD + PORTAL_NAME + ": " + translationService.getString(player, "registration.form.title") + " " + REGISTRATION_STAGE_1);
         window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () ->
-                translationService.getString(player, "registration.form.label", PORTAL_NAME_COLORIZED)
-                        + LF
-                        + LF
-                        + translationService.getString(player, "registration.form.label.part2"))));
+                translationService.getString(player, "registration.form.label", PORTAL_NAME_COLORIZED) + "\n\n" + translationService.getString(player, "registration.form.label.part2"))));
         window.addElement(new ElementInput(
                 translationService.getString(player, "registration.form.input.text"),
                 translationService.getString(player, "registration.form.input.placeholder"),
-                Objects.requireNonNullElse(password, EMPTY)
+                Objects.requireNonNullElse(password, "")
         ));
     }
 

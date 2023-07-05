@@ -32,12 +32,12 @@ public final class LoginForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(FORMAT_BOLD + PORTAL_NAME + COLON + SPACE + translationService.getString(player, "login.form.title"));
-        window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () -> translationService.getString(player, "login.form.label") + COLON + SPACE + THEME_PRIMARY + account.getName())));
+        window.setTitle(FORMAT_BOLD + PORTAL_NAME + ": " + translationService.getString(player, "login.form.title"));
+        window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () -> translationService.getString(player, "login.form.label") + ": " + THEME_PRIMARY + account.getName())));
         window.addElement(new ElementInput(
                 translationService.getString(player, "registration.form.input.text"),
                 translationService.getString(player, "registration.form.input.placeholder"),
-                Objects.requireNonNullElse(password, EMPTY)
+                Objects.requireNonNullElse(password, "")
         ));
     }
 
