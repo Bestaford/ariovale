@@ -56,17 +56,19 @@ public final class Bootstrapper extends PluginBase {
 
     private void bootstrap() {
         Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
+        Server server = getServer();
+        String fallbackPrefix = "ariovale";
 
         //Events
-        PluginManager pluginManager = getServer().getPluginManager();
+        PluginManager pluginManager = server.getPluginManager();
         pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
         pluginManager.registerEvents(injector.getInstance(CommandListener.class), this);
         pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
 
         //Commands
-        SimpleCommandMap commandMap = getServer().getCommandMap();
+        SimpleCommandMap commandMap = server.getCommandMap();
         commandMap.clearCommands();
-        commandMap.register("ariovale", new MeCommand("me"));
+        commandMap.register(fallbackPrefix, injector.getInstance(MeCommand.class));
     }
 
     private static final class Module extends AbstractModule {
