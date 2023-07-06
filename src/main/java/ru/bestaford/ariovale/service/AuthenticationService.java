@@ -11,6 +11,7 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.PlayerState;
 import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.form.LoginForm;
+import ru.bestaford.ariovale.scoreboard.AccountScoreboard;
 import ru.bestaford.ariovale.task.authentication.*;
 import ru.bestaford.ariovale.util.OnlinePlayerData;
 import ru.bestaford.ariovale.util.Strings;
@@ -106,6 +107,7 @@ public final class AuthenticationService {
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
         }
+        new AccountScoreboard(account).display(player);
     }
 
     public void processQuit(Player player) {
