@@ -13,7 +13,7 @@ public class CustomScoreboard extends Scoreboard {
     }
 
     public void addLine() {
-        addLine("", ++line);
+        addLine("");
     }
 
     public void addLine(String text) {
