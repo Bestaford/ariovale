@@ -15,6 +15,7 @@ import ru.bestaford.ariovale.service.FormService;
 import ru.bestaford.ariovale.service.TranslationService;
 import ru.bestaford.ariovale.util.Sex;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -58,6 +59,7 @@ public final class ProfileCreationForm extends CustomForm {
         ProfileData profileData = new ProfileData();
         profileData.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
         profileData.setAge((int) response.getSliderResponse(3));
+        profileData.setMoney(BigDecimal.ZERO);
         account.setProfileData(profileData);
         formService.clearStack(player);
         authenticationService.register(player, account);

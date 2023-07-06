@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.bestaford.ariovale.util.Sex;
 
+import java.math.BigDecimal;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -24,4 +26,7 @@ public class ProfileData {
 
     @Column(name = "age", nullable = false)
     private Integer age;
+
+    @Column(name = "money", nullable = false, precision = 19, scale = 2)
+    private BigDecimal money;
 }
