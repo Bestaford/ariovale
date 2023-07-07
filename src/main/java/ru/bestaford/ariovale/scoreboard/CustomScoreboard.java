@@ -3,6 +3,7 @@ package ru.bestaford.ariovale.scoreboard;
 import cn.nukkit.Player;
 import cn.nukkit.scoreboard.data.DisplaySlot;
 import cn.nukkit.scoreboard.scoreboard.Scoreboard;
+import com.google.common.base.Preconditions;
 
 public class CustomScoreboard extends Scoreboard {
 
@@ -21,6 +22,7 @@ public class CustomScoreboard extends Scoreboard {
     }
 
     public void display(Player player) {
+        Preconditions.checkArgument(player != null);
         player.display(this, DisplaySlot.SIDEBAR);
     }
 }

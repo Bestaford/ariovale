@@ -45,6 +45,7 @@ public final class LoginForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
+        Preconditions.checkArgument(player != null && !wasClosed && response != null);
         password = response.getInputResponse(1);
         error = null;
         if (password.isBlank()) {

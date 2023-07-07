@@ -142,6 +142,8 @@ public class PlayerState {
     }
 
     public void restore(Player player) {
+        Preconditions.checkArgument(player != null);
+
         player.teleport(new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName)));
         player.setMaxHealth(maxHealth);
         player.setHealth(health);

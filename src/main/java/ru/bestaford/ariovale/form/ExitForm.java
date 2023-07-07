@@ -28,6 +28,7 @@ public final class ExitForm extends ConfirmationForm {
 
     @Override
     public void handle(Player player, boolean confirmed) {
+        Preconditions.checkArgument(player != null);
         if (confirmed) {
             String message = translationManager.getString(player, "exit.text");
             player.close("", message);

@@ -118,7 +118,7 @@ public final class AuthenticationManager {
     }
 
     public boolean isLoggedIn(Player player) {
-        return player.isOnline() && onlinePlayers.containsKey(player.getUniqueId());
+        return player.isOnline() && !player.isOp() && onlinePlayers.containsKey(player.getUniqueId());
     }
 
     public int nextOnlinePlayerIndex() {

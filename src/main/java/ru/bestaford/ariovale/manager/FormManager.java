@@ -6,6 +6,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -29,10 +30,12 @@ public final class FormManager {
     @Inject private UtilsManager utilsManager;
 
     public void sendForm(Form form, Player player) {
+        Preconditions.checkArgument(form != null && player != null);
         sendForm(form, player, false);
     }
 
     public void sendForm(Form form, Player player, boolean silent) {
+        Preconditions.checkArgument(form != null && player != null);
         injector.injectMembers(form);
         if (!silent) {
             FormWindow window = form.getWindow(player);
@@ -48,10 +51,12 @@ public final class FormManager {
     }
 
     public void clearStack(Player player) {
+        Preconditions.checkArgument(player != null);
         stackMap.get(player).clear();
     }
 
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
+        Preconditions.checkArgument(window != null && player != null);
         if (formMap.containsKey(window)) {
             try {
                 Form form = formMap.get(window);

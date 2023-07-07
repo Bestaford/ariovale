@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import org.apache.commons.text.WordUtils;
 import ru.bestaford.ariovale.entity.Account;
@@ -38,6 +39,7 @@ public final class AuthenticationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
+        Preconditions.checkArgument(player != null && !wasClosed && response != null);
         name = response.getInputResponse(1).trim();
         error = null;
         if (name.isBlank()) {

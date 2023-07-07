@@ -22,6 +22,6 @@ public final class InformationForm extends SimpleForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseSimple response) {
-        //nothing to do
+
     }
 }

@@ -57,6 +57,7 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
+        Preconditions.checkArgument(player != null && !wasClosed && response != null);
         ProfileData profileData = new ProfileData();
         profileData.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
         profileData.setAge((int) response.getSliderResponse(3));
