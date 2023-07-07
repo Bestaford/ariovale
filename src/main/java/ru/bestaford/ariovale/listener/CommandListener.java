@@ -10,7 +10,6 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
 import cn.nukkit.lang.CommandOutputContainer;
 import cn.nukkit.utils.TextFormat;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import ru.bestaford.ariovale.command.PlayerCommand;
 
@@ -18,8 +17,6 @@ import java.util.ArrayList;
 
 @Singleton
 public final class CommandListener implements Listener {
-
-    @Inject private Server server;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
@@ -31,7 +28,7 @@ public final class CommandListener implements Listener {
             return;
         }
         String sentCommandLabel = parsed.remove(0).toLowerCase();
-        Command target = server.getCommandMap().getCommand(sentCommandLabel);
+        Command target = Server.getInstance().getCommandMap().getCommand(sentCommandLabel);
         if ((target != null) && !(target instanceof PlayerCommand)) {
             player.sendCommandOutput(new CommandOutputContainer(TextFormat.RED + "%commands.generic.unknown", new String[]{sentCommandLabel}, 0));
             event.setCancelled();

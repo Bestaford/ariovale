@@ -5,7 +5,6 @@ import cn.nukkit.command.SimpleCommandMap;
 import cn.nukkit.level.generator.Generator;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
-import cn.nukkit.scheduler.ServerScheduler;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -79,9 +78,6 @@ public final class Bootstrapper extends PluginBase {
         @Override
         protected void configure() {
             bind(Bootstrapper.class).toInstance(bootstrapper);
-            Server server = bootstrapper.getServer();
-            bind(Server.class).toInstance(server);
-            bind(ServerScheduler.class).toInstance(server.getScheduler());
             bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
         }
     }

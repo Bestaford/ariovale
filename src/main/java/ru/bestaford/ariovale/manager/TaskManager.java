@@ -1,7 +1,7 @@
 package ru.bestaford.ariovale.manager;
 
+import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
-import cn.nukkit.scheduler.ServerScheduler;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -12,10 +12,9 @@ public final class TaskManager {
 
     @Inject private Injector injector;
     @Inject private Bootstrapper bootstrapper;
-    @Inject private ServerScheduler scheduler;
 
     public void scheduleAsyncTask(AsyncTask task) {
         injector.injectMembers(task);
-        scheduler.scheduleAsyncTask(bootstrapper, task);
+        Server.getInstance().getScheduler().scheduleAsyncTask(bootstrapper, task);
     }
 }

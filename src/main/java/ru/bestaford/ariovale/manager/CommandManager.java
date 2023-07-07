@@ -17,11 +17,10 @@ import java.util.Map;
 @Singleton
 public final class CommandManager {
 
-    @Inject private Server server;
     @Inject private TranslationManager translationManager;
 
     public void updateAvailableCommands(Player player, boolean loggedIn) {
-        SimpleCommandMap commandMap = server.getCommandMap();
+        SimpleCommandMap commandMap = Server.getInstance().getCommandMap();
         AvailableCommandsPacket packet = new AvailableCommandsPacket();
         Map<String, CommandDataVersions> commands = new HashMap<>();
         if (loggedIn) {

@@ -29,7 +29,6 @@ public final class AuthenticationManager {
     @Inject private TaskManager taskManager;
     @Inject private TranslationManager translationManager;
     @Inject private CommandManager commandManager;
-    @Inject private Server server;
 
     public void update(Player player) {
         boolean loggedIn = isLoggedIn(player);
@@ -84,7 +83,7 @@ public final class AuthenticationManager {
     }
 
     public void completeLogin(Player player, Account account, boolean silent) {
-        Map<UUID, Player> serverPlayers = server.getOnlinePlayers();
+        Map<UUID, Player> serverPlayers = Server.getInstance().getOnlinePlayers();
         for (Map.Entry<UUID, OnlinePlayerData> onlinePlayer : onlinePlayers.entrySet()) {
             UUID uuid = onlinePlayer.getKey();
             String accountName = onlinePlayer.getValue().accountName();
@@ -124,7 +123,7 @@ public final class AuthenticationManager {
 
     public int nextOnlinePlayerIndex() {
         int index;
-        for (index = 1; index <= server.getMaxPlayers(); index++) {
+        for (index = 1; index <= Server.getInstance().getMaxPlayers(); index++) {
             boolean used = false;
             for (OnlinePlayerData data : onlinePlayers.values()) {
                 if (data.index() == index) {
