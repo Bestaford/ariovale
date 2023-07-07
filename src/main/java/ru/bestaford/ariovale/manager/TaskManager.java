@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.service;
+package ru.bestaford.ariovale.manager;
 
 import cn.nukkit.scheduler.AsyncTask;
 import cn.nukkit.scheduler.ServerScheduler;
@@ -8,7 +8,7 @@ import com.google.inject.Singleton;
 import ru.bestaford.ariovale.Bootstrapper;
 
 @Singleton
-public final class TaskService {
+public final class TaskManager {
 
     @Inject private Injector injector;
     @Inject private Bootstrapper bootstrapper;

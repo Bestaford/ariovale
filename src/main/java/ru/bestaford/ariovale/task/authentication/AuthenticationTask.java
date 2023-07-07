@@ -12,9 +12,9 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.LoginHistory;
 import ru.bestaford.ariovale.form.LoginForm;
 import ru.bestaford.ariovale.form.RegistrationForm;
-import ru.bestaford.ariovale.service.AuthenticationService;
-import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.UtilsService;
+import ru.bestaford.ariovale.manager.AuthenticationManager;
+import ru.bestaford.ariovale.manager.FormManager;
+import ru.bestaford.ariovale.manager.UtilsManager;
 import ru.bestaford.ariovale.util.Strings;
 
 import java.util.Objects;
@@ -31,9 +31,9 @@ public final class AuthenticationTask extends AsyncTask {
     public boolean success;
 
     @Inject private SessionFactory sessionFactory;
-    @Inject private UtilsService utilsService;
-    @Inject private FormService formService;
-    @Inject private AuthenticationService authenticationService;
+    @Inject private UtilsManager utilsManager;
+    @Inject private FormManager formManager;
+    @Inject private AuthenticationManager authenticationManager;
 
     public AuthenticationTask(Player player, String name) {
         this.player = Objects.requireNonNull(player);
@@ -71,17 +71,17 @@ public final class AuthenticationTask extends AsyncTask {
         if (player.isOnline() && success) {
             if (registered) {
                 if (loggedIn) {
-                    authenticationService.completeLogin(player, account, false);
+                    authenticationManager.completeLogin(player, account, false);
                 } else {
-                    formService.sendForm(new LoginForm(account), player);
+                    formManager.sendForm(new LoginForm(account), player);
                 }
             } else {
                 account = new Account();
                 account.setName(name);
-                formService.sendForm(new RegistrationForm(account), player);
+                formManager.sendForm(new RegistrationForm(account), player);
             }
         } else {
-            utilsService.closeWithError(player);
+            utilsManager.closeWithError(player);
         }
     }
 }

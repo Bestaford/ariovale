@@ -8,8 +8,8 @@ import com.google.inject.Inject;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
-import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.TranslationService;
+import ru.bestaford.ariovale.manager.FormManager;
+import ru.bestaford.ariovale.manager.TranslationManager;
 
 import java.util.Objects;
 
@@ -21,8 +21,8 @@ public final class RegistrationForm extends CustomForm {
     public String password;
     public String error;
 
-    @Inject private FormService formService;
-    @Inject private TranslationService translationService;
+    @Inject private FormManager formManager;
+    @Inject private TranslationManager translationManager;
 
     public RegistrationForm(Account account) {
         this.account = Objects.requireNonNull(account);
@@ -30,12 +30,12 @@ public final class RegistrationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(FORMAT_BOLD + PORTAL_NAME + ": " + translationService.getString(player, "registration.form.title") + " " + REGISTRATION_STAGE_1);
+        window.setTitle(FORMAT_BOLD + PORTAL_NAME + ": " + translationManager.getString(player, "registration.form.title") + " " + REGISTRATION_STAGE_1);
         window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () ->
-                translationService.getString(player, "registration.form.label", PORTAL_NAME_COLORIZED) + "\n\n" + translationService.getString(player, "registration.form.label.part2"))));
+                translationManager.getString(player, "registration.form.label", PORTAL_NAME_COLORIZED) + "\n\n" + translationManager.getString(player, "registration.form.label.part2"))));
         window.addElement(new ElementInput(
-                translationService.getString(player, "registration.form.input.text"),
-                translationService.getString(player, "registration.form.input.placeholder"),
+                translationManager.getString(player, "registration.form.input.text"),
+                translationManager.getString(player, "registration.form.input.placeholder"),
                 Objects.requireNonNullElse(password, "")
         ));
     }
@@ -46,16 +46,16 @@ public final class RegistrationForm extends CustomForm {
         error = null;
         if (password.isBlank()) {
             password = null;
-            error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.empty");
-            formService.sendForm(this, player);
+            error = THEME_ERROR + translationManager.getString(player, "registration.form.input.error.empty");
+            formManager.sendForm(this, player);
             return;
         }
         if (!Account.PASSWORD_PATTERN.matcher(password).matches()) {
-            error = THEME_ERROR + translationService.getString(player, "registration.form.input.error.invalid");
-            formService.sendForm(this, player);
+            error = THEME_ERROR + translationManager.getString(player, "registration.form.input.error.invalid");
+            formManager.sendForm(this, player);
             return;
         }
         account.setPassword(password);
-        formService.sendForm(new ProfileCreationForm(account), player);
+        formManager.sendForm(new ProfileCreationForm(account), player);
     }
 }

@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.service;
+package ru.bestaford.ariovale.manager;
 
 import cn.nukkit.Player;
 import com.google.inject.Singleton;
@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 @Singleton
-public final class TranslationService {
+public final class TranslationManager {
 
     private static final String BUNDLE_BASE_NAME = "strings";
 

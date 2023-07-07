@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.service;
+package ru.bestaford.ariovale.manager;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponse;
@@ -20,13 +20,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Log4j2
 @Singleton
-public final class FormService {
+public final class FormManager {
 
     public final Map<FormWindow, Form> formMap = new ConcurrentHashMap<>();
     public final Map<Player, Stack<Form>> stackMap = new ConcurrentHashMap<>();
 
     @Inject private Injector injector;
-    @Inject private UtilsService utilsService;
+    @Inject private UtilsManager utilsManager;
 
     public void sendForm(Form form, Player player) {
         sendForm(form, player, false);
@@ -76,7 +76,7 @@ public final class FormService {
                 }
             } catch (Exception exception) {
                 log.error(Strings.ERROR_FORM, exception);
-                utilsService.closeWithError(player);
+                utilsManager.closeWithError(player);
             } finally {
                 formMap.remove(window);
             }

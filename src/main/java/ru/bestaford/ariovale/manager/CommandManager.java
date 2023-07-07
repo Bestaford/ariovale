@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.service;
+package ru.bestaford.ariovale.manager;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
@@ -15,10 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Singleton
-public final class CommandService {
+public final class CommandManager {
 
     @Inject private Server server;
-    @Inject private TranslationService translationService;
+    @Inject private TranslationManager translationManager;
 
     public void updateAvailableCommands(Player player, boolean loggedIn) {
         SimpleCommandMap commandMap = server.getCommandMap();
@@ -31,7 +31,7 @@ public final class CommandService {
                 }
                 CommandDataVersions dataVersions = command.generateCustomCommandData(player);
                 for (CommandData data : dataVersions.versions) {
-                    data.description = translationService.getString(player, "command." + command.getName());
+                    data.description = translationManager.getString(player, "command." + command.getName());
                 }
                 commands.put(command.getName(), dataVersions);
             }

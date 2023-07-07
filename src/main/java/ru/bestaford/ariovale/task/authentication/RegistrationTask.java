@@ -12,8 +12,8 @@ import org.hibernate.Transaction;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.LoginHistory;
 import ru.bestaford.ariovale.entity.PlayerState;
-import ru.bestaford.ariovale.service.AuthenticationService;
-import ru.bestaford.ariovale.service.UtilsService;
+import ru.bestaford.ariovale.manager.AuthenticationManager;
+import ru.bestaford.ariovale.manager.UtilsManager;
 import ru.bestaford.ariovale.util.Strings;
 
 import java.time.LocalDateTime;
@@ -28,8 +28,8 @@ public final class RegistrationTask extends AsyncTask {
     public boolean success;
 
     @Inject private SessionFactory sessionFactory;
-    @Inject private AuthenticationService authenticationService;
-    @Inject private UtilsService utilsService;
+    @Inject private AuthenticationManager authenticationManager;
+    @Inject private UtilsManager utilsManager;
 
     public RegistrationTask(Player player, Account account) {
         this.player = Objects.requireNonNull(player);
@@ -59,9 +59,9 @@ public final class RegistrationTask extends AsyncTask {
     @Override
     public void onCompletion(Server server) {
         if (player.isOnline() && success) {
-            authenticationService.completeRegistration(player, account);
+            authenticationManager.completeRegistration(player, account);
         } else {
-            utilsService.closeWithError(player);
+            utilsManager.closeWithError(player);
         }
     }
 }

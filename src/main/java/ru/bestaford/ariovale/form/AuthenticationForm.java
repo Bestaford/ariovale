@@ -9,9 +9,9 @@ import org.apache.commons.text.WordUtils;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
-import ru.bestaford.ariovale.service.AuthenticationService;
-import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.TranslationService;
+import ru.bestaford.ariovale.manager.AuthenticationManager;
+import ru.bestaford.ariovale.manager.FormManager;
+import ru.bestaford.ariovale.manager.TranslationManager;
 
 import java.util.Objects;
 
@@ -21,17 +21,17 @@ public final class AuthenticationForm extends CustomForm {
     public String name;
     public String error;
 
-    @Inject private FormService formService;
-    @Inject private TranslationService translationService;
-    @Inject private AuthenticationService authenticationService;
+    @Inject private FormManager formManager;
+    @Inject private TranslationManager translationManager;
+    @Inject private AuthenticationManager authenticationManager;
 
     @Override
     protected void build(Player player) {
         window.setTitle(FORMAT_BOLD + PORTAL_NAME);
-        window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () -> translationService.getString(player, "authentication.form.label", PORTAL_NAME_COLORIZED, CITY_NAME_COLORIZED, THEME_OOC))));
+        window.addElement(new ElementLabel(Objects.requireNonNullElseGet(error, () -> translationManager.getString(player, "authentication.form.label", PORTAL_NAME_COLORIZED, CITY_NAME_COLORIZED, THEME_OOC))));
         window.addElement(new ElementInput(
-                translationService.getString(player, "authentication.form.input.text"),
-                translationService.getString(player, "authentication.form.input.placeholder"),
+                translationManager.getString(player, "authentication.form.input.text"),
+                translationManager.getString(player, "authentication.form.input.placeholder"),
                 Objects.requireNonNullElse(name, "")
         ));
     }
@@ -42,16 +42,16 @@ public final class AuthenticationForm extends CustomForm {
         error = null;
         if (name.isBlank()) {
             name = null;
-            error = THEME_ERROR + translationService.getString(player, "authentication.form.input.error.empty");
-            formService.sendForm(this, player);
+            error = THEME_ERROR + translationManager.getString(player, "authentication.form.input.error.empty");
+            formManager.sendForm(this, player);
             return;
         }
         if (!Account.NAME_PATTERN.matcher(name).matches()) {
-            error = THEME_ERROR + translationService.getString(player, "authentication.form.input.error.invalid", EXAMPLE_NAMES);
-            formService.sendForm(this, player);
+            error = THEME_ERROR + translationManager.getString(player, "authentication.form.input.error.invalid", EXAMPLE_NAMES);
+            formManager.sendForm(this, player);
             return;
         }
         name = WordUtils.capitalizeFully(name);
-        authenticationService.authenticate(player, name);
+        authenticationManager.authenticate(player, name);
     }
 }

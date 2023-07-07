@@ -8,27 +8,27 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import ru.bestaford.ariovale.service.FormService;
+import ru.bestaford.ariovale.manager.FormManager;
 
 import java.util.Stack;
 
 @Singleton
 public final class FormListener implements Listener {
 
-    @Inject private FormService formService;
+    @Inject private FormManager formManager;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        formService.stackMap.put(event.getPlayer(), new Stack<>());
+        formManager.stackMap.put(event.getPlayer(), new Stack<>());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerFormResponded(PlayerFormRespondedEvent event) {
-        formService.handleResponse(event.getWindow(), event.getPlayer(), event.wasClosed(), event.getResponse());
+        formManager.handleResponse(event.getWindow(), event.getPlayer(), event.wasClosed(), event.getResponse());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
-        formService.stackMap.remove(event.getPlayer());
+        formManager.stackMap.remove(event.getPlayer());
     }
 }

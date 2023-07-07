@@ -7,205 +7,205 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.*;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import ru.bestaford.ariovale.service.AuthenticationService;
+import ru.bestaford.ariovale.manager.AuthenticationManager;
 
 @Singleton
 public final class AuthenticationListener implements Listener {
 
-    @Inject private AuthenticationService authenticationService;
+    @Inject private AuthenticationManager authenticationManager;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         event.setJoinMessage("");
-        authenticationService.reset(player);
-        authenticationService.update(player);
+        authenticationManager.reset(player);
+        authenticationManager.update(player);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerLocallyInitialized(PlayerLocallyInitializedEvent event) {
         Player player = event.getPlayer();
-        authenticationService.update(player);
-        authenticationService.process(player);
+        authenticationManager.update(player);
+        authenticationManager.process(player);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
         event.setQuitMessage("");
-        authenticationService.processQuit(event.getPlayer());
+        authenticationManager.processQuit(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerAchievementAwarded(PlayerAchievementAwardedEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerAnimation(PlayerAnimationEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerBedEnter(PlayerBedEnterEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerBlockPick(PlayerBlockPickEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerBucketEmpty(PlayerBucketEmptyEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerBucketFill(PlayerBucketFillEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChangeArmorStand(PlayerChangeArmorStandEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChangeSkin(PlayerChangeSkinEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChat(PlayerChatEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (!authenticationService.isLoggedIn(event.getEntity())) {
+        if (!authenticationManager.isLoggedIn(event.getEntity())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerEatFood(PlayerEatFoodEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerEditBook(PlayerEditBookEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerExperienceChange(PlayerExperienceChangeEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerFish(PlayerFishEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerFoodLevelChange(PlayerFoodLevelChangeEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerItemHeld(PlayerItemHeldEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerServerSettingsRequest(PlayerServerSettingsRequestEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerSettingsResponded(PlayerSettingsRespondedEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerShowCredits(PlayerShowCreditsEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
@@ -219,42 +219,42 @@ public final class AuthenticationListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerToggleGlide(PlayerToggleGlideEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerToggleSpinAttack(PlayerToggleSpinAttackEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerToggleSprint(PlayerToggleSprintEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerToggleSwim(PlayerToggleSwimEvent event) {
-        if (!authenticationService.isLoggedIn(event.getPlayer())) {
+        if (!authenticationManager.isLoggedIn(event.getPlayer())) {
             event.setCancelled();
         }
     }

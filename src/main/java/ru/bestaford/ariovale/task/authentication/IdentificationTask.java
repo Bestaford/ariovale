@@ -9,9 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.SelectionQuery;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.AuthenticationForm;
-import ru.bestaford.ariovale.service.AuthenticationService;
-import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.UtilsService;
+import ru.bestaford.ariovale.manager.AuthenticationManager;
+import ru.bestaford.ariovale.manager.FormManager;
+import ru.bestaford.ariovale.manager.UtilsManager;
 
 import java.util.Objects;
 
@@ -23,9 +23,9 @@ public final class IdentificationTask extends AsyncTask {
     public boolean success;
 
     @Inject private SessionFactory sessionFactory;
-    @Inject private UtilsService utilsService;
-    @Inject private AuthenticationService authenticationService;
-    @Inject private FormService formService;
+    @Inject private UtilsManager utilsManager;
+    @Inject private AuthenticationManager authenticationManager;
+    @Inject private FormManager formManager;
 
     public IdentificationTask(Player player) {
         this.player = Objects.requireNonNull(player);
@@ -50,13 +50,13 @@ public final class IdentificationTask extends AsyncTask {
         if (player.isOnline() && success) {
             AuthenticationForm authenticationForm = new AuthenticationForm();
             if (name == null) {
-                formService.sendForm(authenticationForm, player);
+                formManager.sendForm(authenticationForm, player);
             } else {
-                formService.sendForm(authenticationForm, player, true);
-                authenticationService.authenticate(player, name);
+                formManager.sendForm(authenticationForm, player, true);
+                authenticationManager.authenticate(player, name);
             }
         } else {
-            utilsService.closeWithError(player);
+            utilsManager.closeWithError(player);
         }
     }
 }

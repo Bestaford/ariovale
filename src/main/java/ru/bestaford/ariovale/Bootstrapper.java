@@ -19,7 +19,6 @@ import ru.bestaford.ariovale.command.MeCommand;
 import ru.bestaford.ariovale.listener.AuthenticationListener;
 import ru.bestaford.ariovale.listener.CommandListener;
 import ru.bestaford.ariovale.listener.FormListener;
-import ru.bestaford.ariovale.service.*;
 import ru.bestaford.ariovale.util.Strings;
 import ru.bestaford.ariovale.util.VoidGenerator;
 
@@ -59,13 +58,11 @@ public final class Bootstrapper extends PluginBase {
         Server server = getServer();
         String fallbackPrefix = "ariovale";
 
-        //Events
         PluginManager pluginManager = server.getPluginManager();
         pluginManager.registerEvents(injector.getInstance(AuthenticationListener.class), this);
         pluginManager.registerEvents(injector.getInstance(CommandListener.class), this);
         pluginManager.registerEvents(injector.getInstance(FormListener.class), this);
 
-        //Commands
         SimpleCommandMap commandMap = server.getCommandMap();
         commandMap.clearCommands();
         commandMap.register(fallbackPrefix, injector.getInstance(MeCommand.class));
@@ -81,27 +78,11 @@ public final class Bootstrapper extends PluginBase {
 
         @Override
         protected void configure() {
-            //Bootstrapper
             bind(Bootstrapper.class).toInstance(bootstrapper);
             Server server = bootstrapper.getServer();
             bind(Server.class).toInstance(server);
             bind(ServerScheduler.class).toInstance(server.getScheduler());
-
-            //Hibernate
             bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
-
-            //Services
-            bind(AuthenticationService.class).asEagerSingleton();
-            bind(CommandService.class).asEagerSingleton();
-            bind(FormService.class).asEagerSingleton();
-            bind(TaskService.class).asEagerSingleton();
-            bind(TranslationService.class).asEagerSingleton();
-            bind(UtilsService.class).asEagerSingleton();
-
-            //Listeners
-            bind(AuthenticationListener.class).asEagerSingleton();
-            bind(CommandListener.class).asEagerSingleton();
-            bind(FormListener.class).asEagerSingleton();
         }
     }
 }

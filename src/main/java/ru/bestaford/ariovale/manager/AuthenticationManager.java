@@ -1,4 +1,4 @@
-package ru.bestaford.ariovale.service;
+package ru.bestaford.ariovale.manager;
 
 import cn.nukkit.Player;
 import cn.nukkit.PlayerFood;
@@ -21,14 +21,14 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
-public final class AuthenticationService {
+public final class AuthenticationManager {
 
     public final Map<UUID, OnlinePlayerData> onlinePlayers = new ConcurrentHashMap<>();
 
-    @Inject private FormService formService;
-    @Inject private TaskService taskService;
-    @Inject private TranslationService translationService;
-    @Inject private CommandService commandService;
+    @Inject private FormManager formManager;
+    @Inject private TaskManager taskManager;
+    @Inject private TranslationManager translationManager;
+    @Inject private CommandManager commandManager;
     @Inject private Server server;
 
     public void update(Player player) {
@@ -40,7 +40,7 @@ public final class AuthenticationService {
         player.setCheckMovement(false);
         player.setOp(false);
         teleportToSafeSpawn(player);
-        commandService.updateAvailableCommands(player, loggedIn);
+        commandManager.updateAvailableCommands(player, loggedIn);
     }
 
     public void reset(Player player) {
@@ -62,25 +62,25 @@ public final class AuthenticationService {
     }
 
     public void process(Player player) {
-        taskService.scheduleAsyncTask(new IdentificationTask(player));
+        taskManager.scheduleAsyncTask(new IdentificationTask(player));
     }
 
     public void authenticate(Player player, String name) {
-        taskService.scheduleAsyncTask(new AuthenticationTask(player, name));
+        taskManager.scheduleAsyncTask(new AuthenticationTask(player, name));
     }
 
     public void register(Player player, Account account) {
-        taskService.scheduleAsyncTask(new RegistrationTask(player, account));
+        taskManager.scheduleAsyncTask(new RegistrationTask(player, account));
     }
 
     public void completeRegistration(Player player, Account account) {
-        formService.sendForm(new InformationForm(translationService.getString(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED)), player);
+        formManager.sendForm(new InformationForm(translationManager.getString(player, "registration.complete", Strings.PORTAL_NAME_COLORIZED)), player);
         completeLogin(player, account, true);
         reset(player);
     }
 
     public void login(Player player, LoginForm loginForm) {
-        taskService.scheduleAsyncTask(new LoginTask(player, loginForm));
+        taskManager.scheduleAsyncTask(new LoginTask(player, loginForm));
     }
 
     public void completeLogin(Player player, Account account, boolean silent) {
@@ -92,20 +92,20 @@ public final class AuthenticationService {
                 onlinePlayers.remove(uuid);
                 if (serverPlayers.containsKey(uuid)) {
                     Player playerToKick = serverPlayers.get(uuid);
-                    String message = Strings.THEME_ERROR + translationService.getString(playerToKick, "login.kick");
+                    String message = Strings.THEME_ERROR + translationManager.getString(playerToKick, "login.kick");
                     playerToKick.close("", message);
                 }
             }
         }
         onlinePlayers.put(account.getUniqueId(), new OnlinePlayerData(account.getName(), nextOnlinePlayerIndex()));
-        formService.clearStack(player);
+        formManager.clearStack(player);
         update(player);
         PlayerState playerState = account.getPlayerState();
         if (playerState != null) {
             playerState.restore(player);
         }
         if (!silent) {
-            player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationService.getString(player, "login.complete"));
+            player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationManager.getString(player, "login.complete"));
         }
         new AccountScoreboard(account).display(player);
     }
@@ -113,7 +113,7 @@ public final class AuthenticationService {
     public void processQuit(Player player) {
         UUID uuid = player.getUniqueId();
         if (onlinePlayers.containsKey(uuid)) {
-            taskService.scheduleAsyncTask(new QuitTask((Player) player.clone(), onlinePlayers.get(uuid).accountName()));
+            taskManager.scheduleAsyncTask(new QuitTask((Player) player.clone(), onlinePlayers.get(uuid).accountName()));
             onlinePlayers.remove(uuid);
         }
     }

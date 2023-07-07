@@ -10,9 +10,9 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.ProfileData;
 import ru.bestaford.ariovale.form.base.CustomForm;
 import ru.bestaford.ariovale.form.base.Required;
-import ru.bestaford.ariovale.service.AuthenticationService;
-import ru.bestaford.ariovale.service.FormService;
-import ru.bestaford.ariovale.service.TranslationService;
+import ru.bestaford.ariovale.manager.AuthenticationManager;
+import ru.bestaford.ariovale.manager.FormManager;
+import ru.bestaford.ariovale.manager.TranslationManager;
 import ru.bestaford.ariovale.util.Sex;
 
 import java.math.BigDecimal;
@@ -25,9 +25,9 @@ public final class ProfileCreationForm extends CustomForm {
 
     public final Account account;
 
-    @Inject private TranslationService translationService;
-    @Inject private FormService formService;
-    @Inject private AuthenticationService authenticationService;
+    @Inject private TranslationManager translationManager;
+    @Inject private FormManager formManager;
+    @Inject private AuthenticationManager authenticationManager;
 
     public ProfileCreationForm(Account account) {
         this.account = Objects.requireNonNull(account);
@@ -35,18 +35,18 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     protected void build(Player player) {
-        window.setTitle(FORMAT_BOLD + PORTAL_NAME + ": " + translationService.getString(player, "profile.creation.form.title") + " " + REGISTRATION_STAGE_2);
-        window.addElement(new ElementLabel(translationService.getString(player, "profile.creation.form.label", THEME_OOC)));
-        window.addElement(new ElementLabel(translationService.getString(player, "profile.creation.form.name", THEME_PRIMARY + account.getName())));
+        window.setTitle(FORMAT_BOLD + PORTAL_NAME + ": " + translationManager.getString(player, "profile.creation.form.title") + " " + REGISTRATION_STAGE_2);
+        window.addElement(new ElementLabel(translationManager.getString(player, "profile.creation.form.label", THEME_OOC)));
+        window.addElement(new ElementLabel(translationManager.getString(player, "profile.creation.form.name", THEME_PRIMARY + account.getName())));
         window.addElement(new ElementDropdown(
-                translationService.getString(player, "sex.title"),
+                translationManager.getString(player, "sex.title"),
                 Arrays.stream(Sex.values()).map(
-                        sex -> translationService.getString(player, "sex." + sex.toString().toLowerCase())
+                        sex -> translationManager.getString(player, "sex." + sex.toString().toLowerCase())
                 ).collect(Collectors.toList()),
                 Sex.OTHER.ordinal()
         ));
         window.addElement(new ElementSlider(
-                translationService.getString(player, "age"),
+                translationManager.getString(player, "age"),
                 Account.MIN_AGE,
                 Account.MAX_AGE,
                 1,
@@ -61,7 +61,7 @@ public final class ProfileCreationForm extends CustomForm {
         profileData.setAge((int) response.getSliderResponse(3));
         profileData.setMoney(BigDecimal.ZERO);
         account.setProfileData(profileData);
-        formService.clearStack(player);
-        authenticationService.register(player, account);
+        formManager.clearStack(player);
+        authenticationManager.register(player, account);
     }
 }
