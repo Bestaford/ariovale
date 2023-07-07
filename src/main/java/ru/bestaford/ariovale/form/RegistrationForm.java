@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.form.base.CustomForm;
@@ -25,7 +26,8 @@ public final class RegistrationForm extends CustomForm {
     @Inject private TranslationManager translationManager;
 
     public RegistrationForm(Account account) {
-        this.account = Objects.requireNonNull(account);
+        Preconditions.checkArgument(account != null);
+        this.account = account;
     }
 
     @Override

@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
@@ -17,7 +18,6 @@ import ru.bestaford.ariovale.manager.UtilsManager;
 import ru.bestaford.ariovale.util.Strings;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Log4j2
 public final class RegistrationTask extends AsyncTask {
@@ -32,8 +32,9 @@ public final class RegistrationTask extends AsyncTask {
     @Inject private UtilsManager utilsManager;
 
     public RegistrationTask(Player player, Account account) {
-        this.player = Objects.requireNonNull(player);
-        this.account = Objects.requireNonNull(account);
+        Preconditions.checkArgument(player != null && account != null);
+        this.player = player;
+        this.account = account;
     }
 
     @Override

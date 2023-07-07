@@ -5,6 +5,7 @@ import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.ProfileData;
@@ -17,7 +18,6 @@ import ru.bestaford.ariovale.util.Sex;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Required
@@ -30,7 +30,8 @@ public final class ProfileCreationForm extends CustomForm {
     @Inject private AuthenticationManager authenticationManager;
 
     public ProfileCreationForm(Account account) {
-        this.account = Objects.requireNonNull(account);
+        Preconditions.checkArgument(account != null);
+        this.account = account;
     }
 
     @Override

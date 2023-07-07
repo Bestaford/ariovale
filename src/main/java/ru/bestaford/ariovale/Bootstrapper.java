@@ -5,6 +5,7 @@ import cn.nukkit.command.SimpleCommandMap;
 import cn.nukkit.level.generator.Generator;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
+import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -23,7 +24,6 @@ import ru.bestaford.ariovale.util.VoidGenerator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 @Log4j2
 public final class Bootstrapper extends PluginBase {
@@ -72,7 +72,8 @@ public final class Bootstrapper extends PluginBase {
         private final Bootstrapper bootstrapper;
 
         public Module(Bootstrapper bootstrapper) {
-            this.bootstrapper = Objects.requireNonNull(bootstrapper);
+            Preconditions.checkArgument(bootstrapper != null);
+            this.bootstrapper = bootstrapper;
         }
 
         @Override

@@ -1,12 +1,11 @@
 package ru.bestaford.ariovale.entity;
 
 import cn.nukkit.potion.Effect;
+import com.google.common.base.Preconditions;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
@@ -40,8 +39,8 @@ public class PlayerEffect {
     private Boolean ambient;
 
     public PlayerEffect(PlayerState playerState, Effect effect) {
-        this.playerState = Objects.requireNonNull(playerState);
-        Objects.requireNonNull(effect);
+        Preconditions.checkArgument(playerState != null && effect != null);
+        this.playerState = playerState;
         this.effectId = effect.getId();
         this.amplifier = effect.getAmplifier();
         this.duration = effect.getDuration();

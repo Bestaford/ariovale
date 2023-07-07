@@ -1,12 +1,11 @@
 package ru.bestaford.ariovale.form;
 
 import cn.nukkit.Player;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import ru.bestaford.ariovale.form.base.ConfirmationForm;
 import ru.bestaford.ariovale.form.base.IgnoreStack;
 import ru.bestaford.ariovale.manager.TranslationManager;
-
-import java.util.Objects;
 
 @IgnoreStack
 public final class ExitForm extends ConfirmationForm {
@@ -16,7 +15,8 @@ public final class ExitForm extends ConfirmationForm {
     @Inject private TranslationManager translationManager;
 
     public ExitForm(Runnable runnable) {
-        this.runnable = Objects.requireNonNull(runnable);
+        Preconditions.checkArgument(runnable != null);
+        this.runnable = runnable;
     }
 
     @Override
