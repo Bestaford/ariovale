@@ -7,11 +7,10 @@ import cn.nukkit.command.SimpleCommandMap;
 import cn.nukkit.command.data.CommandData;
 import cn.nukkit.command.data.CommandDataVersions;
 import cn.nukkit.network.protocol.AvailableCommandsPacket;
-import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ru.bestaford.ariovale.command.PlayerCommand;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +20,6 @@ public final class CommandManager {
     @Inject private TranslationManager translationManager;
 
     public void updateAvailableCommands(Player player, boolean loggedIn) {
-        Preconditions.checkArgument(player != null);
         SimpleCommandMap commandMap = Server.getInstance().getCommandMap();
         AvailableCommandsPacket packet = new AvailableCommandsPacket();
         Map<String, CommandDataVersions> commands = new HashMap<>();

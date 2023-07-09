@@ -5,7 +5,6 @@ import cn.nukkit.command.SimpleCommandMap;
 import cn.nukkit.level.generator.Generator;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
-import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -26,7 +25,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Log4j2
-public final class Bootstrapper extends PluginBase {
+public final class Ariovale extends PluginBase {
 
     @Override
     public void onEnable() {
@@ -69,16 +68,15 @@ public final class Bootstrapper extends PluginBase {
 
     private static final class Module extends AbstractModule {
 
-        private final Bootstrapper bootstrapper;
+        private final Ariovale plugin;
 
-        public Module(Bootstrapper bootstrapper) {
-            Preconditions.checkArgument(bootstrapper != null);
-            this.bootstrapper = bootstrapper;
+        public Module(Ariovale plugin) {
+            this.plugin = plugin;
         }
 
         @Override
         protected void configure() {
-            bind(Bootstrapper.class).toInstance(bootstrapper);
+            bind(Ariovale.class).toInstance(plugin);
             bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
         }
     }

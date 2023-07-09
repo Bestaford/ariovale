@@ -10,8 +10,8 @@ import java.util.Map;
 
 public final class VoidGenerator extends Generator {
 
-    private ChunkManager chunkManager;
     private final Map<String, Object> options;
+    private ChunkManager chunkManager;
 
     public VoidGenerator() {
         this(Collections.emptyMap());

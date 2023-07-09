@@ -2,7 +2,6 @@ package ru.bestaford.ariovale.entity;
 
 import cn.nukkit.Player;
 import cn.nukkit.utils.LoginChainData;
-import com.google.common.base.Preconditions;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -79,7 +78,6 @@ public class LoginHistory {
     private Integer defaultInputMode;
 
     public LoginHistory(Player player, Account account) {
-        Preconditions.checkArgument(player != null && account != null);
         this.account = account;
         this.datetime = LocalDateTime.now();
         this.address = player.getAddress();

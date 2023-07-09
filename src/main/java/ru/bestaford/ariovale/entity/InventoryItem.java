@@ -1,7 +1,6 @@
 package ru.bestaford.ariovale.entity;
 
 import cn.nukkit.item.Item;
-import com.google.common.base.Preconditions;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,7 +37,6 @@ public class InventoryItem {
     private Integer count;
 
     public InventoryItem(PlayerState playerState, Integer slot, Item item) {
-        Preconditions.checkArgument(playerState != null && slot != null && item != null);
         this.playerState = playerState;
         this.slot = slot;
         this.itemId = item.getId();

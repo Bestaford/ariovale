@@ -2,21 +2,20 @@ package ru.bestaford.ariovale.manager;
 
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.AsyncTask;
-import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
-import ru.bestaford.ariovale.Bootstrapper;
+import ru.bestaford.ariovale.Ariovale;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 @Singleton
 public final class TaskManager {
 
     @Inject private Injector injector;
-    @Inject private Bootstrapper bootstrapper;
+    @Inject private Ariovale plugin;
 
     public void scheduleAsyncTask(AsyncTask task) {
-        Preconditions.checkArgument(task != null);
         injector.injectMembers(task);
-        Server.getInstance().getScheduler().scheduleAsyncTask(bootstrapper, task);
+        Server.getInstance().getScheduler().scheduleAsyncTask(plugin, task);
     }
 }

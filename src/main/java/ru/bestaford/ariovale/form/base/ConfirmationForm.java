@@ -2,9 +2,9 @@ package ru.bestaford.ariovale.form.base;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseModal;
-import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
 import ru.bestaford.ariovale.manager.TranslationManager;
+
+import javax.inject.Inject;
 
 public abstract class ConfirmationForm extends ModalForm {
 
@@ -18,7 +18,6 @@ public abstract class ConfirmationForm extends ModalForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseModal response) {
-        Preconditions.checkArgument(player != null);
         handle(player, (!wasClosed) && (response != null) && (response.getClickedButtonId() == 0));
     }
 

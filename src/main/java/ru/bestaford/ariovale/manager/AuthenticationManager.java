@@ -5,8 +5,6 @@ import cn.nukkit.PlayerFood;
 import cn.nukkit.Server;
 import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.PlayerState;
 import ru.bestaford.ariovale.form.InformationForm;
@@ -16,6 +14,8 @@ import ru.bestaford.ariovale.task.authentication.*;
 import ru.bestaford.ariovale.util.OnlinePlayerData;
 import ru.bestaford.ariovale.util.Strings;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;

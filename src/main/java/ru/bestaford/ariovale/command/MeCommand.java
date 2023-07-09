@@ -3,7 +3,8 @@ package ru.bestaford.ariovale.command;
 import cn.nukkit.Player;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import com.google.inject.Singleton;
+
+import javax.inject.Singleton;
 
 @Singleton
 public class MeCommand extends PlayerCommand {

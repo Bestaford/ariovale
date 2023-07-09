@@ -5,9 +5,10 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.*;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ru.bestaford.ariovale.manager.AuthenticationManager;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 @Singleton
 public final class AuthenticationListener implements Listener {

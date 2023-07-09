@@ -1,6 +1,6 @@
 package ru.bestaford.ariovale.scoreboard;
 
-import com.google.common.base.Preconditions;
+
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.ProfileData;
 
@@ -12,7 +12,6 @@ public class AccountScoreboard extends CustomScoreboard {
     }
 
     public void update(Account account) {
-        Preconditions.checkArgument(account != null);
         ProfileData profileData = account.getProfileData();
         removeAllLine(false);
         addLine();

@@ -6,10 +6,10 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ru.bestaford.ariovale.manager.FormManager;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Stack;
 
 @Singleton

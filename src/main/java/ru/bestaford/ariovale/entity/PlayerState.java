@@ -8,7 +8,6 @@ import cn.nukkit.inventory.PlayerOffhandInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.potion.Effect;
-import com.google.common.base.Preconditions;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -89,12 +88,10 @@ public class PlayerState {
     private List<Effect> restoredEffects = new ArrayList<>();
 
     public PlayerState(Player player) {
-        Preconditions.checkArgument(player != null);
         save(player);
     }
 
     public void save(Player player) {
-        Preconditions.checkArgument(player != null);
         this.x = player.getX();
         this.y = player.getY();
         this.z = player.getZ();
@@ -142,8 +139,6 @@ public class PlayerState {
     }
 
     public void restore(Player player) {
-        Preconditions.checkArgument(player != null);
-
         player.teleport(new Location(x, y, z, yaw, pitch, headYaw, Server.getInstance().getLevelByName(levelName)));
         player.setMaxHealth(maxHealth);
         player.setHealth(health);

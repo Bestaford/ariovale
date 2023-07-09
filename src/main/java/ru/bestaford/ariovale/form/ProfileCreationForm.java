@@ -5,8 +5,6 @@ import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.form.response.FormResponseCustom;
-import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
 import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.ProfileData;
 import ru.bestaford.ariovale.form.base.CustomForm;
@@ -16,6 +14,7 @@ import ru.bestaford.ariovale.manager.FormManager;
 import ru.bestaford.ariovale.manager.TranslationManager;
 import ru.bestaford.ariovale.util.Sex;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -30,7 +29,6 @@ public final class ProfileCreationForm extends CustomForm {
     @Inject private AuthenticationManager authenticationManager;
 
     public ProfileCreationForm(Account account) {
-        Preconditions.checkArgument(account != null);
         this.account = account;
     }
 
@@ -57,7 +55,6 @@ public final class ProfileCreationForm extends CustomForm {
 
     @Override
     public void handle(Player player, boolean wasClosed, FormResponseCustom response) {
-        Preconditions.checkArgument(player != null && !wasClosed && response != null);
         ProfileData profileData = new ProfileData();
         profileData.setSex(Sex.values()[response.getDropdownResponse(2).getElementID()]);
         profileData.setAge((int) response.getSliderResponse(3));
