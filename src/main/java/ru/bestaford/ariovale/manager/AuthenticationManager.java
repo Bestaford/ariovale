@@ -106,7 +106,7 @@ public final class AuthenticationManager {
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationManager.getString(player, "login.complete"));
         }
-        new AccountScoreboard(account).display(player);
+        updateScoreboard(account);
     }
 
     public void processQuit(Player player) {
@@ -136,5 +136,18 @@ public final class AuthenticationManager {
             }
         }
         return index;
+    }
+
+    public void updateScoreboard(Account account) {
+        //TODO: Update existing scoreboard instead of creating new
+        for (Map.Entry<UUID, Player> entry : Server.getInstance().getOnlinePlayers().entrySet()) {
+            if (account.getUniqueId().equals(entry.getKey())) {
+                Player player = entry.getValue();
+                if (isLoggedIn(player)) {
+                    new AccountScoreboard(account).display(player);
+                    return;
+                }
+            }
+        }
     }
 }

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
+import ru.bestaford.ariovale.Ariovale;
+import ru.bestaford.ariovale.manager.AuthenticationManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -52,4 +54,12 @@ public class Account {
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LoginHistory> loginHistory = new ArrayList<>();
+
+    @PostLoad
+    @PostPersist
+    @PostRemove
+    @PostUpdate
+    public void postChange() {
+        Ariovale.injector.getInstance(AuthenticationManager.class).updateScoreboard(this);
+    }
 }
