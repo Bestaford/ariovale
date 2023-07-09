@@ -27,6 +27,8 @@ import java.io.IOException;
 @Log4j2
 public final class Ariovale extends PluginBase {
 
+    public static Injector injector;
+
     @Override
     public void onEnable() {
         try {
@@ -52,7 +54,8 @@ public final class Ariovale extends PluginBase {
     }
 
     private void bootstrap() {
-        Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new AriovaleModule(this));
+        injector = Guice.createInjector(Stage.DEVELOPMENT, new AriovaleModule(this));
+
         Server server = getServer();
         String fallbackPrefix = "ariovale";
 
