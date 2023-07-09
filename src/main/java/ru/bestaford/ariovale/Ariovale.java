@@ -52,7 +52,7 @@ public final class Ariovale extends PluginBase {
     }
 
     private void bootstrap() {
-        Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new Module(this));
+        Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new AriovaleModule(this));
         Server server = getServer();
         String fallbackPrefix = "ariovale";
 
@@ -66,11 +66,11 @@ public final class Ariovale extends PluginBase {
         commandMap.register(fallbackPrefix, injector.getInstance(MeCommand.class));
     }
 
-    private static final class Module extends AbstractModule {
+    private static final class AriovaleModule extends AbstractModule {
 
         private final Ariovale plugin;
 
-        public Module(Ariovale plugin) {
+        public AriovaleModule(Ariovale plugin) {
             this.plugin = plugin;
         }
 
