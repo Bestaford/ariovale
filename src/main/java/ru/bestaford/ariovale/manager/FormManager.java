@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class FormManager {
 
     public final Map<FormWindow, Form> formMap = new ConcurrentHashMap<>();
-    public final Map<Player, Stack<Form>> stackMap = new ConcurrentHashMap<>();
+    public final Map<Player, Stack<Form>> formStackMap = new ConcurrentHashMap<>();
 
     @Inject private Injector injector;
     @Inject private UtilsManager utilsManager;
@@ -40,7 +40,7 @@ public final class FormManager {
             formMap.put(window, form);
         }
         if (!form.getClass().isAnnotationPresent(IgnoreStack.class)) {
-            Stack<Form> formStack = stackMap.get(player);
+            Stack<Form> formStack = formStackMap.get(player);
             if (!formStack.contains(form)) {
                 formStack.push(form);
             }
@@ -48,7 +48,7 @@ public final class FormManager {
     }
 
     public void clearStack(Player player) {
-        stackMap.get(player).clear();
+        formStackMap.get(player).clear();
     }
 
     public void handleResponse(FormWindow window, Player player, boolean wasClosed, FormResponse response) {
@@ -56,7 +56,7 @@ public final class FormManager {
             try {
                 Form form = formMap.get(window);
                 if (!form.getClass().isAnnotationPresent(IgnoreStack.class) && wasClosed) {
-                    Stack<Form> formStack = stackMap.get(player);
+                    Stack<Form> formStack = formStackMap.get(player);
                     formStack.remove(form);
                     if (formStack.empty()) {
                         if (form.getClass().isAnnotationPresent(Required.class)) {

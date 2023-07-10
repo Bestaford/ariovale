@@ -17,7 +17,7 @@ public final class QuitTask extends AsyncTask {
     public final Player player;
     public final String name;
 
-    private @Inject SessionFactory sessionFactory;
+    @Inject private SessionFactory sessionFactory;
 
     public QuitTask(Player player, String name) {
         this.player = player;

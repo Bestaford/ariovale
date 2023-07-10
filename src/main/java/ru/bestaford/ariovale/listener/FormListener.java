@@ -19,7 +19,7 @@ public final class FormListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        formManager.stackMap.put(event.getPlayer(), new Stack<>());
+        formManager.formStackMap.put(event.getPlayer(), new Stack<>());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -29,6 +29,6 @@ public final class FormListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
-        formManager.stackMap.remove(event.getPlayer());
+        formManager.formStackMap.remove(event.getPlayer());
     }
 }
