@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 import ru.bestaford.ariovale.Ariovale;
-import ru.bestaford.ariovale.manager.AuthenticationManager;
+import ru.bestaford.ariovale.manager.ScoreboardManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -60,6 +60,6 @@ public class Account {
     @PostRemove
     @PostUpdate
     public void postChange() {
-        Ariovale.injector.getInstance(AuthenticationManager.class).updateScoreboard(this);
+        Ariovale.injector.getInstance(ScoreboardManager.class).updateScoreboard(this);
     }
 }

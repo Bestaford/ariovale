@@ -3,9 +3,9 @@ package ru.bestaford.ariovale.scoreboard;
 import cn.nukkit.Player;
 import cn.nukkit.scoreboard.data.DisplaySlot;
 import cn.nukkit.scoreboard.scoreboard.Scoreboard;
+import ru.bestaford.ariovale.util.Strings;
 
-
-public class CustomScoreboard extends Scoreboard {
+public class CustomScoreboard extends Scoreboard implements Strings {
 
     private int line;
 

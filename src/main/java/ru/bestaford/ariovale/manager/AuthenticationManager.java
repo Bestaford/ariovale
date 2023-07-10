@@ -9,7 +9,6 @@ import ru.bestaford.ariovale.entity.Account;
 import ru.bestaford.ariovale.entity.PlayerState;
 import ru.bestaford.ariovale.form.InformationForm;
 import ru.bestaford.ariovale.form.LoginForm;
-import ru.bestaford.ariovale.scoreboard.AccountScoreboard;
 import ru.bestaford.ariovale.task.authentication.*;
 import ru.bestaford.ariovale.util.OnlinePlayerData;
 import ru.bestaford.ariovale.util.Strings;
@@ -29,6 +28,7 @@ public final class AuthenticationManager {
     @Inject private TaskManager taskManager;
     @Inject private TranslationManager translationManager;
     @Inject private CommandManager commandManager;
+    @Inject private ScoreboardManager scoreboardManager;
 
     public void update(Player player) {
         boolean loggedIn = isLoggedIn(player);
@@ -103,10 +103,10 @@ public final class AuthenticationManager {
         if (playerState != null) {
             playerState.restore(player);
         }
+        scoreboardManager.updateScoreboard(account);
         if (!silent) {
             player.sendToast(Strings.FORMAT_BOLD + Strings.PORTAL_NAME_COLORIZED, translationManager.getString(player, "login.complete"));
         }
-        updateScoreboard(account);
     }
 
     public void processQuit(Player player) {
@@ -136,18 +136,5 @@ public final class AuthenticationManager {
             }
         }
         return index;
-    }
-
-    public void updateScoreboard(Account account) {
-        //TODO: Update existing scoreboard instead of creating new
-        for (Map.Entry<UUID, Player> entry : Server.getInstance().getOnlinePlayers().entrySet()) {
-            if (account.getUniqueId().equals(entry.getKey())) {
-                Player player = entry.getValue();
-                if (isLoggedIn(player)) {
-                    new AccountScoreboard(account).display(player);
-                    return;
-                }
-            }
-        }
     }
 }
