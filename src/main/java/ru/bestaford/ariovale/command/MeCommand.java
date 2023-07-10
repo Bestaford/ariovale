@@ -7,7 +7,7 @@ import cn.nukkit.command.data.CommandParameter;
 import javax.inject.Singleton;
 
 @Singleton
-public class MeCommand extends PlayerCommand {
+public final class MeCommand extends PlayerCommand {
 
     public MeCommand() {
         super("me");
