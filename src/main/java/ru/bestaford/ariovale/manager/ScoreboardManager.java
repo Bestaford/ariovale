@@ -17,6 +17,7 @@ public final class ScoreboardManager {
 
     public void updateScoreboard(Account account) {
         //TODO: Update existing scoreboard instead of creating new
+        //TODO: Use online players map
         for (Map.Entry<UUID, Player> entry : Server.getInstance().getOnlinePlayers().entrySet()) {
             if (account.getUniqueId().equals(entry.getKey())) {
                 Player player = entry.getValue();
