@@ -6,4 +6,14 @@
         <option name="isLombokNoArgsConstructor" value="true"/>
         <option name="scaffoldingLanguage"/>
     </component>
+    <component name="PersistenceUnitSettings">
+        <persistence-units>
+            <persistence-unit name="ariovale" persistenceXmlPath="src/main/resources/hibernate.cfg.xml">
+                <packages>
+                    <package value="ru.bestaford.ariovale.entity"/>
+                </packages>
+            </persistence-unit>
+            <persistence-unit moduleName="ariovale" name="Default"/>
+        </persistence-units>
+    </component>
 </project>
