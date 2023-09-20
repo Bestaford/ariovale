@@ -39,7 +39,7 @@
         <plugin.author>Bestaford</plugin.author>
         <plugin.main>ru.bestaford.ariovale.Ariovale</plugin.main>
         <plugin.load>STARTUP</plugin.load>
-        <hibernate.version>6.2.7.Final</hibernate.version>
+        <hibernate.version>6.3.1.Final</hibernate.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
